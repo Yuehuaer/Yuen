@@ -1,58 +1,105 @@
-#!name=meizitu
-#!desc=每日妹子图推送
+//!name=meizitu
+//!desc=每日妹子图推送
 
 const NAME = 'meizitu'
 const $ = new Env(NAME)
 
-// Loon专用参数解析（替代原$argument）
-const arg = JSON.parse(typeof $loon != 'undefined' ? $loon : "{}") 
+/**************** 参数配置 ​****************/
+// 默认参数（模式：随机）
+const DEFAULT_CONFIG = { MODE: '0' }
 
-// 合并持久化存储参数
-$.lodash_merge(arg, $.getjson(NAME, {}))
-
-const MODES = {
-  0: '随机',
-  1: '微博',
-  2: 'Instagram',
-  3: 'Cosplay',
-  5: 'MTCos',
-  7: '美腿',
-  8: 'Coser',
-  9: '兔玩映画',
-}
-
+/**************** 主程序 ​****************/
 !(async () => {
   try {
-    // 模式处理
-    const mode = ($.lodash_get(arg, 'MODE') || '0').split(/,|，/).filter(Boolean)
-    const mode_text = mode.map(i => MODES[i] || '').filter(Boolean).join(',')
+    // 参数解析（Loon专用）
+    const arg = JSON.parse(typeof $loon !== 'undefined' ? $loon : '{}')
+    const config = { ...DEFAULT_CONFIG, ...$.getjson(NAME, {}), ...arg }
     
-    // API请求
-    const res = await $.http.get({
-      url: `https://3650000.xyz/api`,
-      headers: {
-        'X-Requested-With': 'XMLHttpRequest',
-        'User-Agent': `Loon/${__VERSION__}`
-      },
-      params: {
-        type: 'json',
-        mode: mode.includes('0') ? undefined : mode.join(',')
-      }
-    })
+    // 运行模式处理
+    const mode = parseMode(config.MODE)
+    $.log(`当前模式：${mode.text}`)
+
+    // 获取图片数据
+    const imageUrl = await fetchImage(mode.code)
     
-    // 结果处理
-    const url = $.lodash_get(JSON.parse(res.body), 'url')
-    if (!url) throw new Error('API未返回有效图片地址')
-    
-    // Loon专用通知格式
-    $.msg('妹子图', mode_text || '随机模式', {
-      openUrl: url,
-      mediaUrl: url,
-      'loon-sound': 'alert'
-    })
-    
+    // 发送通知
+    sendNotification(imageUrl, mode.text)
+
   } catch (e) {
-    $.msg('❌ 运行失败', `${e.message}`, '请检查网络或配置')
-    $.log(`错误详情：${e.stack}`)
+    handleError(e)
   }
 })()
+
+/**************** 工具函数 ​****************/
+function parseMode(input) {
+  const MODES = {
+    0: { code: '', text: '随机' },
+    1: { code: '1', text: '微博' },
+    2: { code: '2', text: 'Instagram' },
+    3: { code: '3', text: 'Cosplay' },
+    5: { code: '5', text: 'MTCos' },
+    7: { code: '7', text: '美腿' },
+    8: { code: '8', text: 'Coser' },
+    9: { code: '9', text: '兔玩映画' }
+  }
+  
+  const validModes = String(input).split(/,|，/)
+    .map(m => m.trim())
+    .filter(m => m in MODES)
+    .map(m => MODES[m])
+  
+  return validModes.length > 0 ? validModes[0] : MODES[0]
+}
+
+async function fetchImage(modeCode) {
+  const response = await $.http.get({
+    url: 'https://3650000.xyz/api',
+    headers: {
+      'User-Agent': `Loon/${__VERSION__}`,
+      'X-Requested-With': 'XMLHttpRequest'
+    },
+    params: {
+      type: 'json',
+      mode: modeCode || undefined
+    }
+  })
+  
+  const data = JSON.parse(response.body)
+  if (!data?.url) throw new Error('未获取到有效图片地址')
+  return data.url
+}
+
+function sendNotification(url, modeText) {
+  $.msg('妹子图推送', `模式：${modeText}`, {
+    openUrl: url,
+    mediaUrl: url,
+    'loon-sound': 'minimal',
+    'icon': 'photo.fill'
+  })
+}
+
+function handleError(error) {
+  const errorMessage = `错误类型：${error.name}\n错误信息：${error.message}`
+  $.msg('❌ 运行失败', errorMessage, { 'open-url': 'loon://logs' })
+  $.log(`[ERROR] ${error.stack}`)
+}
+
+/**************** 环境适配 ​****************/
+function Env(t) {
+  return {
+    isLoon: typeof $loon !== 'undefined',
+    getjson: (e, s) => {
+      try { return JSON.parse($persistentStore.read(e)) || s }
+      catch { return s }
+    },
+    msg: (title, subtitle, opts) => {
+      $notification.post(title, subtitle, '', opts)
+    },
+    http: {
+      get: opts => new Promise((resolve, reject) => {
+        $httpClient.get(opts, (err, res) => err ? reject(err) : resolve(res))
+      })
+    },
+    log: console.log
+  }
+}
