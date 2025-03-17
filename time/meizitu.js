@@ -1,141 +1,146 @@
 //!name=meizitu
-//!desc=苹果设备专用妹子图推送
-//!icon=photo.on.rectangle
+//!desc=极速版妹子图推送
+//!icon=bolt
 //!homepage=https://github.com/crossutility/Quantumult-X
 
-const $ = new Env('meizitu')
+const $ = new UltraEnv('meizitu')
 
-/**************** 深度修复版核心代码 ​****************/
+/**************** 性能优化版核心代码 ​****************/
 !(async () => {
+    const startTime = Date.now()
     try {
-        // 参数解析（适配iOS 17沙盒限制）
+        // 极速参数配置（超时3秒，重试2次）
         const config = {
-            mode: processMode($.getjson('meizitu', {}).MODE || '0'),
-            timeout: 10,
-            retries: 3
+            mode: processMode($.getcfg('MODE', '0')),
+            timeout: 3,
+            retries: 2
         }
 
-        // 调试信息输出
-        $.log(`📱 设备信息: ${JSON.stringify($device)}`)
-        $.log(`⚙️ 配置参数: ${JSON.stringify(config)}`)
+        // 异步并发处理
+        const [response] = await Promise.race([
+            Promise.all([fetchAPI(config)]),
+            timeoutGuard(config.timeout)
+        ])
 
-        // 网络请求（强制JSON响应）
-        const response = await fetchAPI(config)
-        showResult(response)
+        showResult(response, config, startTime)
 
     } catch (e) {
-        handleError(e)
+        handleError(e, startTime)
     }
 })()
 
-/**************** 核心功能函数 ​****************/
+/**************** 高性能函数 ​****************/
 function processMode(input) {
-    const modeMap = {
-        '0': { apiParam: '', desc: '随机推荐' },
-        '1': { apiParam: '1', desc: '微博精选' },
-        '2': { apiParam: '2', desc: 'INS风' },
-        '3': { apiParam: '3', desc: 'Cosplay' },
-        '7': { apiParam: '7', desc: '美腿专辑' },
-        '8': { apiParam: '8', desc: 'Coser特辑' },
-        '9': { apiParam: '9', desc: '兔玩映画' }
-    }
-
-    const sanitizedInput = String(input).replace(/[^\d,]/g, '')
-    return modeMap[sanitizedInput.split(',')[0]] || modeMap['0']
+    const MODE_MAP = new Map([
+        ['0', {code: '', desc: '随机'}],
+        ['1', {code: '1', desc: '微博'}],
+        ['7', {code: '7', desc: '美腿'}],
+        ['8', {code: '8', desc: 'Coser'}]
+    ])
+    
+    const modeKey = String(input).split(/,|，/)[0] || '0'
+    return MODE_MAP.get(modeKey) || MODE_MAP.get('0')
 }
 
 async function fetchAPI(config) {
-    const opts = {
-        url: 'https://3650000.xyz/api',
-        headers: {
-            'Accept': 'application/json',
-            'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148',
-            'X-Requested-With': 'XMLHttpRequest'
-        },
-        params: {
-            type: 'json',
-            mode: config.mode.apiParam || undefined,
-            _t: Date.now() // 防止缓存
-        },
-        policy: config.retries,
-        timeout: config.timeout
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), config.timeout * 1000)
+    
+    try {
+        const res = await $.fetch({
+            url: 'https://3650000.xyz/api',
+            params: {
+                type: 'json',
+                mode: config.mode.code,
+                _: Date.now().toString(36) // 缓存爆破
+            },
+            headers: {
+                'Accept': 'application/json',
+                'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1'
+            },
+            retry: config.retries,
+            signal: controller.signal
+        })
+        
+        clearTimeout(timeoutId)
+        return parseJSON(res.body)
+        
+    } catch (e) {
+        clearTimeout(timeoutId)
+        throw e
     }
-
-    const startTime = Date.now()
-    const res = await $.http.get(opts)
-    const latency = Date.now() - startTime
-
-    $.log(`⏱ 请求耗时: ${latency}ms`)
-    $.log(`🔔 响应头: ${JSON.stringify(res.headers)}`)
-    $.log(`📦 响应预览: ${res.body.substring(0, 120)}...`)
-
-    // 数据校验
-    if (res.status !== 200) throw new Error(`HTTP ${res.status}`)
-    if (!res.headers['Content-Type']?.includes('json')) {
-        throw new Error('非JSON响应')
-    }
-
-    return parseJSON(res.body)
 }
 
 function parseJSON(data) {
     try {
-        const sanitized = data
-            .replace(/(['"])?([a-zA-Z0-9_]+)(['"])?:/g, '"$2":') // 修复非标JSON
-            .replace(/iPhone\d+/g, '""') // 过滤设备标识符
-        
-        return JSON.parse(sanitized)
+        return JSON.parse(
+            data.replace(/(['"])(\w+)\1:/g, '"$2":') // 快速修复非法JSON
+        )
     } catch (e) {
-        throw new Error(`JSON解析失败: ${e.message}\n原始数据: ${data.slice(0, 200)}`)
+        throw new Error(`JSON解析失败: ${e.message.slice(0, 50)}`)
     }
 }
 
-function showResult(data) {
-    if (!data?.url) throw new Error('图片地址无效')
+function timeoutGuard(seconds) {
+    return new Promise((_, reject) => 
+        setTimeout(() => 
+            reject(new Error(`超时保护（${seconds}s）`)), 
+            seconds * 1000
+        )
+    )
+}
+
+function showResult(data, config, startTime) {
+    if (!data?.url) throw new Error('无效响应格式')
     
-    $.msg('🍑 妹子图推送', `📸 ${data.title || config.mode.desc}`, {
-        'open-url': data.url,
-        'media-url': data.url,
-        'loon-sound': 'glass',
-        'icon': 'photo.fill.viewfinder',
-        'auto-dismiss': 10
+    $.notify({
+        title: `🚀 妹子图推送（${config.mode.desc}）`,
+        message: `⏱ 耗时：${Date.now() - startTime}ms`,
+        openUrl: data.url,
+        mediaUrl: data.url,
+        sound: 'clockfill',
+        icon: 'photo.stack'
     })
 }
 
-function handleError(error) {
-    const errorInfo = {
-        name: error.name,
-        message: error.message,
-        stack: error.stack,
-        timestamp: new Date().toISOString(),
-        device: $device
-    }
-
-    $.msg('❌ 运行异常', `${error.name}: ${error.message}`, {
-        'open-url': 'loon://logs',
-        'icon': 'exclamationmark.triangle.fill'
+function handleError(e, startTime) {
+    $.notify({
+        title: `❌ 运行失败（${Date.now() - startTime}ms）`,
+        message: `${e.name}: ${e.message}`,
+        icon: 'exclamationmark.triangle',
+        sound: 'alarm'
     })
     
-    $.log(`🔥 完整错误信息:\n${JSON.stringify(errorInfo, null, 2)}`)
+    $.log(`[PERF] 总耗时: ${Date.now() - startTime}ms`)
+    $.log(`[ERROR] ${e.stack}`)
 }
 
-/**************** Loon环境适配器 ​****************/
-function Env() {
+/**************** 极速环境适配器 ​****************/
+function UltraEnv() {
     return {
-        http: {
-            get: opts => new Promise((resolve, reject) => {
-                $httpClient.get(opts, (err, res) => {
-                    if (err) return reject(err)
-                    if (res.status >= 400) reject(new Error(`HTTP ${res.status}`))
-                    resolve(res)
+        fetch: opts => new Promise((resolve, reject) => {
+            $httpClient.get(opts, (err, res) => {
+                err ? reject(err) : resolve({
+                    body: res.body,
+                    status: res.status
                 })
             })
+        }),
+        notify: opts => $notification.post(
+            opts.title, 
+            opts.message, 
+            '', 
+            {
+                'open-url': opts.openUrl,
+                'media-url': opts.mediaUrl,
+                'sound': opts.sound,
+                'icon': opts.icon
+            }
+        ),
+        getcfg: (key, def) => {
+            const val = $persistentStore.read(key)
+            return val !== undefined ? val : def
         },
-        msg: (title, subtitle, opts) => $notification.post(title, subtitle, '', opts),
-        getjson: (key, def) => {
-            try { return JSON.parse($persistentStore.read(key)) || def }
-            catch { return def }
-        },
-        log: (...args) => console.log('[DEBUG]', ...args)
+        log: (...args) => console.log('[LOG]', ...args)
     }
 }
