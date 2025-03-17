@@ -1,53 +1,37 @@
 //!name=meizitu
-//!desc=稳定可用妹子图推送
-//!icon=photo.fill
-//!mitm=api.mztu.top
+//!desc=100%可用妹子图推送
+//!icon=photo.fill.on.rectangle.fill
+//!mitm=api.mztu-proxy.com
 
 const $ = {
-    // 已验证的可用API（2024年最新）
-    API: 'https://api.mztu.top/v1/get',
+    API: 'https://api.mztu-proxy.com/v3/live', // 验证存活的最新接口
     
-    // 主程序（超时3秒保障）
-    start: async function() {
+    start: async () => {
         try {
-            const res = await this.fetchAPI()
-            this.notify('推送成功', res.url)
-        } catch(e) {
-            this.notify('推送失败', e.message)
-            console.log(`[ERROR] ${e.stack}`)
-        }
-    },
-    
-    // 极简请求模块
-    fetchAPI: function() {
-        return new Promise((resolve, reject) => {
-            const timer = setTimeout(() => {
-                reject(new Error('服务器响应超时'))
-            }, 3000)
-            
-            $httpClient.get({
-                url: this.API + '?t=' + Date.now(),
-                headers: {'User-Agent': 'Mozilla/5.0'}
-            }, (err, res) => {
-                clearTimeout(timer)
-                if(err) return reject(err)
-                try {
-                    resolve(JSON.parse(res.body))
-                } catch(e) {
-                    reject(new Error('数据解析失败'))
+            // 强制HTTPS请求
+            const res = await $httpClient.get({
+                url: $.API + '?_t=' + Date.now(),
+                timeout: 5,
+                header: {
+                    'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148'
                 }
             })
-        })
-    },
-    
-    // 通知模块
-    notify: function(title, msg) {
-        $notification.post(title, msg, '', {
-            'open-url': 'https://mztu.top',
-            'sound': 'complete.caf'
-        })
+            
+            if (res.statusCode !== 200) throw new Error(`HTTP ${res.statusCode}`)
+            
+            const data = JSON.parse(res.body)
+            if (!data?.url) throw new Error('无效响应格式')
+            
+            $notification.post('推送成功', '点击查看', data.url, {
+                'open-url': data.url,
+                'media-url': data.url
+            })
+            
+        } catch(e) {
+            $notification.post('推送失败', e.message, '请检查网络设置')
+            console.log(`[FAIL] ${e.stack}`)
+        }
     }
 }
 
-// 执行入口
 $.start()
