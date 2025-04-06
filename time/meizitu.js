@@ -27,7 +27,7 @@ const MODES = {
 }
 
 !(async () => {
-  let mode = ($.lodash_get(arg, 'MODE') || '2')
+  let mode = ($.lodash_get(arg, 'MODE') || '3')
     .split(/,|，/gi)
     .map(i => i.trim())
     .filter(i => i.length)
