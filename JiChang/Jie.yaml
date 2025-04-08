@@ -2,7 +2,7 @@
 # 机场订阅
 proxy-providers:
   红杏云:
-    url: "https://hongxingdl.love/hxyunvip?token=257c61965c07fb657d7e01e46c41654f"
+    url: "https://"
     type: http
     interval: 86400
     health-check:
