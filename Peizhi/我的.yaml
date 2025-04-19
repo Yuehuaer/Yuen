@@ -217,6 +217,7 @@ rule-providers:
 rules:
   # 本地定制规则
   # 游戏下载
+  - DOMAIN,dmm.co.jp,HBO
   - DOMAIN,gst.prod.dl.playstation.net,直连
   - DOMAIN-SUFFIX,steamcontent.com,直连
   # BitTorrent
