@@ -1,4 +1,8 @@
 # 强制代理列表，来自个人收集
-# 代理列表
-DOMAIN-SUFFIX,fsm.name
+#自有域名
 DOMAIN-SUFFIX,yuehua.xin
+
+
+# PT站点
+DOMAIN-SUFFIX,fsm.name
+
