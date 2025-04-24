@@ -1,5 +1,11 @@
 #直连规则
+#游戏网站
 DOMAIN-SUFFIX,koyso.com
+
+#自有域名
+DOMAIN-SUFFIX,yue.yuehua.xin
+
+#PT站点
 DOMAIN,pttime.org
 DOMAIN,rousi.zip
 DOMAIN-SUFFIX,rousi.zip
