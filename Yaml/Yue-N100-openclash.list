@@ -1,7 +1,7 @@
 [custom]
 ;设置规则标志位
-ruleset=🎯 全球直连,https://gcore.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Lan/Lan.list
 ruleset=🎯 全球直连,https://git.886.be/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/Peizhi/AA-ZhiLian.list
+ruleset=🎯 全球直连,https://gcore.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Lan/Lan.list
 ruleset=🎯 全球直连,https://gcore.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Direct/Direct.list
 ruleset=🎯 全球直连,https://gcore.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct.list
 ruleset=🚀 节点选择,https://gcore.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Proxy.list
