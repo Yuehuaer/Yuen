@@ -7,6 +7,8 @@
 #常用域名
 DOMAIN-SUFFIX,yuehua.xin
 DOMAIN-SUFFIX,invite.stotik.com
+#Emby内网地址
+DOMAIN-SUFFIX,inside.lyrebirdemby.com
 
 
 # PT站点
