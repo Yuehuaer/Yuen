@@ -1,15 +1,18 @@
-#直连规则
+# 直连规则
 # Git加速链接：https://gh.catmak.name/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/Peizhi/AA-ZhiLian.list --------------------------------------#
 # Git加速链接：https://git.886.be/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/Peizhi/AA-ZhiLian.list  -----------------------------------------#
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------------# 
+# 25.05.04 更新文档
 
-#游戏网站
+# 游戏网站
 DOMAIN-SUFFIX,koyso.com
 
-#自有域名
+# 自有域名
 DOMAIN-SUFFIX,yue.yuehua.xin
 
-#PT站点
+# PT站点
+# PT时间
 DOMAIN,pttime.org
+# 肉丝
 DOMAIN,rousi.zip
 DOMAIN-SUFFIX,rousi.zip
