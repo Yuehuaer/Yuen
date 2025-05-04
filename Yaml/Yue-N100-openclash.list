@@ -1,6 +1,10 @@
 [custom]
 ;设置规则标志位
-ruleset=🎯 全球直连,https://git.886.be/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/Peizhi/AA-ZhiLian.list
+ruleset=🚀 节点选择,https://git.886.be/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Daili.list
+ruleset=🎦 EMBY,https://git.886.be/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Emby.list
+ruleset=🔞 DMM.R18,https://git.886.be/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-JapanDaiLi.list
+
+ruleset=🎯 全球直连,https://git.886.be/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-ZhiLian.list
 ruleset=🎯 全球直连,https://gcore.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Lan/Lan.list
 ruleset=🎯 全球直连,https://gcore.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Direct/Direct.list
 ruleset=🎯 全球直连,https://gcore.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct.list
@@ -28,10 +32,8 @@ ruleset=🎥 Netflix,https://gcore.jsdelivr.net/gh/blackmatrix7/ios_rule_script@
 ruleset=🎥 Disney+,https://gcore.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Disney/Disney.list
 ruleset=🎻 Spotify,https://gcore.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Spotify/Spotify.list
 ruleset=📺 Bahamut,https://gcore.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Bahamut/Bahamut.list
-ruleset=🎦 EMBY,https://git.886.be/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/Peizhi/AA-Emby.list
 ruleset=🎦 EMBY,https://gcore.jsdelivr.net/gh/iovejieba/clash@refs/heads/main/Emby.list
 ruleset=📥 PT,https://gcore.jsdelivr.net/gh/iovejieba/clash@refs/heads/main/PrivateTracker.list
-ruleset=🔞 DMM.R18,https://git.886.be/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/Peizhi/AA-JapanDaiLi.list
 ruleset=🧚 影视刮削,https://gcore.jsdelivr.net/gh/iovejieba/clash@refs/heads/main/guaxiao.list
 ruleset=💰 加密货币,https://gcore.jsdelivr.net/gh/iovejieba/clash@refs/heads/main/Crypto.list
 ruleset=🎶 网易音乐,https://gcore.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/NetEaseMusic/NetEaseMusic.list
