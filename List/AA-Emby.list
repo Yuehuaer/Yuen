@@ -1,6 +1,6 @@
-#Emby
-#内网地址
-DOMAIN-SUFFIX,lyrebirdemby.com
+# Emby 分流
+# 25.05.01 更新文档
+
 DOMAIN,195.201.86.86
 DOMAIN,cc.coemn.com
 DOMAIN,cminf.sfcat.link
@@ -109,6 +109,7 @@ DOMAIN-SUFFIX,ju.dog
 DOMAIN-SUFFIX,line.emby.men
 DOMAIN-SUFFIX,loseremby.org
 DOMAIN-SUFFIX,lucasmedia.top
+DOMAIN-SUFFIX,lyrebirdemby.com
 DOMAIN-SUFFIX,magpie.cyou
 DOMAIN-SUFFIX,magpiecdn.tech
 DOMAIN-SUFFIX,mcjoker.xyz
