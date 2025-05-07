@@ -17,3 +17,6 @@ DOMAIN-SUFFIX,fsm.name
 DOMAIN,fsm.name
 # 观众
 DOMAIN-SUFFIX,audiences.me
+# rousi
+DOMAIN-SUFFIX,rousi.zip
+DOMAIN,rousi.zip
