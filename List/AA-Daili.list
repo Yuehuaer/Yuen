@@ -6,6 +6,9 @@
 
 # 常用域名
 DOMAIN,yuehua.xin
+DOMAIN-SUFFIX,yuehua.xin
+DOMAIN,qb.yuehua.xin
+DOMAIN,tr.yuehua.xin
 DOMAIN-SUFFIX,invite.stotik.com
 DOMAIN-SUFFIX,linux.do
 # Pi
