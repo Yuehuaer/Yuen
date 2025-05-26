@@ -1,0 +1,5 @@
+# 屏蔽网站-huang #
+https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/refs/heads/meta/geo/geosite/category-porn.list
+
+rules: 
+  - RULE-SET,category-porn,REJECT
