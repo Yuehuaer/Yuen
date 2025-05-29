@@ -1,60 +1,193 @@
 /*
-脚本名称：万夜图片
+脚本名称：美女图片抓取
 脚本作者：YueJS
 更新时间：2024-03-21
-脚本说明：点击通知查看图片
+脚本说明：获取VOL系列图片并通过通知展示
 测试版本：Loon iOS 17
 */
 
-const NAME = 'wanye'
+const NAME = 'meizi'
 const $ = new Env(NAME)
 
-// API列表，可以通过修改 API_INDEX 的值来切换不同API
-const API_INDEX = 3  // 当前使用的API序号：1、2或3
-
-const API_LIST = {
-    1: 'http://3650000.xyz/api/360.php?cid=6',     // API1
-    2: 'https://api.lolimi.cn/API/meinv/api.php?type=image',  // API2
-    3: 'https://www.onexiaolaji.cn/RandomPicture/api/?key=qq249663924'  // API3
-    // 4: '在这里添加第四个API',  // API4
-    // 5: '在这里添加第五个API'   // API5
+// 目標網站配置
+const CONFIG = {
+    url: 'https://www.meizi2.com',
+    headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+        'Referer': 'https://www.meizi2.com'
+    }
 }
 
 !(async () => {
-    const url = API_LIST[API_INDEX]
-    if (!url) throw new Error('API序号无效')
-    
-    const res = await http({
-        url: url
-    })
-    
-    if (!url) throw new Error('获取图片地址失败')
-    
-    await notify(NAME, `API-${API_INDEX} 获取成功`, '', {
-        'media-url': url
-    })
+    try {
+        $.log('開始獲取首頁內容...')
+        // 獲取首頁內容
+        const html = await http({
+            url: CONFIG.url,
+            headers: CONFIG.headers
+        })
+        
+        $.log('解析VOL系列鏈接...')
+        // 解析VOL系列鏈接
+        const volLinks = parseVolLinks(html)
+        
+        if (volLinks.length === 0) {
+            throw new Error('未找到VOL系列圖片，可能是網頁結構變化')
+        }
+        
+        $.log(`找到 ${volLinks.length} 個VOL系列鏈接`)
+        // 隨機選擇一個VOL系列鏈接
+        const randomVolLink = volLinks[Math.floor(Math.random() * volLinks.length)]
+        $.log(`選擇鏈接: ${randomVolLink}`)
+        
+        // 獲取詳細頁面內容
+        const detailHtml = await http({
+            url: randomVolLink,
+            headers: CONFIG.headers
+        })
+        
+        // 解析詳細頁面的圖片
+        const images = parseDetailImages(detailHtml)
+        
+        if (images.length === 0) {
+            throw new Error('未找到合適的圖片，可能是網頁結構變化')
+        }
+        
+        $.log(`找到 ${images.length} 張圖片`)
+        // 隨機選擇一張圖片
+        const randomImage = images[Math.floor(Math.random() * images.length)]
+        $.log(`選擇原始圖片URL: ${randomImage}`)
+        
+        // 獲取圖片真實URL
+        const realImageUrl = await getRealImageUrl(randomImage)
+        if (!realImageUrl) {
+            throw new Error('無法獲取圖片真實地址')
+        }
+        
+        // 發送通知（包含縮略圖和大圖）
+        await notify(NAME, '🌟 美圖欣賞', `點擊查看大圖`, {
+            'open-url': realImageUrl,
+            'media-url': realImageUrl
+        })
+        
+        $.log('通知發送成功')
+        $.log('最終圖片地址：' + realImageUrl)
+        
+    } catch (e) {
+        $.logErr(e)
+        await notify(NAME, '❌', `${$.lodash_get(e, 'message') || $.lodash_get(e, 'error') || e}`)
+    } finally {
+        $.done()
+    }
 })()
-.catch(async e => {
-    $.logErr(e)
-    await notify(NAME, '❌', `${$.lodash_get(e, 'message') || $.lodash_get(e, 'error') || e}`)
-})
-.finally(() => {
-    $.done()
-})
 
-// 请求函数
-async function http(opt = {}) {
+// 解析VOL系列鏈接
+function parseVolLinks(html) {
+    const links = []
+    const volRegex = /<a[^>]+href="([^"]+)"[^>]*>([^<]*VOL[^<]*)<\/a>/gi
+    let match
+    
+    while ((match = volRegex.exec(html)) !== null) {
+        let link = match[1]
+        if (link.startsWith('/')) {
+            link = CONFIG.url + link
+        }
+        links.push(link)
+    }
+    
+    return links
+}
+
+// 解析詳細頁面圖片
+function parseDetailImages(html) {
+    const images = []
+    const imgRegex = /<img[^>]+src="([^"]+(?:\.jpg|\.png|\.jpeg|\.webp))"[^>]*>/gi
+    let match
+    
+    while ((match = imgRegex.exec(html)) !== null) {
+        let imgUrl = match[1]
+        // 處理相對路徑
+        if (imgUrl.startsWith('//')) {
+            imgUrl = 'https:' + imgUrl
+        } else if (imgUrl.startsWith('/')) {
+            imgUrl = CONFIG.url + imgUrl
+        } else if (!imgUrl.startsWith('http')) {
+            imgUrl = CONFIG.url + '/' + imgUrl
+        }
+        
+        // 過濾圖片：只保留原圖，排除縮略圖和小圖
+        if (!imgUrl.includes('thumb') && 
+            !imgUrl.includes('banner') && 
+            !imgUrl.includes('logo') && 
+            !imgUrl.includes('icon') &&
+            !imgUrl.includes('face') &&
+            !imgUrl.includes('avatar') &&
+            imgUrl.includes('VOL') &&
+            (imgUrl.includes('upload') || imgUrl.includes('images'))) {
+            $.log('找到圖片: ' + imgUrl)
+            images.push(imgUrl)
+        }
+    }
+    
+    return images
+}
+
+// 獲取圖片真實URL
+async function getRealImageUrl(url) {
+    try {
+        const response = await http({
+            url: url,
+            headers: {
+                'Accept': 'image/*',
+                'Referer': CONFIG.url
+            },
+            isImage: true
+        })
+        
+        // 如果有重定向，使用最終URL
+        const realUrl = response.url || url
+        $.log(`圖片真實地址: ${realUrl}`)
+        return realUrl
+    } catch (e) {
+        $.log(`獲取圖片真實地址失敗: ${e}`)
+        return null
+    }
+}
+
+// HTTP 請求函數
+function http(opt = {}) {
     return new Promise((resolve, reject) => {
-        $httpClient.get(opt, (err, resp, body) => {
-            if (err) reject(err)
-            else resolve(resp)
+        const method = opt.method || 'GET'
+        const options = {
+            url: opt.url,
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+                'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+                ...opt.headers
+            },
+            method,
+            followRedirect: true // 允許重定向
+        }
+        
+        $httpClient[method.toLowerCase()](options, (err, resp, body) => {
+            if (err) {
+                reject(err)
+                return
+            }
+            // 如果是圖片請求，返回完整的響應對象
+            if (opt.isImage) {
+                resolve(resp)
+            } else {
+                resolve(body)
+            }
         })
     })
 }
 
-// 通知函数
+// 通知函數
 async function notify(title, subt, desc, opts) {
-    $.msg(title, subt, desc, opts)
+    $notification.post(title, subt, desc, opts)
 }
 
 // prettier-ignore
