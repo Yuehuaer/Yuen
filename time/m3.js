@@ -2,7 +2,7 @@
 脚本名称：美女图片抓取
 脚本作者：YueJS
 更新时间：2024-03-21
-脚本说明：获取网站图片并通过通知展示
+脚本说明：获取VOL系列图片并通过通知展示
 测试版本：Loon iOS 17
 */
 
@@ -13,32 +13,69 @@ const $ = new Env(NAME)
 const CONFIG = {
     url: 'https://www.meizi2.com',
     headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+        'Referer': 'https://www.meizi2.com'
     }
 }
 
 !(async () => {
     try {
-        // 獲取網頁內容
+        $.log('開始獲取首頁內容...')
+        // 獲取首頁內容
         const html = await http({
             url: CONFIG.url,
             headers: CONFIG.headers
         })
         
-        // 解析圖片鏈接
-        const images = parseImages(html)
+        $.log('解析VOL系列鏈接...')
+        // 解析VOL系列鏈接
+        const volLinks = parseVolLinks(html)
         
-        if (images.length === 0) {
-            throw new Error('未找到任何圖片')
+        if (volLinks.length === 0) {
+            throw new Error('未找到VOL系列圖片，可能是網頁結構變化')
         }
         
+        $.log(`找到 ${volLinks.length} 個VOL系列鏈接`)
+        // 隨機選擇一個VOL系列鏈接
+        const randomVolLink = volLinks[Math.floor(Math.random() * volLinks.length)]
+        $.log(`選擇鏈接: ${randomVolLink}`)
+        
+        // 獲取詳細頁面內容
+        const detailHtml = await http({
+            url: randomVolLink,
+            headers: CONFIG.headers
+        })
+        
+        // 解析詳細頁面的圖片
+        const images = parseDetailImages(detailHtml)
+        
+        if (images.length === 0) {
+            throw new Error('未找到詳細圖片，可能是網頁結構變化')
+        }
+        
+        $.log(`找到 ${images.length} 張圖片`)
         // 隨機選擇一張圖片
         const randomImage = images[Math.floor(Math.random() * images.length)]
+        $.log(`選擇圖片: ${randomImage}`)
         
-        // 發送通知
-        await notify(NAME, '獲取成功', `找到 ${images.length} 張圖片`, {
-            'open-url': randomImage,
-            'media-url': randomImage
+        // 檢查圖片URL是否有效
+        const checkImage = await http({
+            url: randomImage,
+            headers: {
+                ...CONFIG.headers,
+                'Accept': 'image/*'
+            }
+        })
+        
+        if (!checkImage) {
+            throw new Error('圖片無法訪問')
+        }
+        
+        // 發送通知（包含縮略圖和大圖）
+        await notify(NAME, '🌟 點擊查看大圖', ``, {
+            'open-url': randomImage,    // 點擊後查看的大圖
+            'media-url': randomImage,   // 通知中顯示的縮略圖
+            'thumb-url': randomImage    // 備用縮略圖
         })
         
     } catch (e) {
@@ -49,20 +86,36 @@ const CONFIG = {
     }
 })()
 
-// 解析圖片鏈接
-function parseImages(html) {
+// 解析VOL系列鏈接
+function parseVolLinks(html) {
+    const links = []
+    const volRegex = /<a[^>]+href="([^"]+)"[^>]*>([^<]*VOL[^<]*)<\/a>/gi
+    let match
+    
+    while ((match = volRegex.exec(html)) !== null) {
+        let link = match[1]
+        if (link.startsWith('/')) {
+            link = CONFIG.url + link
+        }
+        links.push(link)
+    }
+    
+    return links
+}
+
+// 解析詳細頁面圖片
+function parseDetailImages(html) {
     const images = []
-    const imgRegex = /<img[^>]+src="([^">]+)"/g
+    const imgRegex = /<img[^>]+src="([^"]+(?:\.jpg|\.png|\.jpeg))"[^>]*>/gi
     let match
     
     while ((match = imgRegex.exec(html)) !== null) {
         let imgUrl = match[1]
-        // 處理相對路徑
         if (imgUrl.startsWith('/')) {
             imgUrl = CONFIG.url + imgUrl
         }
-        // 過濾掉小圖標等
-        if (imgUrl.includes('.jpg') || imgUrl.includes('.png') || imgUrl.includes('.jpeg')) {
+        // 過濾掉小圖和廣告圖
+        if (!imgUrl.includes('thumb') && !imgUrl.includes('banner') && !imgUrl.includes('logo')) {
             images.push(imgUrl)
         }
     }
@@ -89,7 +142,7 @@ function http(opt = {}) {
 
 // 通知函數
 async function notify(title, subt, desc, opts) {
-    $.msg(title, subt, desc, opts)
+    $notification.post(title, subt, desc, opts)
 }
 
 // prettier-ignore
