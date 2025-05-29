@@ -17,7 +17,7 @@ const $ = new Env(NAME)
     
     if (!url) throw new Error('获取图片地址失败')
     
-    await notify(NAME, '获取成功', '', {
+    await notify(NAME, '万古如长夜', '', {
         'media-url': url
     })
 })()
