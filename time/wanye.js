@@ -72,37 +72,36 @@ function notify(title, subtitle, content, option = {}) {
         const url = getAPI();
         log(`正在使用API ${API_INDEX}: ${url}`);
 
-        const response = await $httpClient.get({
+        const myRequest = {
             url: url,
+            method: "GET",
             headers: {
-                'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1'
-            },
-            timeout: CONFIG.TIMEOUT
-        });
+                "User-Agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1"
+            }
+        };
 
-        if (response.status === 200) {
-            let resp = {
-                title: "万夜图片",
-                subtitle: `API-${API_INDEX} 获取成功`,
-                icon: NOTIFY_CONFIG.SUCCESS_ICON,
-                "icon-color": NOTIFY_CONFIG.SUCCESS_COLOR,
-                content: "点击查看图片",
-                image: url
-            };
-            $done(resp);
-        } else {
-            throw new Error('请求失败');
-        }
+        $httpClient.get(myRequest, function(error, response, data) {
+            if (error) {
+                log(`错误: ${error.message}`);
+                $notification.post('万夜图片', '❌ 获取失败', error);
+                $done();
+            } else {
+                const notification = {
+                    title: "万夜图片",
+                    subtitle: "✅ 获取成功",
+                    content: "点击查看大图",
+                    openUrl: url,
+                    mediaUrl: url,
+                    "media-url": url  // 兼容不同版本
+                };
+                $notification.post(notification.title, notification.subtitle, notification.content, notification);
+                $done();
+            }
+        });
     } catch (error) {
         log(`错误: ${error.message}`);
-        let resp = {
-            title: "万夜图片",
-            subtitle: `API-${API_INDEX} 获取失败`,
-            icon: NOTIFY_CONFIG.ERROR_ICON,
-            "icon-color": NOTIFY_CONFIG.ERROR_COLOR,
-            content: `错误信息: ${error.message}`
-        };
-        $done(resp);
+        $notification.post('万夜图片', '❌ 获取失败', error);
+        $done();
     }
 })();
 
