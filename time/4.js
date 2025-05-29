@@ -104,25 +104,32 @@ function parseDetailImages(html) {
 }
 
 // HTTP 請求函數
-function http(opt = {}) {
-    return new Promise((resolve, reject) => {
-        const method = opt.method || 'GET'
-        const options = {
-            url: opt.url,
-            headers: opt.headers || {},
-            method
+async function http(opt = {}) {
+    const fetch = require('node-fetch');
+    const method = opt.method || 'GET';
+    
+    try {
+        const response = await fetch(opt.url, {
+            method,
+            headers: opt.headers || {}
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
         }
         
-        $httpClient[method.toLowerCase()](options, (err, resp, body) => {
-            if (err) reject(err)
-            else resolve(body)
-        })
-    })
+        return await response.text();
+    } catch (error) {
+        throw new Error(`請求失敗: ${error.message}`);
+    }
 }
 
 // 通知函數
 async function notify(title, subt, desc, opts) {
-    $.msg(title, subt, desc, opts)
+    console.log(`${title}\n${subt}\n${desc}`);
+    if (opts && opts['media-url']) {
+        console.log(`圖片URL: ${opts['media-url']}`);
+    }
 }
 
 // prettier-ignore
