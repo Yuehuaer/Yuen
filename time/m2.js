@@ -1,63 +1,171 @@
 /*
-脚本名称：美女图片爬虫
+脚本名称：美女图片抓取
 脚本作者：YueJS
 更新时间：2024-03-21
-脚本说明：获取美女图片链接
+脚本说明：获取VOL系列图片并通过通知展示
+测试版本：Loon iOS 17
 */
 
 const NAME = 'meizi'
 const $ = new Env(NAME)
 
-// 目标网站
-const TARGET_URL = 'https://www.meizi2.com'
+// 目標網站配置
+const CONFIG = {
+    url: 'https://www.meizi2.com',
+    headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+        'Referer': 'https://www.meizi2.com'
+    }
+}
 
 !(async () => {
     try {
-        // 发送请求获取页面内容
-        const response = await $.http.get({
-            url: TARGET_URL,
-            headers: {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-                'Accept-Language': 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2'
-            }
+        $.log('開始獲取首頁內容...')
+        // 獲取首頁內容
+        const html = await http({
+            url: CONFIG.url,
+            headers: CONFIG.headers
         })
-
-        // 使用正则表达式匹配图片链接
-        const imgRegex = /<img[^>]+src="([^">]+)"/g
-        const images = []
-        let match
-
-        while ((match = imgRegex.exec(response.body)) !== null) {
-            const imgUrl = match[1]
-            if (imgUrl && !imgUrl.includes('avatar') && !imgUrl.includes('logo')) {
-                // 处理相对路径
-                const fullUrl = imgUrl.startsWith('http') ? imgUrl : `${TARGET_URL}${imgUrl.startsWith('/') ? '' : '/'}${imgUrl}`
-                images.push(fullUrl)
-            }
+        
+        $.log('解析VOL系列鏈接...')
+        // 解析VOL系列鏈接
+        const volLinks = parseVolLinks(html)
+        
+        if (volLinks.length === 0) {
+            throw new Error('未找到VOL系列圖片，可能是網頁結構變化')
         }
-
-        // 输出结果
-        if (images.length > 0) {
-            await notify(NAME, `找到 ${images.length} 张图片`, images.join('\n'), {
-                'open-url': images[0]
+        
+        $.log(`找到 ${volLinks.length} 個VOL系列鏈接`)
+        // 隨機選擇一個VOL系列鏈接
+        const randomVolLink = volLinks[Math.floor(Math.random() * volLinks.length)]
+        $.log(`選擇鏈接: ${randomVolLink}`)
+        
+        // 獲取詳細頁面內容
+        const detailHtml = await http({
+            url: randomVolLink,
+            headers: CONFIG.headers
+        })
+        
+        // 解析詳細頁面的圖片
+        const images = parseDetailImages(detailHtml)
+        
+        if (images.length === 0) {
+            throw new Error('未找到詳細圖片，可能是網頁結構變化')
+        }
+        
+        $.log(`找到 ${images.length} 張圖片`)
+        // 隨機選擇一張圖片
+        const randomImage = images[Math.floor(Math.random() * images.length)]
+        $.log(`選擇圖片URL: ${randomImage}`)
+        
+        // 檢查圖片URL是否有效
+        try {
+            const checkResult = await http({
+                url: randomImage,
+                headers: {
+                    'Accept': 'image/*',
+                    'Referer': CONFIG.url
+                }
             })
-        } else {
-            await notify(NAME, '❌ 未找到图片', '请检查网站是否可访问')
+            
+            if (!checkResult) {
+                throw new Error('圖片無法訪問')
+            }
+            
+            // 發送通知（包含縮略圖和大圖）
+            await notify(NAME, '🌟 美圖欣賞', `點擊查看大圖`, {
+                'open-url': randomImage,
+                'media-url': randomImage
+            })
+            
+            $.log('通知發送成功')
+            $.log('圖片地址：' + randomImage)
+            
+        } catch (imgError) {
+            throw new Error(`圖片訪問失敗: ${imgError.message || imgError}`)
         }
-
+        
     } catch (e) {
         $.logErr(e)
-        await notify(NAME, '❌ 运行出错', `${$.lodash_get(e, 'message') || $.lodash_get(e, 'error') || e}`)
+        await notify(NAME, '❌', `${$.lodash_get(e, 'message') || $.lodash_get(e, 'error') || e}`)
+    } finally {
+        $.done()
     }
 })()
-.finally(() => {
-    $.done()
-})
 
-// 通知函数
+// 解析VOL系列鏈接
+function parseVolLinks(html) {
+    const links = []
+    const volRegex = /<a[^>]+href="([^"]+)"[^>]*>([^<]*VOL[^<]*)<\/a>/gi
+    let match
+    
+    while ((match = volRegex.exec(html)) !== null) {
+        let link = match[1]
+        if (link.startsWith('/')) {
+            link = CONFIG.url + link
+        }
+        links.push(link)
+    }
+    
+    return links
+}
+
+// 解析詳細頁面圖片
+function parseDetailImages(html) {
+    const images = []
+    const imgRegex = /<img[^>]+src="([^"]+(?:\.jpg|\.png|\.jpeg))"[^>]*>/gi
+    let match
+    
+    while ((match = imgRegex.exec(html)) !== null) {
+        let imgUrl = match[1]
+        // 處理相對路徑
+        if (imgUrl.startsWith('//')) {
+            imgUrl = 'https:' + imgUrl
+        } else if (imgUrl.startsWith('/')) {
+            imgUrl = CONFIG.url + imgUrl
+        } else if (!imgUrl.startsWith('http')) {
+            imgUrl = CONFIG.url + '/' + imgUrl
+        }
+        
+        // 過濾掉小圖和廣告圖
+        if (!imgUrl.includes('thumb') && 
+            !imgUrl.includes('banner') && 
+            !imgUrl.includes('logo') && 
+            !imgUrl.includes('icon') &&
+            (imgUrl.includes('upload') || imgUrl.includes('images'))) {
+            $.log('找到圖片: ' + imgUrl)
+            images.push(imgUrl)
+        }
+    }
+    
+    return images
+}
+
+// HTTP 請求函數
+function http(opt = {}) {
+    return new Promise((resolve, reject) => {
+        const method = opt.method || 'GET'
+        const options = {
+            url: opt.url,
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+                'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+                ...opt.headers
+            },
+            method
+        }
+        
+        $httpClient[method.toLowerCase()](options, (err, resp, body) => {
+            if (err) reject(err)
+            else resolve(body)
+        })
+    })
+}
+
+// 通知函數
 async function notify(title, subt, desc, opts) {
-    $.msg(title, subt, desc, opts)
+    $notification.post(title, subt, desc, opts)
 }
 
 // prettier-ignore
