@@ -1,135 +1,138 @@
 /*
-脚本名称：美女图片抓取
-脚本作者：YueJS
-更新时间：2024-03-21
-脚本说明：获取VOL系列图片并通过通知展示
-测试版本：Loon iOS 17
+脚本名称：通用图片抓取通知脚本
+适配平台：Surge、Quantumult X、Loon、Stash
+脚本说明：从指定网址首页抓取图片，随机选择展示一张，缩略图 + 点击通知展开大图
+作者：改编自 YueJS
 */
 
-const NAME = 'meizi'
-const $ = new Env(NAME)
-
-// 目標網站配置
 const CONFIG = {
-    url: 'https://www.meizi2.com',
-    headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-        'Referer': 'https://www.meizi2.com'
-    }
+  NAME: '图片通知',
+  HOMEPAGE: 'https://www.meizi2.com',
+  IMG_REGEX: /<img[^>]+src=["']([^"']+\.(?:jpg|jpeg|png|webp))["'][^>]*>/gi,
+  HEADERS: {
+    'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148'
+  }
 }
+
+const $ = new Env(CONFIG.NAME)
 
 !(async () => {
-    try {
-        $.log('開始獲取首頁內容...')
-        // 獲取首頁內容
-        const html = await http({
-            url: CONFIG.url,
-            headers: CONFIG.headers
-        })
-        
-        $.log('解析VOL系列鏈接...')
-        // 解析VOL系列鏈接
-        const volLinks = parseVolLinks(html)
-        
-        if (volLinks.length === 0) {
-            throw new Error('未找到VOL系列圖片，可能是網頁結構變化')
-        }
-        
-        $.log(`找到 ${volLinks.length} 個VOL系列鏈接`)
-        // 隨機選擇一個VOL系列鏈接
-        const randomVolLink = volLinks[Math.floor(Math.random() * volLinks.length)]
-        $.log(`選擇鏈接: ${randomVolLink}`)
-        
-        // 獲取詳細頁面內容
-        const detailHtml = await http({
-            url: randomVolLink,
-            headers: CONFIG.headers
-        })
-        
-        // 解析詳細頁面的圖片
-        const images = parseDetailImages(detailHtml)
-        
-        if (images.length === 0) {
-            throw new Error('未找到詳細圖片，可能是網頁結構變化')
-        }
-        
-        $.log(`找到 ${images.length} 張圖片`)
-        // 隨機選擇一張圖片
-        const randomImage = images[Math.floor(Math.random() * images.length)]
-        $.log(`選擇圖片: ${randomImage}`)
-        
-        // 發送通知（包含圖片）
-        await notify(NAME, '獲取成功', `VOL系列圖片`, {
-            'open-url': randomImage,
-            'media-url': randomImage
-        })
-        
-    } catch (e) {
-        $.logErr(e)
-        await notify(NAME, '❌', `${$.lodash_get(e, 'message') || $.lodash_get(e, 'error') || e}`)
-    } finally {
-        $.done()
-    }
+  const body = await httpGet(CONFIG.HOMEPAGE)
+  if (!body) throw new Error('无法获取页面内容')
+
+  // 修正了此处语法错误：使用扩展运算符 [...] 将迭代器转换为数组
+  const imgUrls =.map(m => m[1])
+  if (!imgUrls.length) throw new Error('未匹配到图片地址')
+
+  const chosen = imgUrls[Math.floor(Math.random() * imgUrls.length)]
+  const finalUrl = toAbsoluteUrl(CONFIG.HOMEPAGE, chosen)
+
+  // 调试信息：输出最终用于通知的图片URL
+  // 你可以在Loon的日志中查看此输出，以确认图片链接是否正确。
+  $.log(`尝试发送通知图片URL: ${finalUrl}`)
+
+  // Loon平台通知图片显示说明：
+  // 尽管脚本尝试通过 'media-url' 选项在通知中显示图片，
+  // 但图片（缩略图和大图）的实际显示能力取决于Loon应用本身对“富通知”的支持，
+  // 以及iOS系统版本的要求（例如，iOS 10+支持富通知）[2]。
+  // Surge等类似工具的文档表明，`media-url`参数用于提供通知的媒体内容，如图片 [3]。
+  // 确保 `finalUrl` 是一个直接可访问的图片链接（例如，以.jpg,.png等结尾），并且是HTTPS链接 [2]。
+  // 如果图片仍无法显示，请检查Loon的官方文档或社区，确认其对通知图片附件的具体支持情况和要求。
+  // 有些富通知功能可能依赖于云服务或需要特定的通知服务扩展 [2, 4]。
+  await notify(CONFIG.NAME, '点击查看大图', finalUrl, {
+    'open-url': finalUrl,
+    'media-url': finalUrl
+  })
 })()
+.catch(e => {
+  $.logErr(e)
+  notify(CONFIG.NAME, '❌ 错误', e.message |
+| e.toString())
+})
+.finally(() => $.done())
 
-// 解析VOL系列鏈接
-function parseVolLinks(html) {
-    const links = []
-    const volRegex = /<a[^>]+href="([^"]+)"[^>]*>([^<]*VOL[^<]*)<\/a>/gi
-    let match
-    
-    while ((match = volRegex.exec(html)) !== null) {
-        let link = match[1]
-        if (link.startsWith('/')) {
-            link = CONFIG.url + link
-        }
-        links.push(link)
-    }
-    
-    return links
+// 工具函数
+function toAbsoluteUrl(base, relative) {
+  // 确保相对URL转换为绝对URL，并处理协议
+  if (/^https?:\/\//.test(relative)) return relative
+  const url = new URL(relative, base)
+  return url.toString()
 }
 
-// 解析詳細頁面圖片
-function parseDetailImages(html) {
-    const images = []
-    const imgRegex = /<img[^>]+src="([^"]+(?:\.jpg|\.png|\.jpeg))"[^>]*>/gi
-    let match
-    
-    while ((match = imgRegex.exec(html)) !== null) {
-        let imgUrl = match[1]
-        if (imgUrl.startsWith('/')) {
-            imgUrl = CONFIG.url + imgUrl
-        }
-        // 過濾掉小圖和廣告圖
-        if (!imgUrl.includes('thumb') && !imgUrl.includes('banner') && !imgUrl.includes('logo')) {
-            images.push(imgUrl)
-        }
-    }
-    
-    return images
-}
-
-// HTTP 請求函數
-function http(opt = {}) {
-    return new Promise((resolve, reject) => {
-        const method = opt.method || 'GET'
-        const options = {
-            url: opt.url,
-            headers: opt.headers || {},
-            method
-        }
-        
-        $httpClient[method.toLowerCase()](options, (err, resp, body) => {
-            if (err) reject(err)
-            else resolve(body)
-        })
+function httpGet(url) {
+  return new Promise((resolve, reject) => {
+    const options = { url, headers: CONFIG.HEADERS }
+    $.get(options, (err, resp, data) => {
+      if (err) reject(err)
+      else resolve(data)
     })
+  })
 }
 
-// 通知函數
-async function notify(title, subt, desc, opts) {
-    $notification.post(title, subt, desc, opts)
+function notify(title, subtitle, message, opts) {
+  $.msg(title, subtitle, message, opts)
 }
 
-// prettier-ignore
-function Env(t,e){class s{constructor(t){this.env=t}send(t,e="GET"){t="string"==typeof t?{url:t}:t;let s=this.get;return"POST"===e&&(s=this.post),new Promise((e,a)=>{s.call(this,t,(t,s,r)=>{t?a(t):e(s)})})}get(t){return this.send.call(this.env,t)}post(t){return this.send.call(this.env,t,"POST")}}return new class{constructor(t,e){this.name=t,this.http=new s(this),this.data=null,this.dataFile="box.dat",this.logs=[],this.isMute=!1,this.isNeedRewrite=!1,this.logSeparator="\n",this.encoding="utf-8",this.startTime=(new Date).getTime(),Object.assign(this,e),this.log("",`🔔${this.name}, 开始!`)}getEnv(){return"undefined"!=typeof $environment&&$environment["surge-version"]?"Surge":"undefined"!=typeof $environment&&$environment["stash-version"]?"Stash":"undefined"!=typeof module&&module.exports?"Node.js":"undefined"!=typeof $task?"Quantumult X":"undefined"!=typeof $loon?"Loon":"undefined"!=typeof $rocket?"Shadowrocket":void 0}isNode(){return"Node.js"===this.getEnv()}isQuanX(){return"Quantumult X"===this.getEnv()}isSurge(){return"Surge"===this.getEnv()}isLoon(){return"Loon"===this.getEnv()}isShadowrocket(){return"Shadowrocket"===this.getEnv()}isStash(){return"Stash"===this.getEnv()}toObj(t,e=null){try{return JSON.parse(t)}catch{return e}}toStr(t,e=null){try{return JSON.stringify(t)}catch{return e}}getjson(t,e){let s=e;const a=this.getdata(t);if(a)try{s=JSON.parse(this.getdata(t))}catch{}return s}setjson(t,e){try{return this.setdata(JSON.stringify(t),e)}catch{return!1}}getScript(t){return new Promise(e=>{this.get({url:t},(t,s,a)=>e(a))})}runScript(t,e){return new Promise(s=>{let a=this.getdata("@chavy_boxjs_userCfgs.httpapi");a=a?a.replace(/\n/g,"").trim():a;let r=this.getdata("@chavy_boxjs_userCfgs.httpapi_timeout");r=r?1*r:20,r=e&&e.timeout?e.timeout:r;const[i,o]=a.split("@"),n={url:`http://${o}/v1/scripting/evaluate`,body:{script_text:t,mock_type:"cron",timeout:r},headers:{"X-Key":i,Accept:"*/*"},timeout:r};this.post(n,(t,e,a)=>s(a))}).catch(t=>this.logErr(t))}loaddata(){if(!this.isNode())return{};{this.fs=this.fs?this.fs:require("fs"),this.path=this.path?this.path:require("path");const t=this.path.resolve(this.dataFile),e=this.path.resolve(process.cwd(),this.dataFile),s=this.fs.existsSync(t),a=!s&&this.fs.existsSync(e);if(!s&&!a)return{};{const a=s?t:e;try{return JSON.parse(this.fs.readFileSync(a))}catch(t){return{}}}}}writedata(){if(this.isNode()){this.fs=this.fs?this.fs:require("fs"),this.path=this.path?this.path:require("path");const t=this.path.resolve(this.dataFile),e=this.path.resolve(process.cwd(),this.dataFile),s=this.fs.existsSync(t),a=!s&&this.fs.existsSync(e),r=JSON.stringify(this.data);s?this.fs.writeFileSync(t,r):a?this.fs.writeFileSync(e,r):this.fs.writeFileSync(t,r)}}lodash_get(t,e,s){const a=e.replace(/\[(\d+)\]/g,".$1").split(".");let r=t;for(const t of a)if(r=Object(r)[t],void 0===r)return s;return r}lodash_set(t,e,s){return Object(t)!==t?t:(Array.isArray(e)||(e=e.toString().match(/[^.[\]]+/g)||[]),e.slice(0,-1).reduce((t,s,a)=>Object(t[s])===t[s]?t[s]:t[s]=Math.abs(e[a+1])>>0==+e[a+1]?[]:{},t)[e[e.length-1]]=s,t)}getdata(t){let e=this.getval(t);if(/^@/.test(t)){const[,s,a]=/^@(.*?)\.(.*?)$/.exec(t),r=s?this.getval(s):"";if(r)try{const t=JSON.parse(r);e=t?this.lodash_get(t,a,""):e}catch(t){e=""}}return e}setdata(t,e){let s=!1;if(/^@/.test(e)){const[,a,r]=/^@(.*?)\.(.*?)$/.exec(e),i=this.getval(a),o=a?"null"===i?null:i||"{}":"{}";try{const e=JSON.parse(o);this.lodash_set(e,r,t),s=this.setval(JSON.stringify(e),a)}catch(e){const i={};this.lodash_set(i,r,t),s=this.setval(JSON.stringify(i),a)}}else s=this.setval(t,e);return s}getval(t){switch(this.getEnv()){case"Surge":case"Loon":case"Stash":case"Shadowrocket":return $persistentStore.read(t);case"Quantumult X":return $prefs.valueForKey(t);case"Node.js":return this.data=this.loaddata(),this.data[t];default:return this.data&&this.data[t]||null}}setval(t,e){switch(this.getEnv()){case"Surge":case"Loon":case"Stash":case"Shadowrocket":return $persistentStore.write(t,e);case"Quantumult X":return $prefs.setValueForKey(t,e);case"Node.js":return this.data=this.loaddata(),this.data[e]=t,this.writedata(),!0;default:return this.data&&this.data[e]||null}}initGotEnv(t){this.got=this.got?this.got:require("got"),this.cktough=this.cktough?this.cktough:require("tough-cookie"),this.ckjar=this.ckjar?this.ckjar:new this.cktough.CookieJar,t&&(t.headers=t.headers?t.headers:{},void 0===t.headers.Cookie&&void 0===t.cookieJar&&(t.cookieJar=this.ckjar))}get(t,e=(()=>{})){switch(t.headers&&(delete t.headers["Content-Type"],delete t.headers["Content-Length"],delete t.headers["content-type"],delete t.headers["content-length"]),this.getEnv()){case"Surge":case"Loon":case"Stash":case"Shadowrocket":default:this.isSurge()&&this.isNeedRewrite&&(t.headers=t.headers||{},Object.assign(t.headers,{"X-Surge-Skip-Scripting":!1})),$httpClient.get(t,(t,s,a)=>{!t&&s&&(s.body=a,s.statusCode=s.status?s.status:s.statusCode,s.status=s.statusCode),e(t,s,a)});break;case"Quantumult X":this.isNeedRewrite&&(t.opts=t.opts||{},Object.assign(t.opts,{hints:!1})),$task.fetch(t).then(t=>{const{statusCode:s,statusCode:a,headers:r,body:i,bodyBytes:o}=t;e(null,{status:s,statusCode:a,headers:r,body:i,bodyBytes:o},i,o)},t=>e(t&&t.error||"UndefinedError"));break;case"Node.js":let s=require("iconv-lite");this.initGotEnv(t),this.got(t).on("redirect",(t,e)=>{try{if(t.headers["set-cookie"]){const s=t.headers["set-cookie"].map(this.cktough.Cookie.parse).toString();s&&this.ckjar.setCookieSync(s,null),e.cookieJar=this.ckjar}}catch(t){this.logErr(t)}}).then(t=>{const{statusCode:a,statusCode:r,headers:i,rawBody:o}=t,n=s.decode(o,this.encoding);e(null,{status:a,statusCode:r,headers:i,rawBody:o,body:n},n)},t=>{const{message:a,response:r}=t;e(a,r,r&&s.decode(r.rawBody,this.encoding))})}}post(t,e=(()=>{})){const s=t.method?t.method.toLocaleLowerCase():"post";switch(t.body&&t.headers&&!t.headers["Content-Type"]&&!t.headers["content-type"]&&(t.headers["content-type"]="application/x-www-form-urlencoded"),t.headers&&(delete t.headers["Content-Length"],delete t.headers["content-length"]),this.getEnv()){case"Surge":case"Loon":case"Stash":case"Shadowrocket":default:this.isSurge()&&this.isNeedRewrite&&(t.headers=t.headers||{},Object.assign(t.headers,{"X-Surge-Skip-Scripting":!1})),$httpClient[s](t,(t,s,a)=>{!t&&s&&(s.body=a,s.statusCode=s.status?s.status:s.statusCode,s.status=s.statusCode),e(t,s,a)});break;case"Quantumult X":t.method=s,this.isNeedRewrite&&(t.opts=t.opts||{},Object.assign(t.opts,{hints:!1})),$task.fetch(t).then(t=>{const{statusCode:s,statusCode:a,headers:r,body:i,bodyBytes:o}=t;e(null,{status:s,statusCode:a,headers:r,body:i,bodyBytes:o},i,o)},t=>e(t&&t.error||"UndefinedError"));break;case"Node.js":let a=require("iconv-lite");this.initGotEnv(t);const{url:r,...i}=t;this.got[s](r,i).then(t=>{const{statusCode:s,statusCode:r,headers:i,rawBody:o}=t,n=a.decode(o,this.encoding);e(null,{status:s,statusCode:r,headers:i,rawBody:o,body:n},n)},t=>{const{message:s,response:r}=t;e(s,r,r&&a.decode(r.rawBody,this.encoding))})}}time(t,e=null){const s=e?new Date(e):new Date;let a={"M+":s.getMonth()+1,"d+":s.getDate(),"H+":s.getHours(),"m+":s.getMinutes(),"s+":s.getSeconds(),"q+":Math.floor((s.getMonth()+3)/3),S:s.getMilliseconds()};/(y+)/.test(t)&&(t=t.replace(RegExp.$1,(s.getFullYear()+"").substr(4-RegExp.$1.length)));for(let e in a)new RegExp("("+e+")").test(t)&&(t=t.replace(RegExp.$1,1==RegExp.$1.length?a[e]:("00"+a[e]).substr((""+a[e]).length)));return t}queryStr(t){let e="";for(const s in t){let a=t[s];null!=a&&""!==a&&("object"==typeof a&&(a=JSON.stringify(a)),e+=`${s}=${a}&`)}return e=e.substring(0,e.length-1),e}msg(e=t,s="",a="",r){const i=t=>{switch(typeof t){case void 0:return t;case"string":switch(this.getEnv()){case"Surge":case"Stash":default:return{url:t};case"Loon":case"Shadowrocket":return t;case"Quantumult X":return{"open-url":t};case"Node.js":return}case"object":switch(this.getEnv()){case"Surge":case"Stash":case"Shadowrocket":default:{let e=t.url||t.openUrl||t["open-url"];return{url:e}}case"Loon":{let e=t.openUrl||t.url||t["open-url"],s=t.mediaUrl||t["media-url"];return{openUrl:e,mediaUrl:s}}case"Quantumult X":{let e=t["open-url"]||t.url||t.openUrl,s=t["media-url"]||t.mediaUrl,a=t["update-pasteboard"]||t.updatePasteboard;return{"open-url":e,"media-url":s,"update-pasteboard":a}}case"Node.js":return}default:return}};if(!this.isMute)switch(this.getEnv()){case"Surge":case"Loon":case"Stash":case"Shadowrocket":default:$notification.post(e,s,a,i(r));break;case"Quantumult X":$notify(e,s,a,i(r));break;case"Node.js":}if(!this.isMuteLog){let t=["","==============📣系统通知📣=============="];t.push(e),s&&t.push(s),a&&t.push(a),console.log(t.join("\n")),this.logs=this.logs.concat(t)}}log(...t){t.length>0&&(this.logs=[...this.logs,...t]),console.log(t.join(this.logSeparator))}logErr(t,e){switch(this.getEnv()){case"Surge":case"Loon":case"Stash":case"Shadowrocket":case"Quantumult X":default:this.log("",`❗️${this.name}, 错误!`,t);break;case"Node.js":this.log("",`❗️${this.name}, 错误!`,t.stack)}}wait(t){return new Promise(e=>setTimeout(e,t))}done(t={}){const e=(new Date).getTime(),s=(e-this.startTime)/1e3;switch(this.log("",`🔔${this.name}, 结束! 🕛 ${s} 秒`),this.log(),this.getEnv()){case"Surge":case"Loon":case"Stash":case"Shadowrocket":case"Quantumult X":default:$done(t);break;case"Node.js":process.exit(1)}}}(t,e)}
+// ↓↓↓ 跨平台环境封装
+function Env(name, opts) {
+  const isSurge = typeof $httpClient!== 'undefined'
+  const isQuanX = typeof $task!== 'undefined'
+  const isLoon = typeof $loon!== 'undefined'
+  const isStash = typeof $environment!== 'undefined' && $environment['stash-version']
+
+  return new class {
+    constructor(name, opts) {
+      this.name = name
+      Object.assign(this, opts)
+      this.logs =
+      this.startTime = new Date().getTime()
+      this.log(`🔔${this.name}, 开始!`)
+    }
+
+    get(opts, cb) {
+      if (isSurge |
+| isLoon |
+| isStash) {
+        $httpClient.get(opts, cb)
+      } else if (isQuanX) {
+        if (typeof opts === 'string') opts = { url: opts }
+        opts.method = 'GET'
+        $task.fetch(opts).then(
+          resp => cb(null, resp, resp.body),
+          reason => cb(reason.error, null, null)
+        )
+      }
+    }
+
+    msg(title, subt, body, opt) {
+      if (isSurge |
+| isLoon |
+| isStash) {
+        $notification.post(title, subt, body, opt)
+      } else if (isQuanX) {
+        $notify(title, subt, body, opt)
+      }
+      this.log(`${title} ${subt} ${body}`)
+    }
+
+    log(...args) {
+      this.logs.push(...args)
+      console.log(args.join('\n'))
+    }
+
+    logErr(err) {
+      this.log(`❗️${this.name}, 错误!`, err.stack |
+| err)
+    }
+
+    done() {
+      const end = new Date().getTime()
+      const elapsed = ((end - this.startTime) / 1000).toFixed(2)
+      this.log(`🔔${this.name}, 结束! 🕛 ${elapsed} 秒`)
+      if (isSurge |
+| isLoon |
+| isStash |
+| isQuanX) $done()
+    }
+  }(name, opts)
+}
