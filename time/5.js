@@ -2,7 +2,7 @@
 脚本名称：美女图片抓取
 脚本作者：YueJS
 更新时间：2024-03-21
-脚本说明：获取VOL系列图片并通过通知展示
+脚本说明：获取网站首页图片并通过通知展示
 测试版本：Loon iOS 17
 */
 
@@ -11,10 +11,11 @@ const $ = new Env(NAME)
 
 // 目標網站配置
 const CONFIG = {
-    url: 'https://www.meizi2.com',
+    url: 'https://www.meizi2.com',  // 這裡可以替換為任意網站
     headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-        'Referer': 'https://www.meizi2.com'
+        'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+        'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8'
     }
 }
 
@@ -26,36 +27,30 @@ const CONFIG = {
             headers: CONFIG.headers
         })
         
-        // 解析VOL系列鏈接
-        const volLinks = parseVolLinks(html)
-        
-        if (volLinks.length === 0) {
-            throw new Error('未找到VOL系列圖片')
-        }
-        
-        // 隨機選擇一個VOL系列鏈接
-        const randomVolLink = volLinks[Math.floor(Math.random() * volLinks.length)]
-        
-        // 獲取詳細頁面內容
-        const detailHtml = await http({
-            url: randomVolLink,
-            headers: CONFIG.headers
-        })
-        
-        // 解析詳細頁面的圖片
-        const images = parseDetailImages(detailHtml)
+        $.log('開始解析圖片...')
+        // 解析所有圖片
+        const images = parseImages(html)
         
         if (images.length === 0) {
-            throw new Error('未找到詳細圖片')
+            throw new Error('未在頁面中找到任何圖片，請檢查網站是否正常訪問')
         }
         
+        $.log(`共找到 ${images.length} 張圖片`)
         // 隨機選擇一張圖片
         const randomImage = images[Math.floor(Math.random() * images.length)]
+        $.log(`選擇圖片: ${randomImage}`)
         
-        // 發送通知（包含圖片）
-        await notify(NAME, '獲取成功', `VOL系列圖片`, {
-            'open-url': randomImage,
-            'media-url': randomImage
+        // 獲取圖片真實地址
+        const realImageUrl = await getRealImageUrl(randomImage)
+        
+        if (!realImageUrl) {
+            throw new Error('無法獲取圖片地址，可能是圖片已失效或需要登錄')
+        }
+        
+        // 發送通知
+        await notify(NAME, '🌟 圖片獲取成功', '', {
+            'open-url': realImageUrl,
+            'media-url': realImageUrl
         })
         
     } catch (e) {
@@ -66,70 +61,112 @@ const CONFIG = {
     }
 })()
 
-// 解析VOL系列鏈接
-function parseVolLinks(html) {
-    const links = []
-    const volRegex = /<a[^>]+href="([^"]+)"[^>]*>([^<]*VOL[^<]*)<\/a>/gi
-    let match
-    
-    while ((match = volRegex.exec(html)) !== null) {
-        let link = match[1]
-        if (link.startsWith('/')) {
-            link = CONFIG.url + link
-        }
-        links.push(link)
-    }
-    
-    return links
-}
-
-// 解析詳細頁面圖片
-function parseDetailImages(html) {
+// 解析圖片
+function parseImages(html) {
     const images = []
-    const imgRegex = /<img[^>]+src="([^"]+(?:\.jpg|\.png|\.jpeg))"[^>]*>/gi
-    let match
     
-    while ((match = imgRegex.exec(html)) !== null) {
-        let imgUrl = match[1]
-        if (imgUrl.startsWith('/')) {
-            imgUrl = CONFIG.url + imgUrl
-        }
-        // 過濾掉小圖和廣告圖
-        if (!imgUrl.includes('thumb') && !imgUrl.includes('banner') && !imgUrl.includes('logo')) {
-            images.push(imgUrl)
+    // 匹配多種可能的圖片標籤格式
+    const patterns = [
+        /<img[^>]+src="([^"]+(?:\.jpg|\.png|\.jpeg|\.webp))"[^>]*>/gi,  // 標準圖片標籤
+        /<img[^>]+data-original="([^"]+(?:\.jpg|\.png|\.jpeg|\.webp))"[^>]*>/gi,  // 懶加載圖片
+        /<img[^>]+data-src="([^"]+(?:\.jpg|\.png|\.jpeg|\.webp))"[^>]*>/gi,  // 另一種懶加載
+        /url\(['"]?([^'"]+(?:\.jpg|\.png|\.jpeg|\.webp))['"]?\)/gi,  // CSS背景圖
+        /<a[^>]+href="([^"]+(?:\.jpg|\.png|\.jpeg|\.webp))"[^>]*>/gi  // 圖片鏈接
+    ]
+    
+    // 遍歷所有模式
+    for (const regex of patterns) {
+        let match
+        while ((match = regex.exec(html)) !== null) {
+            let imgUrl = match[1]
+            
+            // 處理相對路徑
+            if (imgUrl.startsWith('//')) {
+                imgUrl = 'https:' + imgUrl
+            } else if (imgUrl.startsWith('/')) {
+                imgUrl = CONFIG.url + imgUrl
+            } else if (!imgUrl.startsWith('http')) {
+                imgUrl = CONFIG.url + '/' + imgUrl
+            }
+            
+            // 基本過濾
+            if (!imgUrl.includes('thumb') && 
+                !imgUrl.includes('banner') && 
+                !imgUrl.includes('logo') && 
+                !imgUrl.includes('icon') &&
+                !imgUrl.includes('avatar') &&
+                imgUrl.length > 10) {  // 排除太短的URL
+                
+                // 檢查是否為有效的圖片URL
+                if (/\.(jpg|jpeg|png|webp)(\?.*)?$/i.test(imgUrl)) {
+                    $.log('找到圖片: ' + imgUrl)
+                    if (!images.includes(imgUrl)) {  // 避免重複
+                        images.push(imgUrl)
+                    }
+                }
+            }
         }
     }
     
     return images
 }
 
-// HTTP 請求函數
-async function http(opt = {}) {
-    const fetch = require('node-fetch');
-    const method = opt.method || 'GET';
-    
+// 獲取圖片真實URL
+async function getRealImageUrl(url) {
     try {
-        const response = await fetch(opt.url, {
-            method,
-            headers: opt.headers || {}
-        });
+        $.log('正在檢查圖片URL: ' + url)
+        const response = await http({
+            url: url,
+            headers: {
+                'Accept': 'image/*',
+                'Referer': CONFIG.url
+            },
+            checkImage: true
+        })
         
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
+        const finalUrl = response.url || url
+        $.log('獲取到真實圖片URL: ' + finalUrl)
+        return finalUrl
+        
+    } catch (e) {
+        $.log(`檢查圖片失敗: ${e}`)
+        return null
+    }
+}
+
+// HTTP 請求函數
+function http(opt = {}) {
+    return new Promise((resolve, reject) => {
+        const options = {
+            url: opt.url,
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 13_2_3 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.0.3 Mobile/15E148 Safari/604.1',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+                'Accept-Language': 'zh-CN,zh;q=0.9,en;q=0.8',
+                ...opt.headers
+            },
+            followRedirect: true
         }
         
-        return await response.text();
-    } catch (error) {
-        throw new Error(`請求失敗: ${error.message}`);
-    }
+        $httpClient.get(options, (err, resp, body) => {
+            if (err) {
+                reject(err)
+                return
+            }
+            
+            // 如果是檢查圖片URL，返回響應對象
+            if (opt.checkImage) {
+                resolve(resp)
+            } else {
+                resolve(body)
+            }
+        })
+    })
 }
 
 // 通知函數
 async function notify(title, subt, desc, opts) {
-    console.log(`${title}\n${subt}\n${desc}`);
-    if (opts && opts['media-url']) {
-        console.log(`圖片URL: ${opts['media-url']}`);
-    }
+    $.msg(title, subt, desc, opts)
 }
 
 // prettier-ignore
