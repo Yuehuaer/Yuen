@@ -1,65 +1,115 @@
 /*
-脚本名称：Meizi2 随机图片通知
-作者：基于YueJS修改
-更新时间：2025-05-30
-支持平台：Surge、Quantumult X、Loon
-脚本功能：访问指定页面，提取图片链接并随机推送带预览的大图
+脚本名称：通用图片抓取通知脚本
+适配平台：Surge、Quantumult X、Loon、Stash
+脚本说明：从指定网址首页抓取图片，随机选择展示一张，缩略图 + 点击通知展开大图
+作者：改编自 YueJS
 */
 
-const NAME = 'Meizi2 图片通知'
-const HOMEPAGE = 'https://www.meizi2.com'
-const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp']
-const $ = new Env(NAME)
+const CONFIG = {
+  NAME: '图片通知',
+  HOMEPAGE: 'https://www.meizi2.com',
+  IMG_REGEX: /<img[^>]+src=["']([^"']+\.(?:jpg|jpeg|png|webp))["'][^>]*>/gi,
+  HEADERS: {
+    'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148'
+  }
+}
+
+const $ = new Env(CONFIG.NAME)
 
 !(async () => {
-  const html = await http({ url: HOMEPAGE })
-  if (!html) throw new Error('页面获取失败')
+  const body = await httpGet(CONFIG.HOMEPAGE)
+  if (!body) throw new Error('无法获取页面内容')
 
-  const imageUrls = extractImageUrls(html, HOMEPAGE)
-  if (!imageUrls.length) throw new Error('未提取到图片链接')
+  const imgUrls = [...body.matchAll(CONFIG.IMG_REGEX)].map(m => m[1])
+  if (!imgUrls.length) throw new Error('未匹配到图片地址')
 
-  const chosen = imageUrls[Math.floor(Math.random() * imageUrls.length)]
-  await notify(NAME, '随机美图获取成功', chosen, {
-    'open-url': chosen,
-    'media-url': chosen
+  const chosen = imgUrls[Math.floor(Math.random() * imgUrls.length)]
+  const finalUrl = toAbsoluteUrl(CONFIG.HOMEPAGE, chosen)
+
+  await notify(CONFIG.NAME, '点击查看大图', finalUrl, {
+    'open-url': finalUrl,
+    'media-url': finalUrl
   })
 })()
-.catch(async e => {
+.catch(e => {
   $.logErr(e)
-  await notify(NAME, '❌ 获取失败', e.message || e)
+  notify(CONFIG.NAME, '❌ 错误', e.message || e.toString())
 })
-.finally(() => {
-  $.done()
-})
+.finally(() => $.done())
 
-function extractImageUrls(html, baseUrl) {
-  const matches = html.match(/<img[^>]+src=["']?([^"'>]+)["']?/g) || []
-  return matches.map(m => {
-    const srcMatch = m.match(/src=["']?([^"'>]+)["']?/) 
-    return srcMatch && srcMatch[1] ? toAbsoluteUrl(srcMatch[1], baseUrl) : null
-  })
-  .filter(u => u && IMAGE_EXTENSIONS.some(ext => u.toLowerCase().includes(ext)))
+// 工具函数
+function toAbsoluteUrl(base, relative) {
+  if (/^https?:\/\//.test(relative)) return relative
+  const url = new URL(relative, base)
+  return url.toString()
 }
 
-function toAbsoluteUrl(url, base) {
-  if (url.startsWith('http')) return url
-  return new URL(url, base).href
-}
-
-// 通知封装
-async function notify(title, subt, desc, opts) {
-  $.msg(title, subt, desc, opts)
-}
-
-// HTTP请求封装
-async function http(opt = {}) {
+function httpGet(url) {
   return new Promise((resolve, reject) => {
-    $httpClient.get({ url: opt.url }, (err, resp, body) => {
+    const options = { url, headers: CONFIG.HEADERS }
+    $.get(options, (err, resp, data) => {
       if (err) reject(err)
-      else resolve(body)
+      else resolve(data)
     })
   })
 }
 
-// 环境支持封装（兼容 Loon/Surge/QuanX）
-function Env(t,e){class s{constructor(t){this.env=t}send(t,e="GET"){t="string"==typeof t?{url:t}:t;let s=this.get;return"POST"===e&&(s=this.post),new Promise((e,a)=>{s.call(this,t,(t,s,r)=>{t?a(t):e(s)})})}get(t){return this.send.call(this.env,t)}post(t){return this.send.call(this.env,t,"POST")}}return new class{constructor(t,e){this.name=t,this.http=new s(this),this.data=null,this.dataFile="box.dat",this.logs=[],this.isMute=!1,this.isNeedRewrite=!1,this.logSeparator="\n",this.encoding="utf-8",this.startTime=(new Date).getTime(),Object.assign(this,e),this.log("",`🔔${this.name}, 开始!`)}isSurge(){return"undefined"!=typeof $httpClient}isQuanX(){return"undefined"!=typeof $task}isLoon(){return"undefined"!=typeof $loon}isNode(){return"undefined"!=typeof module&&!!module.exports}msg(e=t,s="",a="",r){const i=t=>{switch(typeof t){case"object":return this.isSurge()||this.isLoon()?{url:t.url}:this.isQuanX()?{"open-url":t.url,"media-url":t.mediaUrl}:void 0;default:return t}};this.isMute||(this.isSurge()||this.isLoon()?$notification.post(e,s,a,i(r)):this.isQuanX()&&$notify(e,s,a,i(r)));let logs=["","==============📣系统通知📣==============",e];s&&logs.push(s),a&&logs.push(a),console.log(logs.join("\n")),this.logs=this.logs.concat(logs)}log(...t){t.length>0&&(this.logs=[...this.logs,...t]),console.log(t.join(this.logSeparator))}logErr(t,e){this.log("",`❗️${this.name}, 错误!`,t.stack?t.stack:t)}done(t={}){const e=(new Date).getTime(),s=(e-this.startTime)/1e3;this.log("",`🔔${this.name}, 结束! 🕛 ${s} 秒`),this.log(),this.isQuanX()||this.isSurge()||this.isLoon()?$done(t):this.isNode()&&process.exit(1)}}(t,e)}
+function notify(title, subtitle, message, opts) {
+  $.msg(title, subtitle, message, opts)
+}
+
+// ↓↓↓ 跨平台环境封装
+function Env(name, opts) {
+  const isSurge = typeof $httpClient !== 'undefined'
+  const isQuanX = typeof $task !== 'undefined'
+  const isLoon = typeof $loon !== 'undefined'
+  const isStash = typeof $environment !== 'undefined' && $environment['stash-version']
+
+  return new class {
+    constructor(name, opts) {
+      this.name = name
+      Object.assign(this, opts)
+      this.logs = []
+      this.startTime = new Date().getTime()
+      this.log(`🔔${this.name}, 开始!`)
+    }
+
+    get(opts, cb) {
+      if (isSurge || isLoon || isStash) {
+        $httpClient.get(opts, cb)
+      } else if (isQuanX) {
+        if (typeof opts === 'string') opts = { url: opts }
+        opts.method = 'GET'
+        $task.fetch(opts).then(
+          resp => cb(null, resp, resp.body),
+          reason => cb(reason.error, null, null)
+        )
+      }
+    }
+
+    msg(title, subt, body, opt) {
+      if (isSurge || isLoon || isStash) {
+        $notification.post(title, subt, body, opt)
+      } else if (isQuanX) {
+        $notify(title, subt, body, opt)
+      }
+      this.log(`${title} ${subt} ${body}`)
+    }
+
+    log(...args) {
+      this.logs.push(...args)
+      console.log(args.join('\n'))
+    }
+
+    logErr(err) {
+      this.log(`❗️${this.name}, 错误!`, err.stack || err)
+    }
+
+    done() {
+      const end = new Date().getTime()
+      const elapsed = ((end - this.startTime) / 1000).toFixed(2)
+      this.log(`🔔${this.name}, 结束! 🕛 ${elapsed} 秒`)
+      if (isSurge || isLoon || isStash || isQuanX) $done()
+    }
+  }(name, opts)
+}
