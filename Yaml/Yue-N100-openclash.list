@@ -1,12 +1,11 @@
 [custom]
 ;设置规则标志位
-ruleset=🚀 节点选择,https://git.886.be/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Daili.list
-ruleset=🚀 节点选择,https://git.886.be/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-HKDaili.list
-ruleset=🎦 EMBY,https://git.886.be/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Emby.list
-ruleset=🔞 DMM.R18,https://git.886.be/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-JapanDaili.list
-ruleset=🕸️ 里番动漫,https://git.886.be/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-HKDaili.list
-ruleset=🎯 全球直连,https://git.886.be/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-XPTV.list
-ruleset=🎯 全球直连,https://git.886.be/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-ZhiLian.list
+ruleset=🚀 节点选择,https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Daili.list
+ruleset=🎦 EMBY,https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Emby.list
+ruleset=🔞 DMM.R18,https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-JapanDaili.list
+ruleset=🕸️ 里番动漫,https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-HKDaili.list
+ruleset=🎯 全球直连,https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-XPTV.list
+ruleset=🎯 全球直连,https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Zhilian.list
 ruleset=🎯 全球直连,https://gcore.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Lan/Lan.list
 ruleset=🎯 全球直连,https://gcore.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Direct/Direct.list
 ruleset=🎯 全球直连,https://gcore.jsdelivr.net/gh/Aethersailor/Custom_OpenClash_Rules@main/rule/Custom_Direct.list
