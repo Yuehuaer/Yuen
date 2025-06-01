@@ -1,7 +1,7 @@
 ;原raw地址：https://raw.githubusercontent.com/iovejieba/clash/refs/heads/main/cdn.list
 ;原地址：https://github.com/iovejieba/clash/blob/main/cdn.list
 ;软路由-配置模版
-
+；https://raw.githubusercontent.com/iovejieba/clash/refs/heads/main/cdn.list
 
 [custom]
 ;设置规则标志位
