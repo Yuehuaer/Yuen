@@ -1,7 +1,7 @@
 # 机场订阅
 proxy-providers:
   HXY:
-    url: "AAAAAAAAAAAAAAAAA"
+    url: "http://38.59.246.49:38295/api/v1/client/subscribe?token=5747d45f45a4bb8ea7ef340a0580bf44"
     type: http
     interval: 86400
     health-check:
