@@ -1,6 +1,8 @@
+# 拦截 规则
+
 # ps软件屏蔽弹窗 REJECT
 
- - DOMAIN-SUFFIX,adobe.io
- - DOMAIN,Ics-cops.adobe.io
- - DOMAIN-KEYWORD,adobe
- - DOMAIN-SUFFIX,adobe.com
+DOMAIN-SUFFIX,adobe.io
+DOMAIN,Ics-cops.adobe.io
+DOMAIN-KEYWORD,adobe
+DOMAIN-SUFFIX,adobe.com
