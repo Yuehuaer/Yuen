@@ -1,5 +1,6 @@
 # ps软件屏蔽弹窗
 
-+rules:
 - DOMAIN-SUFFIX,adobe.io,REJECT
 - DOMAIN,Ics-cops.adobe.io,DIRECT
+- DOMAIN-KEYWORD, adobe, REJECT
+- DOMAIN-SUFFIX,adobe.com,REJECT
