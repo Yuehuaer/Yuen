@@ -1,7 +1,7 @@
 # 机场订阅
 proxy-providers:
-  琴鸟:
-    url: "######"
+  机场1:
+    url: "AAAA"
     type: http
     interval: 86400
     health-check:
@@ -9,8 +9,9 @@ proxy-providers:
       url: https://www.gstatic.com/generate_204
       interval: 300
     proxy: 直连
-  红杏云:
-    url: "###"
+    benchmark-url: https://www.gstatic.com/generate_204
+  机场2:
+    url: "AAAA"
     type: http
     interval: 86400
     health-check:
@@ -18,6 +19,17 @@ proxy-providers:
       url: https://www.gstatic.com/generate_204
       interval: 300
     proxy: 直连
+    benchmark-url: https://www.gstatic.com/generate_204
+  机场3:
+    url: "AAAA"
+    type: http
+    interval: 86400
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+    proxy: 直连
+    benchmark-url: https://www.gstatic.com/generate_204
 # 节点信息
 proxies:
   - {name: 直连, type: direct}
@@ -92,40 +104,39 @@ dns:
     - 223.5.5.5
     - 119.29.29.29
 # 出站策略
-pr: &pr {type: select, proxies: [🚀 默认代理, 🔯 香港故转, 🔯 日本故转, ♻️ 香港自动, ♻️ 日本自动, ♻️ 美国自动, ♻️ 自动选择, ✋ 手动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 🌐 全部节点, 直连]}
+pr: &pr {type: select, proxies: [🚀 默认代理, 🔯 香港故转, 🔯 日本故转, ♻️ 香港自动, ♻️ 日本自动, ♻️ 美国自动, ♻️ 自动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 直连]}
 proxy-groups:
-  - {name: 🚀 默认代理, type: select, proxies: [🔯 香港故转, 🔯 日本故转, ♻️ 香港自动, ♻️ 日本自动, ♻️ 美国自动, ♻️ 自动选择, ✋ 手动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 🌐 全部节点, 直连]}
+  - {name: 🚀 默认代理, type: select, proxies: [ ♻️ 香港自动,🔯 香港故转, ♻️ 日本自动,🔯 日本故转,  ♻️ 美国自动, ♻️ 自动选择, ✋ 手动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 直连]}
   - {name: ✋ 手动选择, type: select, include-all: true}
-  - {name: 🎬 影视刮削, !!merge <<: *pr}
-  - {name: 📥 PT下载, !!merge <<: *pr, proxies: [🚀 默认代理, 🔯 香港故转, 🔯 日本故转, ♻️ 香港自动, ♻️ 日本自动, ♻️ 美国自动, ♻️ 自动选择, ✋ 手动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 🌐 全部节点, 直连], type: select}
-  - {name: 🎬 Emby库, type: select, proxies: [直连, ❄️ 冷门自选]}
-  - {name: 🔞 DMM.R18, type: select, proxies: [直连, 🔯 日本故转, ♻️ 日本自动, 🇯🇵 日本节点]}
-  - {name: 📽️油管视频, !!merge <<: *pr, proxies: [🚀 默认代理, 🔯 香港故转, 🔯 日本故转, ♻️ 香港自动, ♻️ 日本自动, ♻️ 美国自动, ♻️ 自动选择, ✋ 手动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 🌐 全部节点, 直连], type: select}
-  - {name: 🍀 谷歌地球, !!merge <<: *pr, proxies: [🚀 默认代理, 🔯 香港故转, 🔯 日本故转, ♻️ 香港自动, ♻️ 日本自动, ♻️ 美国自动, ♻️ 自动选择, ✋ 手动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 🌐 全部节点, 直连], type: select}
-  - {name: 🤖 Ai机器人, !!merge <<: *pr, proxies: [🚀 默认代理, 🔯 香港故转, 🔯 日本故转, ♻️ 香港自动, ♻️ 日本自动, ♻️ 美国自动, ♻️ 自动选择, ✋ 手动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 🌐 全部节点, 直连], type: select}
+  - {name: 📥 PT下载, !!merge <<: *pr, proxies: [🚀 默认代理, 🔯 香港故转, 🔯 日本故转, ♻️ 香港自动, ♻️ 日本自动, ♻️ 美国自动, ♻️ 自动选择, ✋ 手动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 直连], type: select}
+  - {name: 🎬 Emby库, type: select, proxies: [ ❄️ 冷门节点,直连, ✋ 手动选择]}
+  - {name: 🔞 DMM.R18, type: select, proxies: [ ♻️ 日本自动, 🔯 日本故转, 🇯🇵 日本节点,直连, ✋ 手动选择]}
+  - {name: ❄️ 冷门节点, type: select, include-all: true, filter: '^(?!.*(直连|港|台|新|日|韩|香港|台湾|新加坡|日本|韩国|美国|🇭🇰|🇼🇸|🇹🇼|🇸🇬|🇯🇵|🇰🇷|🇺🇸|🇬🇧|🇦🇹|🇧🇪|🇨🇿|🇩🇰|🇫🇮|🇫🇷|🇩🇪|🇮🇪|🇮🇹|🇱🇹|🇱🇺|🇳🇱|🇵🇱|🇸🇪|HK|TW|SG|JP|KR|US|GB|CDG|FRA|AMS|MAD|BCN|FCO|MUC|BRU|HKG|TPE|TSA|KHH|SIN|XSP|NRT|HND|KIX|CTS|FUK|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD|LHR|LGW))'}
+  - {name: 🤖 Ai机器人, type: select, proxies: [ ♻️ 美国自动, 🔯 美国故转,🇺🇲 美国节点,直连, ✋ 手动选择]}
+  - {name: 📽️ 油管视频, !!merge <<: *pr, proxies: [🚀 默认代理, 🔯 香港故转, 🔯 日本故转, ♻️ 香港自动, ♻️ 日本自动, ♻️ 美国自动, ♻️ 自动选择, ✋ 手动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 直连], type: select}
+  - {name: 🍀 谷歌地球, !!merge <<: *pr, proxies: [🚀 默认代理, 🔯 香港故转, 🔯 日本故转, ♻️ 香港自动, ♻️ 日本自动, ♻️ 美国自动, ♻️ 自动选择, ✋ 手动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 直连], type: select}
+  - {name: 🪟 微软邮箱, !!merge <<: *pr, proxies: [🚀 默认代理, 🔯 香港故转, 🔯 日本故转, ♻️ 香港自动, ♻️ 日本自动, ♻️ 美国自动, ♻️ 自动选择, ✋ 手动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 直连], type: select}
   - {name: 👨🏿‍💻 GitHub, !!merge <<: *pr}
-  - {name: 🪟 微软邮箱, !!merge <<: *pr, proxies: [🚀 默认代理, 🔯 香港故转, 🔯 日本故转, ♻️ 香港自动, ♻️ 日本自动, ♻️ 美国自动, ♻️ 自动选择, ✋ 手动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 🌐 全部节点, 直连], type: select}
-  - {name: 🎵 国外抖音, !!merge <<: *pr, proxies: [🚀 默认代理, 🔯 香港故转, 🔯 日本故转, ♻️ 香港自动, ♻️ 日本自动, ♻️ 美国自动, ♻️ 自动选择, ✋ 手动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 🌐 全部节点, 直连], type: select}
-  - {name: 📲 电报消息, !!merge <<: *pr, proxies: [🚀 默认代理, 🔯 香港故转, 🔯 日本故转, ♻️ 香港自动, ♻️ 日本自动, ♻️ 美国自动, ♻️ 自动选择, ✋ 手动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 🌐 全部节点, 直连], type: select}
-  - {name: ✈️ 网速测试, !!merge <<: *pr, proxies: [🚀 默认代理, 🔯 香港故转, 🔯 日本故转, ♻️ 香港自动, ♻️ 日本自动, ♻️ 美国自动, ♻️ 自动选择, ✋ 手动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 🌐 全部节点, 直连], type: select}
-  - {name: 💶 金融平台, !!merge <<: *pr, proxies: [🚀 默认代理, 🔯 香港故转, 🔯 日本故转, ♻️ 香港自动, ♻️ 日本自动, ♻️ 美国自动, ♻️ 自动选择, ✋ 手动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 🌐 全部节点, 直连], type: select}
-  - {name: 🍎 苹果商店, type: select, proxies: [直连, 🚀 默认代理]}
+  - {name: 🎵 国外抖音, !!merge <<: *pr, proxies: [🚀 默认代理, 🔯 香港故转, 🔯 日本故转, ♻️ 香港自动, ♻️ 日本自动, ♻️ 美国自动, ♻️ 自动选择, ✋ 手动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 直连], type: select}
+  - {name: 📲 电报消息, !!merge <<: *pr, proxies: [🚀 默认代理, 🔯 香港故转, 🔯 日本故转, ♻️ 香港自动, ♻️ 日本自动, ♻️ 美国自动, ♻️ 自动选择, ✋ 手动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 直连], type: select}
+  - {name: ✈️ 网速测试, !!merge <<: *pr, proxies: [🚀 默认代理, 🔯 香港故转, 🔯 日本故转, ♻️ 香港自动, ♻️ 日本自动, ♻️ 美国自动, ♻️ 自动选择, ✋ 手动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 直连], type: select}
+  - {name: 💶 货币平台, !!merge <<: *pr, proxies: [🚀 默认代理, 🔯 香港故转, 🔯 日本故转, ♻️ 香港自动, ♻️ 日本自动, ♻️ 美国自动, ♻️ 自动选择, ✋ 手动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇲 美国节点, 直连], type: select}
+  - {name: 🍎 苹果商店, type: select, proxies: [直连, 🚀 默认代理, ✋ 手动选择]}
   - {name: 🎯 直连, type: select, proxies: [直连, 🚀 默认代理]}
   - {name: 🐟 漏网之鱼, !!merge <<: *pr}
   - {name: 🇭🇰 香港节点, type: select, include-all: true, filter: "(?i)港|hk|hongkong|hong kong"}
-  - {name: 🇯🇵 日本节点, type: select, include-all: true, filter: "(?i)日|jp|japan"}
+  - {name: 🇯🇵 日本节点, type: select, include-all: true, filter: "(?=.*(日|JP|(?i)Japan))^((?!(港|台|韩|新|美|尼)).)*$"}
+  - {name: 🇸🇬 狮城节点, type: select, include-all: true, filter: "(?i)狮城|新加坡|singapore|sg\\b|sgp"}
   - {name: 🇺🇲 美国节点, type: select, include-all: true, filter: "(?i)美|us|unitedstates|united states"}
   - {name: 🔯 香港故转, type: fallback, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(港|HK|(?i)Hong))^((?!(台|日|韩|新|深|美)).)*$"}
   - {name: 🔯 日本故转, type: fallback, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(日|JP|(?i)Japan))^((?!(港|台|韩|新|美)).)*$"}
-  - {name: 🔯 狮城故转, type: fallback, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(日|JP|(?i)Japan))^((?!(港|台|韩|新|美)).)*$"}
+  - {name: 🔯 狮城故转, type: fallback, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(狮城|新加坡|(?i)Singapore|SG\\b|SGP))^((?!(港|台|日|韩|美|美利坚|USA|Japan|JP|韩国|香港|台湾)).)*$"}
   - {name: 🔯 美国故转, type: fallback, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(日|JP|(?i)Japan))^((?!(港|台|韩|新|美)).)*$"}
-  - {name: ♻️ 香港自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(港|HK|(?i)Hong))^((?!(台|日|韩|新|深|美)).)*$"}
+  - {name: ♻️ 香港自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(港|HK|(?i)Hong))^((?!(台|日|韩|新|深|美|hongxin)).)*$"}
   - {name: ♻️ 日本自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(日|JP|(?i)Japan))^((?!(港|台|韩|新|深|美)).)*$"}
-  - {name: ♻️ 狮城自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(日|JP|(?i)Japan))^((?!(港|台|韩|新|深|美)).)*$"}
+  - {name: ♻️ 狮城自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(狮城|新加坡|(?i)Singapore|SG\\b|SGP))^((?!(港|台|日|韩|美|美利坚|USA|Japan|JP|韩国|香港|台湾)).)*$"}
   - {name: ♻️ 美国自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(美|US|(?i)States|American))^((?!(港|台|日|韩|新)).)*$"}
   - {name: ♻️ 自动选择, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "^((?!(直连)).)*$"}
-  - {name: 🌐 全部节点, type: select, include-all: true}
-  - {name: ❄️ 冷门自选, type: select, include-all: true}
 # 规则集定义
 rule-anchor:
   ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: mrs}
@@ -133,27 +144,27 @@ rule-anchor:
   class: &class {type: http, interval: 86400, behavior: classical, format: text}
 rule-providers:
   ################################# 自行修改 ######################################################################################################################################################################
-  AA-Daili: {!!merge <<: *class, url: "https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Daili.list"}
-  AA-Emby: {!!merge <<: *class, url: "https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Emby.list"}
-  AA-HKDaili: {!!merge <<: *class, url: "https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-HKDaili.list"}
-  AA-JapanDaili: {!!merge <<: *class, url: "https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-JapanDaili.list"}
-  AA-XPTV: {!!merge <<: *class, url: "https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-XPTV.list"}
-  AA-Zhilian: {!!merge <<: *class, url: "https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Zhilian.list"}
+  AA-Daili: {!!merge <<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Daili.list"}
+  AA-Emby: {!!merge <<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Emby.list"}
+  AA-HKDaili: {!!merge <<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-HKDaili.list"}
+  AA-JapanDaili: {!!merge <<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-JapanDaili.list"}
+  AA-XPTV: {!!merge <<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-XPTV.list"}
+  AA-Zhilian: {!!merge <<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Zhilian.list"}
+  AA-PS.list: {!!merge <<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-PS.list"} 
   ################################################################################################################################################################################################################
+  Openai: {!!merge <<: *class, url: "https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/OpenAI/OpenAI.list"}
   private_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/private.mrs"}
   proxylite: {!!merge <<: *class, url: "https://raw.githubusercontent.com/qichiyuhub/rule/refs/heads/main/proxy.list"}
   guaxiao_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/txzl130/YSF/refs/heads/main/yaml/GZ/guaxiao.list"}
-  pt_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/txzl130/YSF/refs/heads/main/yaml/GZ/PT.list"}
+  pt_domain: {!!merge <<: *domain, url: "https://gh-proxy.com/https://raw.githubusercontent.com/txzl130/YSF/refs/heads/main/yaml/GZ/PT.list"}
   ai: {!!merge <<: *domain, url: "https://github.com/MetaCubeX/meta-rules-dat/raw/refs/heads/meta/geo/geosite/category-ai-!cn.mrs"}
   youtube_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/youtube.mrs"}
   google_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/google.mrs"}
   github_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/github.mrs"}
   telegram_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/telegram.mrs"}
-  netflix_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/netflix.mrs"}
   paypal_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/paypal.mrs"}
-  onedrive_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/onedrive.mrs"}
   microsoft_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/microsoft.mrs"}
-  apple_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/apple-cn.mrs"}
+  apple_domain: {!!merge <<: *domain, url: "https://gh-proxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/refs/heads/master/rule/Clash/Apple/Apple.list"}
   speedtest_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/ookla-speedtest.mrs"}
   tiktok_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/tiktok.mrs"}
   gfw_domain: {!!merge <<: *domain, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/gfw.mrs"}
@@ -162,31 +173,32 @@ rule-providers:
   cn_ip: {!!merge <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/cn.mrs"}
   google_ip: {!!merge <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.mrs"}
   telegram_ip: {!!merge <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/telegram.mrs"}
-  netflix_ip: {!!merge <<: *ip, url: "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/netflix.mrs"}
 # 规则匹配
 rules:
+  - RULE-SET,Openai,🤖 Ai机器人
   - RULE-SET,AA-Daili,🚀 默认代理
   - RULE-SET,AA-Emby,🎬 Emby库
-  - RULE-SET,AA-HKDaili,🚀 默认代理
+  - RULE-SET,AA-HKDaili,♻️ 香港自动
   - RULE-SET,AA-JapanDaili,🔞 DMM.R18
   - RULE-SET,AA-XPTV,🎯 直连
   - RULE-SET,AA-Zhilian,🎯 直连
+  - RULE-SET,AA-PS.list,REJECT
   - DOMAIN-KEYWORD,ourbits,🚀 默认代理
   - DOMAIN-SUFFIX,qichiyu.com,🚀 默认代理
   - RULE-SET,private_domain,直连
   - RULE-SET,apple_domain,🍎 苹果商店
   - RULE-SET,proxylite,🚀 默认代理
-  - RULE-SET,guaxiao_domain,🎬 影视刮削
+  - RULE-SET,guaxiao_domain,📥 PT下载
   - RULE-SET,pt_domain,📥 PT下载
   - RULE-SET,ai,🤖 Ai机器人
   - RULE-SET,github_domain,👨🏿‍💻 GitHub
-  - RULE-SET,youtube_domain,📽️油管视频
+  - RULE-SET,youtube_domain,📽️ 油管视频
   - RULE-SET,google_domain,🍀 谷歌地球
   - RULE-SET,microsoft_domain,🪟 微软邮箱
   - RULE-SET,tiktok_domain,🎵 国外抖音
   - RULE-SET,speedtest_domain,✈️ 网速测试
   - RULE-SET,telegram_domain,📲 电报消息
-  - RULE-SET,paypal_domain,💶 金融平台
+  - RULE-SET,paypal_domain,💶 货币平台
   - RULE-SET,gfw_domain,🚀 默认代理
   - RULE-SET,geolocation-!cn,🚀 默认代理
   - RULE-SET,cn_domain,🎯 直连
