@@ -12,59 +12,59 @@ payload:
 #XPTV主站-部分地区可以直连自行尝试
 # - DOMAIN, infuseku.xyz
 #iCloud同步
- - DOMAIN, gateway.icloud.com
- - DOMAIN, metrics.icloud.com
+DOMAIN, gateway.icloud.com
+DOMAIN, metrics.icloud.com
 #XPTV封面来源
 #小海报
- - DOMAIN-SUFFIX, doubanio.com
+DOMAIN-SUFFIX, doubanio.com
 #大封面
- - DOMAIN, image.tmdb.org
+DOMAIN, image.tmdb.org
 #弹幕
- - DOMAIN, dandanplay.net
+DOMAIN, dandanplay.net
 #网盘规则
 #阿里
- - DOMAIN-SUFFIX, aliyundrive.com
- - DOMAIN-SUFFIX, voicehub.top
+DOMAIN-SUFFIX, aliyundrive.com
+DOMAIN-SUFFIX, voicehub.top
 #夸克
- - DOMAIN-SUFFIX, quark.cn
+DOMAIN-SUFFIX, quark.cn
 #天翼
- - DOMAIN-SUFFIX, 189.cn
+DOMAIN-SUFFIX, 189.cn
  - DOMAIN-SUFFIX, ctyunxs.cn
 #115
- - DOMAIN-SUFFIX, 115.com
+DOMAIN-SUFFIX, 115.com
 #uc
- - DOMAIN-SUFFIX, uc.cn
+DOMAIN-SUFFIX, uc.cn
 #小雅
- - DOMAIN-SUFFIX, xiaoya.pro
+DOMAIN-SUFFIX, xiaoya.pro
 #网盘源
 #小米
- - DOMAIN, mihdr.top
+DOMAIN, mihdr.top
 #木偶
- - DOMAIN-SUFFIX, mogg.top
+DOMAIN-SUFFIX, mogg.top
 #玩偶
- - DOMAIN-SUFFIX, wogg.net
+DOMAIN-SUFFIX, wogg.net
 #雷鲸
- - DOMAIN, www.leijing.xyz
+DOMAIN, www.leijing.xyz
 #校长
- - DOMAIN, xzys.fun
+DOMAIN, xzys.fun
 #蜡笔
- - DOMAIN-SUFFIX, duopan.fun
+DOMAIN-SUFFIX, duopan.fun
 #南风
- - DOMAIN, www.nanf.cc
+DOMAIN, www.nanf.cc
 #多多
- - DOMAIN, yydsys.top
+DOMAIN, yydsys.top
 #欧歌
- - DOMAIN, woog.nxog.eu.org
+DOMAIN, woog.nxog.eu.org
 #云盘吧
- - DOMAIN, yunpan8.cc
+DOMAIN, yunpan8.cc
 #nmlive相关
- - DOMAIN-SUFFIX, bilivideo.com
- - DOMAIN, slink.ltd
- - DOMAIN-SUFFIX, douyincdn.com
- - DOMAIN-SUFFIX, douyinpic.com
- - DOMAIN-SUFFIX, douyucdn.cn
- - DOMAIN-SUFFIX, douyucdn2.cn
- - DOMAIN-SUFFIX, huya.com
+DOMAIN-SUFFIX, bilivideo.com
+DOMAIN, slink.ltd
+DOMAIN-SUFFIX, douyincdn.com
+DOMAIN-SUFFIX, douyinpic.com
+DOMAIN-SUFFIX, douyucdn.cn
+DOMAIN-SUFFIX, douyucdn2.cn
+DOMAIN-SUFFIX, huya.com
  - DOMAIN-SUFFIX, msstatic.com
  - DOMAIN, lemonlive.deno.dev
 #VOD源
