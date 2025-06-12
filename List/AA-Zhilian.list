@@ -26,3 +26,6 @@ DOMAIN-SUFFIX,apps.apple.com
 DOMAIN-SUFFIX,mzstatic.com
 DOMAIN,itunes.apple.com
 DOMAIN,ppa.apple.com
+
+# 98
+DOMAIN-SUFFIX,gjim.jwcop.net
