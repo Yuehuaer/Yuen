@@ -3,11 +3,15 @@
 # Git加速链接：https://git.886.be/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-JapanDaili.list  -------------------------------------------#
 #--------------------------------------------------------------------------------------------------------------------------------------------------------------------# 
 # 源地址：
-# 25.05.04 更新文档
+# 25.06.13 更新文档
+
+# Claude Ai软件
+DOMAIN,cdn.usefathom.com
+DOMAIN-SUFFIX,anthropic.com
+DOMAIN-SUFFIX,claude.ai
 
 
-
-#DMM-18
+# DMM-18
 DOMAIN-SUFFIX,akabeesoft2.com
 DOMAIN-SUFFIX,akabeesoft3.com
 DOMAIN-SUFFIX,akatsukiworks.com
