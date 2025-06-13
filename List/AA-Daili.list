@@ -15,10 +15,6 @@ DOMAIN-SUFFIX,linux.do
 
 # Pi
 DOMAIN-SUFFIX,minepi.com
-# Claude Ai软件
-DOMAIN,cdn.usefathom.com
-DOMAIN-SUFFIX,anthropic.com
-DOMAIN-SUFFIX,claude.ai
 
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------#
 # PT站点
