@@ -1,5 +1,8 @@
 # 拦截 规则
-
+# Git加速链接：https://gh.catmak.name/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-PS.list ----------------------------------------#
+# Git加速链接：https://git.886.be/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-PS.list  -------------------------------------------#
+# Git加速链接：https://gh-proxy.com/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-PS.list  -----------------------------------------#
+#------------------------------------------------------------------------------------------------------------------------------------------------------------# 
 # ps软件屏蔽弹窗 REJECT
 
 DOMAIN-SUFFIX,adobe.io
