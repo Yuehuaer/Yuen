@@ -10,7 +10,6 @@ const NAME = 'wanye'
 const $ = new Env(NAME)
 
 // API列表，可以通过修改 API_INDEX 的值来切换不同API
-const API_INDEX = 2  // 当前使用的API序号：1、2、3或4
 const API_INDEX = 4  // 当前使用的API序号：1、2、3或4
 
 const API_LIST = {
