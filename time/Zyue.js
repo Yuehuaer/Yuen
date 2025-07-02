@@ -14,9 +14,9 @@ const API_LIST = {
     1: 'http://3650000.xyz/api/?type=img&mode=6',     // API1,随机美女图，部分
     2: 'https://api.lolimi.cn/API/meinv/api.php?type=image',  // API2,随机萝莉图，画质极好
     3: 'https://www.onexiaolaji.cn/RandomPicture/api/?key=qq249663924',  // API3，随机美女，不能刷新
-    4: 'https://v2.xxapi.cn/api/meinvpic?return=302'  // API4，随机美女，不能刷新
-    5: 'http://3650000.xyz/api/360.php?cid=6'   // API5，360美女
-    6: 'http://3650000.xyz/api/?type=img'   // API6,公共图床速度快~
+    4: 'https://v2.xxapi.cn/api/meinvpic?return=302',  // API4，随机美女，不能刷新
+    5: 'http://3650000.xyz/api/360.php?cid=6',   // API5，360美女
+    6: 'http://3650000.xyz/api/?type=img',   // API6,公共图床速度快~
     7: 'http://3650000.xyz/api/?type=img&mode=1,3,5,6,7,8,9'   // API6,可多选随机返回
 }
 
