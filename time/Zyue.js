@@ -1,12 +1,11 @@
 /*
-脚本名称：万夜图片
-脚本作者：YueJSMore actions
-更新时间：2024-03-21
-脚本说明：点击通知查看图片
+脚本名称：万夜
+脚本作者：Yue
+更新时间：2025-07-10
 测试版本：Loon iOS 17
 */
 
-const NAME = 'wanye'
+const NAME = '慕夏'
 const $ = new Env(NAME)
 
 // API列表，可以通过修改 API_INDEX 的值来切换不同API
@@ -31,7 +30,7 @@ const API_LIST = {
 
     if (!realImageUrl) throw new Error('获取图片地址失败')
 
-    await notify(NAME, `API-${API_INDEX} 获取成功`, `${realImageUrl}`, {
+    await notify(NAME, `API-${API_INDEX} 念秋`, `${realImageUrl}`, {
         'open-url': realImageUrl,
         'media-url': realImageUrl
     })
