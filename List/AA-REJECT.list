@@ -4,10 +4,11 @@
 # Git加速链接：https://gh-proxy.com/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-REJECT.list  ----------------------------------------#
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------# 
 
-
+# 游戏广告
 DOMAIN-SUFFIX,chatmate.tv
 DOMAIN-SUFFIX,chatmate.tv
 DOMAIN-SUFFIX,hero-wars.com
+# PS 修图软件
 DOMAIN-SUFFIX,adobe.io
 DOMAIN,Ics-cops.adobe.io
 DOMAIN-KEYWORD,adobe
