@@ -6,10 +6,24 @@
 
 
 # 常用域名
-DOMAIN,yuehua.xin
-DOMAIN-SUFFIX,yuehua.xin
 DOMAIN,qb.yuehua.xin
 DOMAIN,tr.yuehua.xin
+DOMAIN,mp.yuehua.xin
+DOMAIN,ts.yuehua.xin
+DOMAIN,e.yuehua.xin
+DOMAIN,lucky.yuehua.xin
+DOMAIN,f.yuehua.xin
+DOMAIN,av.yuehua.xin
+DOMAIN,is.yuehua.xin
+DOMAIN,a.yuehua.xin
+DOMAIN,g.yuehua.xin
+DOMAIN,gx.yuehua.xin
+DOMAIN,al.yuehua.xin
+DOMAIN,msgo.yuehua.xin
+DOMAIN,op.yuehua.xin
+DOMAIN,ya.yuehua.xin
+DOMAIN,amm.yuehua.xin
+
 DOMAIN-SUFFIX,invite.stotik.com
 DOMAIN-SUFFIX,linux.do
 
