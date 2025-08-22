@@ -1,1 +1,7 @@
-1
+#!name=去广告
+#!desc=屏蔽广告
+#!author=YUE
+#!icon=https://raw.githubusercontent.com/xxx/icon/adblock.png
+
+[Script]
+http-request ^https?:\/\/image\.pushplus\.plus\/ad\/.*\.(png|jpg|jpeg|gif)$ script-path=https://raw.githubusercontent.com/你的GitHub用户名/loon-scripts/main/block_ads.js, tag=Muxia-去广告
