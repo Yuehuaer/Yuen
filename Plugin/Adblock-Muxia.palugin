@@ -1,8 +1,38 @@
-#!name=去广告
-#!desc=屏蔽广告
-#!author=YUE
+#!name=慕夏去广告
+#!desc=慕夏自用屏蔽广告
+#!author=慕夏
 #!icon=https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/AdBlack.png
 
-[Script]
-http-request ^https?:\/\/image\.pushplus\.plus\/ad\/.*\.(png|jpg|jpeg|gif)$ script-path=https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/Script/block_ads.js, tag=Muxia-去广告
-http-request ^https?:\/\/file\.youpiaopiaopiao\.cn\/upload\/materials\/.*\.(jpg|jpeg|png|gif)$ script-path=https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/Script/block_ads.js, tag=去广告
+
+# > 东方财富
+# hostname = emdcadvertise.eastmoney.com
+^https?:\/\/emdcadvertise\.eastmoney\.com\/infoService\/v\d reject
+
+# 东方航空
+# hostname = app.ceair.com
+^https?:\/\/app\.ceair\.com\/customize\/security\/update reject-200
+^https?:\/\/app\.ceair\.com\/customize\/main\/adScreen reject-dict
+
+# > 懂球帝
+# hostname = ap.dongdianqiu.com
+#^https?:\/\/ap\.dongqiudi\.com\/plat\/v reject
+^https?:\/\/ap\.dongdianqiu\.com\/plat\/v4 reject
+# > 动画疯
+# hostname = api.gamer.com.tw
+^https?:\/\/api\.gamer\.com\.tw\/mobile_app\/anime\/v\d\/anime_get_question\.php reject-dict
+
+# > 滴滴出行
+# hostname = res.xiaojukeji.com, common.diditaxi.com.cn, hd.xiaojukeji.com, freight.xiaojukeji.com, daijia.kuaidadi.com, ct.xiaojukeji.com, conf.diditaxi.com.cn
+^https?:\/\/hd\.xiaojukeji\.com\/d reject-dict
+
+# > 滴滴青桔
+# hostname = pt-starimg.didistatic.com, omgup*.xiaojukeji.com
+^https?:\/\/pt-starimg\.didistatic\.com\/static\/starimg\/node\/.*.(jpg|png|gif) reject-200
+^https?:\/\/omgup[0-9]{1}\.xiaojukeji\.com\/api reject-200
+
+# > 滴滴代驾小程序
+# hostname = daijia.kuaidadi.com, as.xiaojukeji.com
+
+# 横幅广告
+^https?:\/\/as\.xiaojukeji\.com\/ep\/as\/conf\?ns=daijia-front&name= reject-dict
+^https?:\/\/daijia\.kuaidadi\.com\/gateway\?api=prado\.cms\.delivery\.batch&apiVe reject-dict
