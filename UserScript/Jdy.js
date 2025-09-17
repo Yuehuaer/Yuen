@@ -83,6 +83,7 @@
     const blockedCompanies = [
         "深圳市天天过年智慧新零售有限公司",
         "深圳市艾理森投资有限公司",
+        "深圳市美伦堡实业发展有限公司",
         "深圳星耀传媒文化有限公司"
     ];
 
@@ -167,10 +168,10 @@
 
     // 排序：先优先级，再会计期间
     function sortAccountsByPriorityAndPeriod() {
-        console.log('Starting sort process');
+        console。log('Starting sort process');
         const container = document.querySelector('.customerbox');
         if (!container) {
-            console.log('Container .customerbox not found');
+            console。log('Container .customerbox not found');
             return;
         }
         const accounts = Array.from(container.querySelectorAll('.customerbox_li:not(.add):not(.blocked)'));
