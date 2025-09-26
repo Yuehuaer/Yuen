@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         字节自动 
+// @name         字节女神 订阅/取消订阅 - 每弹窗一次版
 // @namespace    http://tampermonkey.net/
-// @version      3.2
-// @description  自动点击“订阅/取消订阅”弹窗的确认按钮，每个弹窗只点击一次（无限监听）
+// @version      3.4
+// @description  自动点击订阅/取消订阅弹窗的确认按钮，每个弹窗只点击一次（不会重复，但新弹窗正常继续）
 // @author       You
 // @match        *://192.168.21.242:2233/*
 // @grant        none
@@ -72,12 +72,12 @@
     const dialogs = findDialogs(root);
     for (const d of dialogs) {
       if (!isTargetDialog(d)) continue;
-      if (d.dataset.autoClicked === "true") continue; // 已经点过，不再重复
+      if (d.dataset.autoClicked === "true") continue; // 已点过这个弹窗，不再重复
       const btn = findConfirmButton(d);
       if (btn && !btn.disabled) {
-        log('发现订阅/取消订阅弹窗，点击确认');
+        log('发现弹窗，点击确认（只点一次）');
         simulateClick(btn);
-        d.dataset.autoClicked = "true"; // 打上标记
+        d.dataset.autoClicked = "true"; // 给这个弹窗打标记
         return true;
       }
     }
@@ -108,5 +108,5 @@
 
   window.__autoConfirmTrigger = () => searchAllContexts();
 
-  log('AutoConfirm 单次点击版已启动，每个弹窗只会点击一次');
+  log('AutoConfirm 每弹窗一次版已启动：每个订阅/取消订阅弹窗都会自动点一次确认');
 })();
