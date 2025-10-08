@@ -12,18 +12,6 @@ proxy-providers:
     benchmark-url: https://www.gstatic.com/generate_204
     override:
       additional-prefix: "[琴鸟] "
-  良心:
-    url: "https://liangxin.xyz/api/v1/liangxin?OwO=5fdc22b633bbc27203b0965dfbc0e5b3"
-    type: http
-    interval: 86400
-    health-check:
-      enable: true
-      url: https://www.gstatic.com/generate_204
-      interval: 300
-    proxy: 直连
-    benchmark-url: https://www.gstatic.com/generate_204
-    override:
-      additional-prefix: "[良心] "
 # 节点信息
 proxies:
   - {name: 直连, type: direct}
