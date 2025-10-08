@@ -1,7 +1,7 @@
 # 机场订阅
 proxy-providers:
   琴鸟:
-    url: "http://38.59.246.49:38295/bfg3ubif/7a6bbdcc0cc29d1b63b805317e4dffb"
+    url: "http://38.59.246.49:38295/bfg3ubif/7a6bbdcc0cc29d1b63b805317e4dffb5"
     type: http
     interval: 86400
     health-check:
@@ -13,7 +13,7 @@ proxy-providers:
     override:
       additional-prefix: "[琴鸟] "
   良心:
-    url: "https://liangxin.xyz/api/v1/liangxin?OwO=5fdc22b633bbc27203b0965dfbc0e5b"
+    url: "https://liangxin.xyz/api/v1/liangxin?OwO=5fdc22b633bbc27203b0965dfbc0e5b3"
     type: http
     interval: 86400
     health-check:
