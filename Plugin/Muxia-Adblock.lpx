@@ -62,5 +62,5 @@ hostname = api.pinduoduo.com
 
 
 [MITM]
-hostname = image.pushplus.plus, www.pushplus.plus,hostname = hm.baidu.com
+hostname = image.pushplus.plus, www.pushplus.plus,hm.baidu.com
 
