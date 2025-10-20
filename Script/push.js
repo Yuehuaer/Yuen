@@ -1,12 +1,4 @@
-// Loon 脚本: 修改 PushPlus 消息页面内容 (作业 - 保留标题)
-// [response] 类型的脚本
-
-/**
- * 目标:
- * 1. 确保 Content-Type 为 text/html。
- * 2. 保留原始网页标题 (<title>...</title>) 不变。
- * 3. 删除页面底部的广告块 (使用更健壮的正则匹配)。
- */
+// push.js - 增强日志版
 
 // 获取原始的响应体和响应头
 let body = $response.body;
@@ -19,29 +11,33 @@ if (!url.includes("https://www.pushplus.plus/shortMessage/")) {
 }
 
 try {
+    // 【✅ 关键日志 1: 确认脚本已运行】
+    console.log("PushPlus Script: 脚本已开始运行，URL: " + url);
+    
     // 1. 修改或确保 Content-Type
     headers['Content-Type'] = 'text/html;charset=UTF-8';
     headers['content-type'] = 'text/html;charset=UTF-8';
 
-    // 2. 原始标题保留（不进行任何操作）
-    
-    // 3. 删除广告块 - 【重点修改部分】
-    // 使用更宽松的 [\s\S]*? 来匹配中间的任何内容（包括换行符），
-    // 只要匹配到特定的起始 DIV 和广告图片链接，就删除整个块。
-    // 广告块的 HTML 结构： <div class="container pb-3 text-center">...[包含diancai.jpg的图片链接]...</div>
+    // 2. 删除广告块
     const adRegex = /<div class="container pb-3 text-center">[\s\S]*?image\.pushplus\.plus\/ad\/diancai\.jpg[\s\S]*?<\/div>/s;
 
     if (body.match(adRegex)) {
-        // 将匹配到的整个广告块替换为空字符串，即删除
+        // 【✅ 关键日志 2: 确认匹配成功】
+        console.log("PushPlus Script: 成功匹配到广告块，准备移除。");
         body = body.replace(adRegex, "");
+    } else {
+        // 【⚠️ 关键日志 3: 确认匹配失败及原因】
+        console.log("PushPlus Script: 未匹配到广告块。");
+        // 如果匹配失败，可能是 HTML 结构再次变化。我们打印部分响应体来查看。
+        // console.log("--- Body Snippet (Failure) ---");
+        // console.log(body.substring(body.length - 1000)); // 打印底部 1000 字符
+        // console.log("--- End Snippet ---");
     }
     
-    // 返回修改后的响应体和响应头
     $done({body, headers});
 
 } catch (e) {
     // 捕获可能出现的错误并输出日志
     console.log("PushPlus Script Error: " + e.message);
-    // 出现错误时，返回原始响应
     $done({});
 }
