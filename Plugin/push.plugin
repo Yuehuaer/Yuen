@@ -1,0 +1,20 @@
+#!name=PushPlus 消息去广告
+#!desc=移除 PushPlus 短消息页面底部的广告
+#!author=Yuehuaer 
+#!homepage=https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/Script/push.js
+
+
+[Script]
+# [Script] 部分配置脚本行为
+# 脚本名称：PushPlus_Remove_Ad
+# 脚本类型：http-response (响应体修改)
+# 匹配规则：匹配所有 pushplus.plus/shortMessage/ 开头的链接
+# 脚本路径：指向你 GitHub 上的 JS 脚本文件的 Raw 链接
+# requires-body：必须设置为 true 才能读取和修改网页内容
+
+PushPlus_Remove_Ad = type=http-response,pattern=^https?:\/\/www\.pushplus\.plus\/shortMessage\/.*$,script-path=https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/Script/push.js,requires-body=true
+
+[Mitm]
+# [Mitm] 部分启用 HTTPS 解密，这是修改内容的前提
+# hostname：必须包含目标域名
+hostname = www.pushplus.plus
