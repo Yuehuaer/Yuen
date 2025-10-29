@@ -5,6 +5,7 @@
 // @description  【v7.38 最终完整稳定版】1. 彻底修复代码崩溃问题 (补全所有函数定义)。2. 修复管理面板定时关闭失效的问题。3. 保持所有核心功能稳定运行。
 // @author       You
 // @match        *://192.168.21.242:2233/*
+// @icon         https://www.helloimg.com/i/2025/10/29/690216fe55540.jpg
 // @grant        none
 // @run-at       document-idle
 // ==/UserScript==
