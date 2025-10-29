@@ -10,6 +10,17 @@
 // @run-at       document-idle
 // ==/UserScript==
 
+// ==UserScript==
+// @name         字节女神
+// @namespace    http://tampermonkey.net/
+// @version      7.38
+// @description  【v7.38 最终完整稳定版】1. 彻底修复代码崩溃问题 (补全所有函数定义)。2. 修复管理面板定时关闭失效的问题。3. 保持所有核心功能稳定运行。
+// @author       You
+// @match        *://192.168.21.242:2233/*
+// @grant        none
+// @run-at       document-idle
+// ==/UserScript==
+
 (function () {
   'use strict';
   const DEBUG = true;
@@ -25,7 +36,7 @@
   const UNCHANGED_PATHS = ['/profile', '/config', '/logs', '/actor', '/search', '/dashboard'];
 
   // 自动隐藏的前缀
-  const REJECT_PREFIXES = ['MDVR', 'SIVR', 'OVVR', 'VRTM', 'VRIT', 'FCVR', 'VRBD', 'VRKM', 'HODV', '3DSVR', 'KAVR', 'IPVR'];
+  const REJECT_PREFIXES = ['MDVR', 'SIVR', 'OVVR', 'VRTM', 'VRIT', 'FCVR', 'VRBD', 'VRKM', 'HODV', '3DSVR', 'KAVR', 'IPVR','SAVR'];
 
   const log = (...args) => { if (DEBUG) console.log('[AutoScript]', ...args); };
   const safeText = n => (n && n.textContent || '').trim();
@@ -477,7 +488,7 @@
     timeoutId = setTimeout(() => {
       timeoutId = null;
       mainLoop();
-    }, DEBOUNCE_DELAY);
+    }， DEBOUNCE_DELAY);
   }
 
   function mainLoop() {
@@ -490,8 +501,8 @@
             injectCustomCSS(); 
             searchAndClickInDoc(document);
             
-            const path = window.location.pathname;
-            const isUnchangedPage = UNCHANGED_PATHS.some(p => path。startsWith(p));
+            const path = window.location。pathname;
+            const isUnchangedPage = UNCHANGED_PATHS.some(p => path.startsWith(p));
 
             if (!isUnchangedPage) {
                 // 2. 仅在卡片相关页面运行文本替换
@@ -512,12 +523,12 @@
   if (document.readyState === 'complete' || document.readyState === 'interactive') {
       mainLoop();
   } else {
-      window.addEventListener('DOMContentLoaded', mainLoop);
+      window。addEventListener('DOMContentLoaded'， mainLoop);
   }
 
   // 仅使用 MutationObserver + Debounce 监听DOM变化
   const observer = new MutationObserver(debounceMainLoop);
-  observer。observe(document。body， { childList: true, subtree: true });
+  observer。observe(document。body， { childList: true， subtree: true });
 
   log('脚本已启动：V7.38 (最终完整稳定版)');
 })();
