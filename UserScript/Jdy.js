@@ -1,12 +1,13 @@
 // ==UserScript==
-// @name         精斗云多账套增强脚本 with Test v0.7
-// @namespace    http://scriptcat.org/
-// @version      0.7
-// @description  增强精斗云多账套页面：高亮过期账套、添加优先级标签、排序和屏蔽公司，并包含测试功能
-// @author       Yuehua
-// @match        https://*.jdy.com/mulAcct/*
-// @match        https://vip*.jdy.com/*
-// @grant        none
+// @name          精斗云
+// @namespace     http://scriptcat.org/
+// @version       0.7.1
+// @description   增强精斗云多账套页面：高亮过期账套、添加优先级标签、排序和屏蔽公司
+// @author        Yuehua
+// @icon          https://vip1-hz.jdy.com/favicon.ico
+// @match         https://*.jdy.com/mulAcct/*
+// @match         https://vip*.jdy.com/*
+// @grant         none
 // ==/UserScript==
 
 (function() {
@@ -168,10 +169,10 @@
 
     // 排序：先优先级，再会计期间
     function sortAccountsByPriorityAndPeriod() {
-        console。log('Starting sort process');
+        console.log('Starting sort process'); // <-- 已修复
         const container = document.querySelector('.customerbox');
         if (!container) {
-            console。log('Container .customerbox not found');
+            console.log('Container .customerbox not found'); // <-- 已修复
             return;
         }
         const accounts = Array.from(container.querySelectorAll('.customerbox_li:not(.add):not(.blocked)'));
@@ -184,28 +185,28 @@
             if (priA !== priB) return priA - priB;
             return parsePeriod(a) - parsePeriod(b);
         });
-        accounts.forEach(acc => container.appendChild(acc));
+        accounts。forEach(acc => container.appendChild(acc));
     }
 
     // === 主函数 ===
     const observer = new MutationObserver(() => {
-        console.log('DOM mutation detected, reprocessing');
+        console。log('DOM mutation detected, reprocessing');
         processAccounts();
     });
 
     function processAccounts() {
-        console.log('Processing accounts at:', new Date().toLocaleTimeString());
-        observer.disconnect();
+        console。log('Processing accounts at:'， new Date()。toLocaleTimeString());
+        observer。disconnect();
         highlightExpiredAccounts();
         sortAccountsByPriorityAndPeriod();
-        observer.observe(document.body, { childList: true, subtree: true });
+        observer。observe(document。body， { childList: true， subtree: true });
     }
 
     if (document.readyState === 'complete' || document.readyState === 'interactive') {
         processAccounts();
     } else {
-        document.addEventListener('DOMContentLoaded', processAccounts);
+        document。addEventListener('DOMContentLoaded'， processAccounts);
     }
 
-    observer.observe(document.body, { childList: true, subtree: true });
+    observer.observe(document.body， { childList: true, subtree: true });
 })();
