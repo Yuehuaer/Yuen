@@ -118,8 +118,8 @@ rule-anchor:
   Em: &Em {type: select, proxies: [雪落无声,  指尖逸选,直连]} # 影库狂潮
   AV: &AV {type: select, proxies: [日本策略, 指尖逸选,直连]} # 秘密花园
   LM: &LM {type: select, include-all: true, filter: *FilterOther} # 雪落无声
-  MG: &MG {type: select, proxies: [台湾策略,狮城策略,美国策略, 指尖逸选, 直连]} # 程序怼王
-  RG: &RG {type: select, proxies: [日本策略,狮城策略,美国策略, 指尖逸选, 直连]} # 未来之瞳
+  MG: &MG {type: select, proxies: [日本策略,台湾策略,狮城策略,美国策略, 指尖逸选， 直连]} # 程序怼王
+  RG: &RG {type: select, proxies: [日本策略,台湾策略,狮城策略,美国策略, 指尖逸选， 直连]} # 未来之瞳
   GG: &GG {type: select, proxies: [直连, 香港策略,美国策略,指尖逸选]} # 果园私语
   ZL: &ZL {type: select, proxies: [直连, 随心所欲]} # 绝对通行
 
