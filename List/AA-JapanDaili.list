@@ -11,6 +11,8 @@ DOMAIN,cdn.usefathom.com
 DOMAIN-SUFFIX,anthropic.com
 DOMAIN-SUFFIX,claude.ai
 
+#爱壹帆
+DOMAIN-SUFFIX,m10.iyf.tv
 
 # DMM-18
 DOMAIN-SUFFIX,akabeesoft2.com
