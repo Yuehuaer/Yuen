@@ -1,8 +1,8 @@
 # 机场订阅
 proxy-providers:
-  琴鸟:
-    url: "http://"
-    输入: http
+  良心:
+    url: "XXXXXXX"
+    type: http
     interval: 9986400
     health-check:
       enable: true
@@ -11,7 +11,7 @@ proxy-providers:
     proxy: 直连
     benchmark-url: https://www.gstatic.com/generate_204
     override:
-      additional-prefix: "[青鸟] "
+      additional-prefix: "[良心] "
 
 # 节点信息
 proxies:
@@ -87,17 +87,17 @@ dns:
     - 223.5.5.5
     - 119.29.29.29
 # 出站策略
-pr: &pr {输入: select, proxies: [🚀 默认代理, ♻️ 香港自动, 🔯 香港故转, 🇭🇰 香港节点, ♻️ 日本自动, 🔯 日本故转, 🇯🇵 日本节点, ♻️ 狮城自动, 🔯 狮城故转, 🇸🇬 狮城节点, ♻️ 美国自动, 🔯 台湾故转, 🇺🇸 美国节点, ♻️ 自动选择, 直连]}
-aq: &aq {输入: select, proxies: [🚀 默认代理, ♻️ 香港自动, ♻️ 日本自动, ♻️ 狮城自动, ♻️ 美国自动, ✋ 手动选择, 直连]}
-aw: &aw {输入: select, proxies: [直连, 🇺🇸 美国节点, 🇭🇰 香港节点, ✋ 手动选择]}
-ae: &ae {输入: select, proxies: [直连, 🚀 默认代理]}
-ar: &ar {输入: select, proxies: [♻️ 日本自动, ♻️ 狮城自动,♻️ 美国自动, 🔯 美国故转, 🇺🇸 美国节点, 直连, ✋ 手动选择]}
-at: &at {输入: select, include-all: true, filter: '^(?!.*(直连|港|台|新|日|韩|香港|台湾|新加坡|日本|韩国|美国|🇭🇰|🇼🇸|🇹🇼|🇸🇬|🇯🇵|🇰🇷|🇺🇸|🇬🇧|🇦🇹|🇧🇪|🇨🇿|🇩🇰|🇫🇮|🇫🇷|🇩🇪|🇮🇪|🇮🇹|🇱🇹|🇱🇺|🇳🇱|🇵🇱|🇸🇪|HK|TW|SG|JP|KR|US|GB|CDG|FRA|AMS|MAD|BCN|FCO|MUC|BRU|HKG|TPE|TSA|KHH|SIN|XSP|NRT|HND|KIX|CTS|FUK|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD|LHR|LGW))'}
-av: &av {输入: select, proxies: [♻️ 日本自动, 🔯 日本故转, 🇯🇵 日本节点, 直连, ✋ 手动选择]}
-ay: &ay {输入: select, proxies: [❄️ 冷门节点, 直连, ✋ 手动选择]}
-pt: &pt {输入: select, proxies: [🚀 默认代理, 🔯 香港故转, 🔯 日本故转, ♻️ 香港自动, ♻️ 日本自动, ♻️ 美国自动, ♻️ 自动选择, ✋ 手动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇸 美国节点, 直连]}
-mm: &mm {输入: select, proxies: [♻️ 香港自动, 🔯 香港故转, 🇭🇰 香港节点, ♻️ 自动选择, 🔯 日本故转, 🇯🇵 日本节点, ♻️ 日本自动, 🔯 狮城故转, 🇸🇬 狮城节点, ♻️ 狮城自动, 🔯 台湾故转, 🏍️ 台湾节点, ♻️ 台湾自动, 🔯 美国故转, 🇺🇸 美国节点, ♻️ 美国自动, ✋ 手动选择, 直连]}
-ad: &ad {输入: select, include-all: true}
+pr: &pr {type: select, proxies: [🚀 默认代理, ♻️ 香港自动, 🔯 香港故转, 🇭🇰 香港节点, ♻️ 日本自动, 🔯 日本故转, 🇯🇵 日本节点, ♻️ 狮城自动, 🔯 狮城故转, 🇸🇬 狮城节点, ♻️ 美国自动, 🔯 台湾故转, 🇺🇸 美国节点, ♻️ 自动选择,  直连]}
+aq: &aq {type: select, proxies: [ ♻️ 日本自动, ♻️ 狮城自动, ♻️ 美国自动, ✋ 手动选择, 直连, 🚀 默认代理, ♻️ 香港自动,]}
+aw: &aw {type: select, proxies: [直连, 🇺🇸 美国节点, 🇭🇰 香港节点, ✋ 手动选择]}
+ae: &ae {type: select, proxies: [直连, 🚀 默认代理]}
+ar: &ar {type: select, proxies: [♻️ 美国自动, 🔯 美国故转, 🇺🇸 美国节点, 直连, ✋ 手动选择]}
+at: &at {type: select, include-all: true, filter: '^(?!.*(直连|港|台|新|日|韩|香港|台湾|新加坡|日本|韩国|美国|🇭🇰|🇼🇸|🇹🇼|🇸🇬|🇯🇵|🇰🇷|🇺🇸|🇬🇧|🇦🇹|🇧🇪|🇨🇿|🇩🇰|🇫🇮|🇫🇷|🇩🇪|🇮🇪|🇮🇹|🇱🇹|🇱🇺|🇳🇱|🇵🇱|🇸🇪|HK|TW|SG|JP|KR|US|GB|CDG|FRA|AMS|MAD|BCN|FCO|MUC|BRU|HKG|TPE|TSA|KHH|SIN|XSP|NRT|HND|KIX|CTS|FUK|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD|LHR|LGW))'}
+av: &av {type: select, proxies: [♻️ 日本自动, 🔯 日本故转, 🇯🇵 日本节点, 直连, ✋ 手动选择]}
+ay: &ay {type: select, proxies: [❄️ 冷门节点, 直连, ✋ 手动选择]}
+pt: &pt {type: select, proxies: [🚀 默认代理, 🔯 香港故转, 🔯 日本故转, ♻️ 香港自动, ♻️ 日本自动, ♻️ 美国自动, ♻️ 自动选择, ✋ 手动选择, 🇭🇰 香港节点, 🇯🇵 日本节点, 🇺🇸 美国节点, 直连]}
+mm: &mm {type: select, proxies: [♻️ 香港自动, 🔯 香港故转, 🇭🇰 香港节点, ♻️ 自动选择, 🔯 日本故转, 🇯🇵 日本节点, ♻️ 日本自动, 🔯 狮城故转, 🇸🇬 狮城节点, ♻️ 狮城自动, 🔯 台湾故转, 🏍️ 台湾节点, ♻️ 台湾自动, 🔯 美国故转, 🇺🇸 美国节点, ♻️ 美国自动, ✋ 手动选择, 直连]}
+ad: &ad {type: select, include-all: true}
 
 
 proxy-groups:
@@ -120,25 +120,25 @@ proxy-groups:
   - {name: 🍎 苹果商店, !!merge <<: *aw}
   - {name: 🎯 直连, !!merge <<: *ae}
   - {name: 🐟 漏网之鱼, !!merge <<: *pr}
-  - {name: ♻️ 香港自动, 输入: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(港|HK|(?i)Hong|HKG|香港|🇭🇰))^((?!(台|日|韩|新|深|美|hongxin)).)*$"}
-  - {name: ♻️ 自动选择, 输入: url-test, include-all: true, tolerance: 20, interval: 300, filter: "^((?!(直连)).)*$"}
-  - {name: ♻️ 日本自动, 输入: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(日|JP\\b|(?i)Japan|NRT|HND|KIX|CTS|FUK|🇯🇵))^((?!(港|台|韩|新|深|美)).)*$"}
-  - {name: ♻️ 狮城自动, 输入: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(狮城|新加坡|(?i)Singapore|SG\\b|SGP|SIN|XSP|🇸🇬))^((?!(港|台|日|韩|美|美利坚|USA|Japan|JP|韩国|香港|台湾)).)*$"}
-  - {name: ♻️ 台湾自动, 输入: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(台|TW\\b|Taiwan|TPE|KHH|TSA|🇹🇼))^((?!(港|日|韩|新|美)).)*$"}
-  - {name: ♻️ 美国自动, 输入: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(美|US\\b|(?i)States|USA|United\\s*States|American|JFK|LAX|SFO|🇺🇸))^((?!(港|台|日|韩|新)).)*$"} 
-  - {name: 🔯 香港故转, 输入: fallback, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(港|HK|(?i)Hong))^((?!(台|日|韩|新|深|美)).)*$"}
-  - {name: 🔯 日本故转, 输入: fallback, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(日|JP|(?i)Japan))^((?!(港|台|韩|新|美)).)*$"}
-  - {name: 🔯 狮城故转, 输入: fallback, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(狮城|新加坡|(?i)Singapore|SG\\b|SGP))^((?!(港|台|日|韩|美|美利坚|USA|Japan|JP|韩国|香港|台湾)).)*$"}
-  - {name: 🔯 美国故转, 输入: fallback, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(美|US|(?i)United\\s?States|USA|American))^((?!(港|台|韩|新|日|狮)).)*$"}
-  - {name: 🔯 台湾故转, 输入: fallback, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(台|TW|Taiwan|TPE|KHH|TSA))^((?!(港|日|韩|新|美)).)*$"}
-  - {name: 🇭🇰 香港节点, 输入: select, include-all: true, filter: "(?i)港|香港|HK|HKG|hong\\s*kong|xianggang|heung\\s*gong|🇭🇰"}
-  - {name: 🇯🇵 日本节点, 输入: select, include-all: true, filter: "(?i)日本|日|JP\\b|Japan|NRT|HND|KIX|CTS|FUK|🇯🇵|nihon|nippon"}
-  - {name: 🇸🇬 狮城节点, 输入: select, include-all: true, filter: "(?i)狮城|新加坡|SG\\b|Sing|Singapore|SIN|XSP|xinjiapo|🇸🇬"}
-  - {name: 🏍️ 台湾节点, 输入: select, include-all: true, filter: "(?i)台湾|台灣|台|TW\\b|TPE|TSA|KHH|taiwan|tai\\s*wan|🇹🇼"}
-  - {name: 🇺🇸 美国节点, 输入: select, include-all: true, filter: "(?i)美国|美|US\\b|USA\\b|United\\s*States|UnitedStates|America|American|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD|🇺🇸|mei\\s*guo"}
+  - {name: ♻️ 香港自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(港|HK|(?i)Hong|HKG|香港|🇭🇰))^((?!(台|日|韩|新|深|美|hongxin)).)*$"}
+  - {name: ♻️ 自动选择, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "^((?!(直连)).)*$"}
+  - {name: ♻️ 日本自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(日|JP\\b|(?i)Japan|NRT|HND|KIX|CTS|FUK|🇯🇵))^((?!(港|台|韩|新|深|美)).)*$"}
+  - {name: ♻️ 狮城自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(狮城|新加坡|(?i)Singapore|SG\\b|SGP|SIN|XSP|🇸🇬))^((?!(港|台|日|韩|美|美利坚|USA|Japan|JP|韩国|香港|台湾)).)*$"}
+  - {name: ♻️ 台湾自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(台|TW\\b|Taiwan|TPE|KHH|TSA|🇹🇼))^((?!(港|日|韩|新|美)).)*$"}
+  - {name: ♻️ 美国自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(美|US\\b|(?i)States|USA|United\\s*States|American|JFK|LAX|SFO|🇺🇸))^((?!(港|台|日|韩|新)).)*$"} 
+  - {name: 🔯 香港故转, type: fallback, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(港|HK|(?i)Hong))^((?!(台|日|韩|新|深|美)).)*$"}
+  - {name: 🔯 日本故转, type: fallback, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(日|JP|(?i)Japan))^((?!(港|台|韩|新|美)).)*$"}
+  - {name: 🔯 狮城故转, type: fallback, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(狮城|新加坡|(?i)Singapore|SG\\b|SGP))^((?!(港|台|日|韩|美|美利坚|USA|Japan|JP|韩国|香港|台湾)).)*$"}
+  - {name: 🔯 美国故转, type: fallback, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(美|US|(?i)United\\s?States|USA|American))^((?!(港|台|韩|新|日|狮)).)*$"}
+  - {name: 🔯 台湾故转, type: fallback, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(台|TW|Taiwan|TPE|KHH|TSA))^((?!(港|日|韩|新|美)).)*$"}
+  - {name: 🇭🇰 香港节点, type: select, include-all: true, filter: "(?i)港|香港|HK|HKG|hong\\s*kong|xianggang|heung\\s*gong|🇭🇰"}
+  - {name: 🇯🇵 日本节点, type: select, include-all: true, filter: "(?i)日本|日|JP\\b|Japan|NRT|HND|KIX|CTS|FUK|🇯🇵|nihon|nippon"}
+  - {name: 🇸🇬 狮城节点, type: select, include-all: true, filter: "(?i)狮城|新加坡|SG\\b|Sing|Singapore|SIN|XSP|xinjiapo|🇸🇬"}
+  - {name: 🏍️ 台湾节点, type: select, include-all: true, filter: "(?i)台湾|台灣|台|TW\\b|TPE|TSA|KHH|taiwan|tai\\s*wan|🇹🇼"}
+  - {name: 🇺🇸 美国节点, type: select, include-all: true, filter: "(?i)美国|美|US\\b|USA\\b|United\\s*States|UnitedStates|America|American|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD|🇺🇸|mei\\s*guo"}
 # 规则集定义
 rule-anchor:
-  ip: &ip {输入: http, interval: 86400, behavior: ipcidr, format: mrs}
+  ip: &ip {type: http, interval: 86400, behavior: ipcidr, format: mrs}
   domain: &domain {type: http, interval: 86400, behavior: domain, format: mrs}
   class: &class {type: http, interval: 86400, behavior: classical, format: text}
 rule-providers:
@@ -221,13 +221,3 @@ rules:
   - RULE-SET,telegram_ip,📲 电报消息,no-resolve
   - RULE-SET,cn_ip,🎯 直连
   - MATCH,🐟 漏网之鱼
-#cron:
-#  script:
-#    - name: your-script-name
-#      cron: '*/2 * * * *' # 每 5 分钟执行一次
-#      argument: '{ "key": true }' # 可选参数
-#      timeout: 10 # 可选，单位秒
-#script-providers:
-#  your-script-name:
-#    url: https://raw.githubusercontent.com/I-am-R-E/Functional-Store-Hub/Master/PixivShow/Script/PixivShow.js
-#    interval: 86400 # 每 86400 秒（即 24 小时）拉取一次脚本更新
