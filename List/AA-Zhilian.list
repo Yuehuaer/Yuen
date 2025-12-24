@@ -29,6 +29,8 @@ DOMAIN,emos.lol
 DOMAIN,yue.yuehua.site
 DOMAIN,yue2.yuehua.site
 
+#Bark通知
+DOMAIN,api.day.app
 
 # PT时间
 DOMAIN,pttime.org
