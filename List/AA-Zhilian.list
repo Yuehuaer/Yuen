@@ -24,10 +24,12 @@ DOMAIN-KEYWORD,koyso
 
 # 影视emby
 DOMAIN,emos.lol
+DOMAIN,209.146.116.89
 
 # 自有域名
 DOMAIN,yue.yuehua.site
 DOMAIN,yue2.yuehua.site
+
 
 #Bark通知
 DOMAIN,api.day.app
