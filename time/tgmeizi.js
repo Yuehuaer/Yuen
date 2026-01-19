@@ -43,7 +43,7 @@ async function main() {
     
     // 1. 获取一言 (不影响主流程，异步获取)
     let hitokoto = "生活明朗，万物可爱"; // 默认值
-    getHitokoto().键，然后(text => hitokoto = text);
+    getHitokoto().then，然后(text => hitokoto = text);
 
     // 2. 🐢 慢速爬取流程
     let allMessages = [];
@@ -86,7 +86,7 @@ async function main() {
             }
         }
 
-        $.log(`📊 抓取结束，共收集消息 ${allMessages.length} 条`);
+        $。log(`📊 抓取结束，共收集消息 ${allMessages.length} 条`);
 
         // --- 3. 清洗与入池 ---
         let candidates = [];
