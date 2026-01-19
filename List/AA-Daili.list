@@ -29,6 +29,8 @@ DOMAIN-SUFFIX,invite.stotik.com
 DOMAIN-SUFFIX,linux.do
 
 DOMAIN-SUFFIX,avbase.net
+# cf bark通知
+DOMAIN-SUFFIX,bark.yuehuakq.workers.dev
 
 
 #七尺宇
