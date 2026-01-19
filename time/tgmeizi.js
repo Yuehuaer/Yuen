@@ -1,5 +1,8 @@
 /**
  * @name 轻松一夏 (TG 慢速防封版 V35)
+ * @version 35.0.0
+ * @author Yuen
+ * @description 轻松一夏 - Telegram 美图频道慢速爬虫脚本
  * @desc 1.引入随机延迟(拟人防封) 2.最大容错机制 3.支持深度爬取(默认12页) 4.接入一言
  **************************************************************************************************************
 脚本声明:
@@ -52,7 +55,7 @@ async function main() {
     
     // 1. 获取一言 (不影响主流程，异步获取)
     let hitokoto = "生活明朗，万物可爱"; // 默认值
-    getHitokoto().键，然后(text => hitokoto = text);
+    getHitokoto().then(text => hitokoto = text);
 
     // 2. 🐢 慢速爬取流程
     let allMessages = [];
