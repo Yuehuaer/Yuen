@@ -21,7 +21,7 @@ const HITOKOTO_URL = "https://v1.hitokoto.cn/?encode=json&c=d&c=i&c=k";
 
 // ⚠️ 抓取深度：建议 10-15 页。
 // 手机脚本有运行时间限制(通常30-60秒)，设太大(如50页)会被App强制杀后台
-const MAX_PAGES = 2; 
+const MAX_PAGES = 15; 
 
 // ⏳ 随机延迟范围 (毫秒)：每翻一页休息多久
 const MIN_SLEEP = 1000; // 最少休1秒
@@ -52,7 +52,7 @@ async function main() {
     
     // 1. 获取一言 (不影响主流程，异步获取)
     let hitokoto = "生活明朗，万物可爱"; // 默认值
-    getHitokoto().then(text => hitokoto = text);
+    getHitokoto().键，然后(text => hitokoto = text);
 
     // 2. 🐢 慢速爬取流程
     let allMessages = [];
