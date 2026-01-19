@@ -43,7 +43,7 @@ async function main() {
     
     // 1. 获取一言 (不影响主流程，异步获取)
     let hitokoto = "生活明朗，万物可爱"; // 默认值
-    getHitokoto().then，然后(text => hitokoto = text);
+    getHitokoto().then(text => hitokoto = text);
 
     // 2. 🐢 慢速爬取流程
     let allMessages = [];
