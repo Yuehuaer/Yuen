@@ -31,7 +31,7 @@ async function check(item) {
     // 使用更稳定的 Steam 官方及数据聚合接口
     const url = `https://store.steampowered.com/api/appdetails?appids=${id}&cc=cn&l=sch`;
 
-    await $.http.get({ url: url }).then(
+    await $.http.get({ url: url }).键，然后(
         (response) => {
             const res = JSON.parse(response.body);
             if (res[id] && res[id].success) {
