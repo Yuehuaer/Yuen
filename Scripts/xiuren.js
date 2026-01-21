@@ -16,12 +16,14 @@
 **************************************************************************************************************
  */
 
-
 const $ = new Env("随机美图");
 
 // --- 1. 配置区 ---
+// 超时时间(毫秒)
 const TIMEOUT = 15000;
+// 目标站域名
 const HOST = "http://a1.876512.xyz";
+// 基础抓取路径
 const BASE_URL = "http://a1.876512.xyz/Xiuren"; 
 
 // --- 2. 主入口 ---
@@ -35,14 +37,12 @@ const BASE_URL = "http://a1.876512.xyz/Xiuren";
 
 // --- 3. 核心抓取逻辑 ---
 async function main() {
-    $.log("🚀 V21 开始...");
+    $.log("🚀 V21 抓取开始...");
     
-    // Step A: 随机列表页
-    // 30% 几率看最新(第1页)，70% 几率看回顾(2-15页)
-    let listPage = Math.random() < 0.3 ? 1 : Math.floor(Math.random() * 15) + 2;
+    // Step A: 随机列表页 (50%几率看最新，50%几率看回顾)
+    let listPage = Math.random() < 0.5 ? 1 : Math.floor(Math.random() * 4) + 2;
     let listUrl = listPage === 1 ? `${BASE_URL}/` : `${BASE_URL}/page_${listPage}.html`;
     
-    // 📌 日志：随机抓取网页
     $.log(`🎲 随机抓取网页: 第 ${listPage} 页`);
 
     try {
@@ -67,16 +67,13 @@ async function main() {
             albumLink = albumLink.startsWith("/") ? `${HOST}${albumLink}` : `${HOST}/Xiuren/${albumLink}`;
         }
         
-        // 获取基础名称
         let baseNameMatch = albumLink.match(/\/([a-zA-Z0-9]+)\.html/);
         let baseName = baseNameMatch ? baseNameMatch[1] : "未知ID";
 
-        // 📌 日志：选中图集 ID
         $.log(`🔗 选中图集: ${baseName}`);
-        // 📌 日志：当前图集完整链接
         $.log(`🔗 当前图集链接: ${albumLink}`);
 
-        // Step D: 进入图集首页 (提取标题)
+        // Step D: 进入图集首页
         const albumIndexBody = await httpGet(albumLink);
 
         // 清洗标题
@@ -93,12 +90,11 @@ async function main() {
                                .replace(/写真\d+P.*$/, "")
                                .trim();
         }
-        // 📌 日志：图集名称
         $.log(`📖 图集名称: ${rawTitle}`);
 
         // Step E: 内页随机跳跃
         let targetPageUrl = albumLink; 
-        let subPage = 0; // 0代表第1页
+        let subPage = 0; 
 
         if (baseName) {
             const pageRegex = new RegExp(baseName + "_(\\d+)\\.html", "g");
@@ -118,21 +114,16 @@ async function main() {
             }
         }
         
-        // 📌 日志：跳跃位置
         $.log(`🔀 跳跃图集内至: 第 ${subPage + 1} 页`);
 
         // Step F: 获取最终页面图片
         let finalBody = (subPage === 0) ? albumIndexBody : await httpGet(targetPageUrl);
         
-        // 提取页面中所有正文图片
         let allImgs = [];
         let imgRegex = /src=["']([^"']+\/uploadfile\/[^"']+\.jpg)["']/gi;
         let imgM;
-        while ((imgM = imgRegex.exec(finalBody)) !== null) {
-            allImgs.push(imgM[1]);
-        }
+        while ((imgM = imgRegex.exec(finalBody)) !== null) allImgs.push(imgM[1]);
         
-        // 如果没找到 uploadfile 的大图，找任意 jpg
         if (allImgs.length === 0) {
              let backupRegex = /src=["']([^"']+\.(?:jpg|png))["']/gi;
              while ((imgM = backupRegex.exec(finalBody)) !== null) allImgs.push(imgM[1]);
@@ -140,29 +131,23 @@ async function main() {
 
         if (allImgs.length === 0) throw "未找到图片";
 
-        // 既然页面可能有多个图，我们取第一个(通常就是大图)
         let imgLink = allImgs[0];
         if (!imgLink.startsWith("http")) {
             imgLink = imgLink.startsWith("/") ? `${HOST}${imgLink}` : `${HOST}${imgLink}`;
         }
 
-        // 📌 日志：展示图片序号 (通常内页只有一张大图，所以是第1个)
         $.log(`🖼️ 展示图片: 第 1 张`);
-        // 📌 日志：图片链接
         $.log(`🔗 展示图片链接: ${imgLink}`);
 
-        // Step G: 发送通知 (极简)
-        // 标题: 轻松一秀
-        // 内容: 清洗后的标题
-        // 动作: 跳转到 targetPageUrl (原网页)
-        $.msg("轻松一秀", rawTitle, "", {
+        // Step G: 发送通知
+        $.msg("轻松一夏", rawTitle, "", {
             "open-url": targetPageUrl,
             "media-url": imgLink 
         });
 
     } catch (e) {
         $.log(`❌ 错误: ${e}`);
-        $.msg("轻松一秀", "获取失败", "");
+        $.msg("轻松一夏", "获取失败", "请查看日志");
     }
 }
 
