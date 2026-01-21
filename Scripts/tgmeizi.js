@@ -22,10 +22,12 @@ const $ = new Env("随机美图-TG版");
 // --- 1. 配置区 ---
 const BASE_URL = "https://telegram.dog/s/botmzt";
 const HITOKOTO_URL = "https://v1.hitokoto.cn/?encode=json&c=d&c=i&c=k";
-
+   $.log(`-----------------------------------------`);
+   $.log(`当前地址: ${BASE_URL}`);
+   $.log(`-----------------------------------------`);
 // ⚠️ 抓取深度：建议 10-15 页。
 // 手机脚本有运行时间限制(通常30-60秒)，设太大(如50页)会被App强制杀后台
-const MAX_PAGES = 10; 
+const MAX_PAGES = 5; 
 
 // ⏳ 随机延迟范围 (毫秒)：每翻一页休息多久
 const MIN_SLEEP = 1000; // 最少休1秒
@@ -88,7 +90,7 @@ async function main() {
                 // 🛑 防封核心：随机休息
                 if (i < MAX_PAGES) {
                     let sleepTime = Math.floor(Math.random() * (MAX_SLEEP - MIN_SLEEP + 1) + MIN_SLEEP);
-                    // $.log(`☕ 休息 ${sleepTime/1000} 秒...`); 
+                     $.log(`☕ 等待 ${sleepTime/1000} 秒...`); 
                     await $.wait(sleepTime);
                 }
 
