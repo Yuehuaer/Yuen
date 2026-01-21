@@ -1,13 +1,14 @@
 {
-  "id": "yuehuaer_repo"，
-  "name": "Yuehuaer 的脚本库",
+  "id": "Yuehuaer.sub"，
+  "name": "Yuehuaer 应用订阅",
   "author": "@author Yuehuaer",
   "icon": "https://avatars.githubusercontent.com/u/1?v=4",
-  "repo": "https://github.com/yourname/scripts",
+  "repo": "https://github.com/Yuehuaer/Yuen",
   "apps": [
     {
-      "id": "yuehuaer_script",
+      "id": "yuehuaer_demo",
       "name": "Yuehuaer 专属脚本",
+      "desc_html": "<b>⚠️ 脚本免责声明</b><br>1. 此脚本仅用于学习研究，不保证其合法性、准确性、有效性，请根据情况自行判断，本人对此不承担任何保证责任。<br>2. 由于此脚本仅用于学习研究，您必须在下载后 24 小时内将所有内容从您的计算机或手机或任何存储设备中完全删除。<br>3. 请勿将此脚本用于任何商业或非法目的。<br>4. 涉及应用与本人无关，本人对隐私泄漏或其他后果不承担责任。<br>5. 本人对任何脚本引发的问题概不负责。<br>6. 如涉嫌侵权，请通知删除。<br>7. 使用即视为接受此声明。",
       "keys": [
         "yuehuaer_switch",
         "yuehuaer_input",
@@ -35,6 +36,13 @@
           "type": "text",
           "desc": "敏感数据，请勿随意分享"
         }
+      ],
+      "author": "@author Yuehuaer",
+      "repo": "https://github.com/Yuehuaer/Yuen",
+      "script": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/Scripts/demo.js",
+      "icons": [
+        "https://raw.githubusercontent.com/Orz-3/mini/master/Color/Star.png",
+        "https://raw.githubusercontent.com/Orz-3/mini/master/Color/Star.png"
       ]
     }
   ]
