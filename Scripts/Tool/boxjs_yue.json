@@ -1,32 +1,41 @@
 {
-  "id": "yuehuaer_script",
-  "name": "Yuehuaer 专属脚本",
-  "keys": [
-    "yuehuaer_switch",
-    "yuehuaer_input",
-    "yuehuaer_token"
-  ],
-  "settings": [
+  "id": "yuehuaer_repo"，
+  "name": "Yuehuaer 的脚本库",
+  "author": "@author Yuehuaer",
+  "icon": "https://avatars.githubusercontent.com/u/1?v=4",
+  "repo": "https://github.com/yourname/scripts",
+  "apps": [
     {
-      "id": "yuehuaer_switch",
-      "name": "功能开关",
-      "val": false,
-      "type": "boolean",
-      "desc": "开启后将执行核心任务"
-    },
-    {
-      "id": "yuehuaer_input",
-      "name": "用户名",
-      "val": "",
-      "type": "text",
-      "placeholder": "请输入你的名字"
-    },
-    {
-      "id": "yuehuaer_token",
-      "name": "API Token",
-      "val": "",
-      "type": "text",
-      "desc": "敏感数据，请勿随意分享"
+      "id": "yuehuaer_script",
+      "name": "Yuehuaer 专属脚本",
+      "keys": [
+        "yuehuaer_switch",
+        "yuehuaer_input",
+        "yuehuaer_token"
+      ],
+      "settings": [
+        {
+          "id": "yuehuaer_switch",
+          "name": "功能开关",
+          "val": false,
+          "type": "boolean",
+          "desc": "开启后将执行核心任务"
+        },
+        {
+          "id": "yuehuaer_input",
+          "name": "用户名",
+          "val": "",
+          "type": "text",
+          "placeholder": "请输入你的名字"
+        },
+        {
+          "id": "yuehuaer_token",
+          "name": "API Token",
+          "val": "",
+          "type": "text",
+          "desc": "敏感数据，请勿随意分享"
+        }
+      ]
     }
   ]
 }
