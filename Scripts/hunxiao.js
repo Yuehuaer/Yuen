@@ -4,12 +4,12 @@ const path = require('path');
 const JavaScriptObfuscator = require('javascript-obfuscator');
 
 // ====================== 你只需要改这里 ======================
-const TARGET_FILE = './docker.js'; // 替换成你的JS文件路径（比如 ./index.js）
+const TARGET_FILE = './cc.js'; // 替换成你的JS文件路径（比如 ./index.js）
 // ===========================================================
 
 // 自动生成备份文件和混淆文件的名称
-const BACKUP_FILE = TARGET_FILE.replace('.js', '-original.js');
-const OBFUSCATE_FILE = TARGET_FILE.replace('.js', '-obfuscated.js');
+const BACKUP_FILE = TARGET_FILE.replace('.js', '-y.js');
+const OBFUSCATE_FILE = TARGET_FILE.replace('.js', '-j.js');
 
 // 混淆配置（小白不用改，兼顾安全性和运行稳定性）
 const obfuscateOptions = {
