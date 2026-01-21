@@ -16,15 +16,16 @@
 **************************************************************************************************************
  */
 
+
 const $ = new Env("随机美图-TG版");
 
 // --- 1. 配置区 ---
-const BASE_URL = "https://telegram.dog/s/meizitu3";
+const BASE_URL = "https://telegram.dog/s/botmzt";
 const HITOKOTO_URL = "https://v1.hitokoto.cn/?encode=json&c=d&c=i&c=k";
 
 // ⚠️ 抓取深度：建议 10-15 页。
 // 手机脚本有运行时间限制(通常30-60秒)，设太大(如50页)会被App强制杀后台
-const MAX_PAGES = 15; 
+const MAX_PAGES = 10; 
 
 // ⏳ 随机延迟范围 (毫秒)：每翻一页休息多久
 const MIN_SLEEP = 1000; // 最少休1秒
@@ -147,14 +148,14 @@ async function main() {
         $.log(`🖼️ 图片: ${selected.img}`);
 
         // --- 5. 发送通知 ---
-        $.msg("轻松一季", hitokoto, "", {
+        $.msg("轻松一夏", hitokoto, "", {
             "open-url": selected.link,
             "media-url": selected.img 
         });
 
     } catch (e) {
         $.log(`❌ 致命错误: ${e}`);
-        $.msg("轻松一季", "脚本运行出错", String(e));
+        $.msg("轻松一夏", "脚本运行出错", String(e));
     }
 }
 
