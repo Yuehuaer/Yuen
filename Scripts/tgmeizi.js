@@ -150,14 +150,14 @@ async function main() {
         $.log(`🖼️ 图片: ${selected.img}`);
 
         // --- 5. 发送通知 ---
-        $.msg("轻松一夏", hitokoto, "", {
+        $.msg("轻松一季", hitokoto, "", {
             "open-url": selected.link,
             "media-url": selected.img 
         });
 
     } catch (e) {
         $.log(`❌ 致命错误: ${e}`);
-        $.msg("轻松一夏", "脚本运行出错", String(e));
+        $.msg("轻松一季", "脚本运行出错", String(e));
     }
 }
 
