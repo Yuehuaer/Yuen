@@ -32,6 +32,9 @@ DOMAIN-SUFFIX,avbase.net
 # cf bark通知
 DOMAIN-SUFFIX,bark.yuehuakq.workers.dev
 
+# JK图片
+DOMAIN-SUFFIX,jk.rs
+
 
 #七尺宇
 DOMAIN-SUFFIX,qichiyu.com
