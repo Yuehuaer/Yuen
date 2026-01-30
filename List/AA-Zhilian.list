@@ -31,6 +31,9 @@ DOMAIN,shicheng.wang
 DOMAIN,yue.yuehua.site
 DOMAIN,yue2.yuehua.site
 
+# 樱花动漫网
+DOMAIN-SUFFIX,skr.skr2.cc
+DOMAIN-SUFFIX,skr.cc
 
 #Bark通知
 DOMAIN,api.day.app
