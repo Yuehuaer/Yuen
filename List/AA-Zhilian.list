@@ -34,6 +34,8 @@ DOMAIN,yue2.yuehua.site
 # 樱花动漫网
 DOMAIN-SUFFIX,skr.skr2.cc
 DOMAIN-SUFFIX,skr.cc
+DOMAIN,www.skr2.cc
+DOMAIN-SUFFIX,www.skr2.cc
 
 #Bark通知
 DOMAIN,api.day.app
