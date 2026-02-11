@@ -150,6 +150,7 @@ rule-providers:
   AA-JapanDaili:        {!!merge <<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-JapanDaili.list"}
   AA-PT:                {!!merge <<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-PT.list"}
   AA-REJECT:            {!!merge <<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-REJECT.list"}
+  AA-TwDaili:           {!!merge <<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-TwDaili.list"}
   AA-XPTV:              {!!merge <<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-XPTV.list"}
   AA-Zhilian:           {!!merge <<: *class, url: "https://gh-proxy.com/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Zhilian.list"}
   
@@ -198,6 +199,7 @@ rules:
   - RULE-SET,AA-Emby,🎬 Emby库
   - RULE-SET,AA-HKDaili,♻️ 香港自动
   - RULE-SET,AA-JapanDaili,🔞 DMM.R18
+  - RULE-SET,AA-TwDaili,♻️ 台湾自动
   - RULE-SET,AA-XPTV,🎯 直连
   - RULE-SET,AA-Zhilian,🎯 直连
   - RULE-SET,AA-PT,📥 PT下载
