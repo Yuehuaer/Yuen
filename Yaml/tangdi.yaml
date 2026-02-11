@@ -1,7 +1,7 @@
 # 机场订阅
 proxy-providers:
   琴鸟:
-    url: "http://-------------------------------------------------"
+    url: "123"
     type: http
     interval: 86400
     health-check:
