@@ -123,7 +123,7 @@ proxy-groups:
   - {name: 🔞 秘密花园, !!merge <<: *av}
   - {name: ❄️ 雪落无声, !!merge <<: *at}
   - {name: 🤯 人工智能, !!merge <<: *aq}
-  - {name: 🌏 全球语桥, !!merge <<: *aq}
+  - {name: 🌏 全球语桥, !!merge <<: *pr}
   - {name: 🍎 果园私语, !!merge <<: *ae}
   - {name: 🎯 绝对通行, !!merge <<: *ae}
   - {name: 🐟 漏网之鱼, !!merge <<: *pr}
