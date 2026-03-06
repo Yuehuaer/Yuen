@@ -187,6 +187,11 @@ rules:
   # - SSID,"春江花月夜",DIRECT
   # - SRC-IP-CIDR,192.168.21.0/24,DIRECT
   # 匹配规则
+
+# 代理规则-手动填写-----------------------------------------------------------------------------------
+
+  - DOMAIN,ourbits.club,🚀 随心所欲
+  - DOMAIN-SUFFIX,ourbits.club,🚀 随心所欲
   - DOMAIN,lf3-static.bytednsdoc.com,🎯 绝对通行
   - DOMAIN,v5-dy-o-abtest.zjcdn.com,🎯 绝对通行
   - DOMAIN-SUFFIX,amemv.com,🎯 绝对通行
