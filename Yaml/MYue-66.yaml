@@ -2,7 +2,7 @@
 # 配置作者：Yuehuaer
 # 适用版本：所有使用 mihomo 核心的程序
 # 更新时间：2026年3月2日16:00:47
-# 版本：1.0.0
+# 版本：1.0.1
 # 版本内容与核心特性：
 # 1. 架构极致精简：深度运用 YAML 锚点（Anchors）与别名复用技术，代码零冗余，极大提升后期维护效率。
 # 2. 路由性能榨取：全量采用 .mrs（Meta Rule Set）二进制规则集，极速加载且占用极低 RAM，完美适配路由器环境。
@@ -10,6 +10,10 @@
 # 4. 极致场景分流：专为家庭局域网深度定制，对影库流媒体 (Emby)、PT/BT 下载（底层物理级规避）、AI 人工智能（引入台湾原生节点极速解锁）、苹果生态等进行精准隔离分流。
 # 5. 面板视觉重构：引入体系化的 Emoji 命名，大一统合并冗余的海外常用服务至“全球语桥”，控制面板极度清爽直观。
 # 6. 极速网页解析：高度优化的 Fake-IP 增强模式与精准的域名嗅探（Sniffer）黑白名单，实现无感秒开且不破坏本地智能家居与探测服务。
+#--------------------------------------------------------------------------------------------
+# 版本更新：
+# 2026-03-12 更新日志：1. 添加了「自动选择」锚点，用于自动选择节点。
+#
 #
 # mihomo 配置--------------------------------------------------------------------------------
 
@@ -113,11 +117,13 @@ ay: &ay {type: select, proxies: [❄️ 雪落无声, 直连, ✋ 指尖逸选]}
 pt: &pt {type: select, proxies: [🚀 随心所欲, 🔯 香港故转, 🔯 日本故转, ♻️ 香港自动, ♻️ 日本自动, ♻️ 美国自动, ♻️ 自动选择, ✋ 指尖逸选, 🛳 香港节点, 🗾 日本节点, 🗽 美国节点, 直连]}
 mm: &mm {type: select, proxies: [♻️ 香港自动, 🔯 香港故转, 🛳 香港节点, ♻️ 自动选择, 🔯 日本故转, 🗾 日本节点, ♻️ 日本自动, 🔯 狮城故转, 🦁 狮城节点, ♻️ 狮城自动, 🔯 台湾故转, 🧋 台湾节点, ♻️ 台湾自动, 🔯 美国故转, 🗽 美国节点, ♻️ 美国自动, ✋ 指尖逸选, 直连]}
 ad: &ad {type: select, include-all: true}
+au: &au {type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "^((?!(直连)).)*$"} # 自动选择
 
 
 proxy-groups:
   - {name: 🚀 随心所欲, !!merge <<: *mm}
   - {name: ✋ 指尖逸选, !!merge <<: *ad}
+  - {name: ♻️ 自动选择, !!merge <<: *au}
   - {name: 📥 兰台共储, !!merge <<: *pt}
   - {name: 🎬 影库狂潮, !!merge <<: *ay}
   - {name: 🔞 秘密花园, !!merge <<: *av}
@@ -128,7 +134,6 @@ proxy-groups:
   - {name: 🎯 绝对通行, !!merge <<: *ae}
   - {name: 🐟 漏网之鱼, !!merge <<: *pr}
   - {name: ♻️ 香港自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(港|HK|(?i)Hong|HKG|香港|🇭🇰))^((?!(台|日|韩|新|深|美|hongxin)).)*$"}
-  - {name: ♻️ 自动选择, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "^((?!(直连)).)*$"}
   - {name: ♻️ 日本自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(日|JP\\b|(?i)Japan|NRT|HND|KIX|CTS|FUK|🇯🇵))^((?!(港|台|韩|新|深|美)).)*$"}
   - {name: ♻️ 狮城自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(狮城|新加坡|(?i)Singapore|SG\\b|SGP|SIN|XSP|🇸🇬))^((?!(港|台|日|韩|美|美利坚|USA|Japan|JP|韩国|香港|台湾)).)*$"}
   - {name: ♻️ 台湾自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(台|TW\\b|Taiwan|TPE|KHH|TSA|🇹🇼))^((?!(港|日|韩|新|美)).)*$"}
