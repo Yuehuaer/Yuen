@@ -2,28 +2,16 @@
   "topShelf": "壁纸精选",
   "content": [
     {
-      "coverUrl": "https://cdn.jsdelivr.net/gh/Yuehuaer/Yuen@main/Unpaly/Blue-Eyes-Anime-Girl-4K.jpg",
-      "videoUrl": ""
+      "coverUrl": "http://192.168.21.242:5244/p/download/Unplay/darling-in-the-franxx.jpg",
+      "videoUrl": "http://192.168.21.242:5244/d/download/Unplay/darling-in-the-franxx.mp4"
     },
     {
-      "coverUrl": "https://cdn.jsdelivr.net/gh/Yuehuaer/Yuen@main/Unpaly/darling-in-the-franxx.jpg",
-      "videoUrl": ""
+      "coverUrl": "http://192.168.21.242:5244/p/download/Unplay/darling-in-the-franxx.jpg",
+      "videoUrl": "http://192.168.21.242:5244/d/download/Unplay/darling-in-the-franxx.mp4"
     },
     {
-      "coverUrl": "https://cdn.jsdelivr.net/gh/Yuehuaer/Yuen@main/Unpaly/fanren.jpeg",
-      "videoUrl": ""
-    },
-    {
-      "coverUrl": "https://cdn.jsdelivr.net/gh/Yuehuaer/Yuen@main/Unpaly/gundam-4k.jpg",
-      "videoUrl": ""
-    },
-    {
-      "coverUrl": "https://cdn.jsdelivr.net/gh/Yuehuaer/Yuen@main/Unpaly/inori-yuzuriha-guilty-crown.jpg",
-      "videoUrl": ""
-    },
-    {
-      "coverUrl": "https://cdn.jsdelivr.net/gh/Yuehuaer/Yuen@main/Unpaly/zero-path-to-nowhere.jpg",
-      "videoUrl": ""
+      "coverUrl": "http://192.168.21.242:5244/p/download/Unplay/zero-path-to-nowhere.jpg",
+      "videoUrl": "http://192.168.21.242:5244/d/download/Unplay/zero-path-to-nowhere.mp4"
     }
   ]
 }
