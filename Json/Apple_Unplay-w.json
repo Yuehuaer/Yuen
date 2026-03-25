@@ -6,6 +6,10 @@
       "videoUrl": "http://192.168.21.242:5244/d/download/Unplay/Bianca.mp4"
     },
     {
+      "coverUrl": "http://192.168.21.242:5244/p/download/Unplay/Blue-Eyes-Anime-Girl-4K.jpg",
+      "videoUrl": "http://192.168.21.242:5244/d/download/Unplay/Blue-Eyes-Anime-Girl-4K.mp4"
+    },
+    {
       "coverUrl": "http://192.168.21.242:5244/p/download/Unplay/CyberPsychosis.jpg",
       "videoUrl": "http://192.168.21.242:5244/d/download/Unplay/CyberPsychosis.mp4"
     },
@@ -18,12 +22,20 @@
       "videoUrl": "http://192.168.21.242:5244/d/download/Unplay/darling-in-the-franxx.mp4"
     },
     {
-      "coverUrl": "http://192.168.21.242:5244/p/download/Unplay/Dreamy%20Landscape.jpg",
+      "coverUrl": "http://192.168.21.242:5244/d/download/Unplay/Dreamy%20Landscape.jpg",
       "videoUrl": "http://192.168.21.242:5244/d/download/Unplay/Dreamy%20Landscape.mp4"
     },
     {
       "coverUrl": "http://192.168.21.242:5244/p/download/Unplay/genshin.jpg",
       "videoUrl": "http://192.168.21.242:5244/d/download/Unplay/genshin.mp4"
+    },
+    {
+      "coverUrl": "http://192.168.21.242:5244/d/download/Unplay/gundam-4k.jpg",
+      "videoUrl": "http://192.168.21.242:5244/d/download/Unplay/gundam-4k.mp4"
+    },
+    {
+      "coverUrl": "http://192.168.21.242:5244/d/download/Unplay/inori-yuzuriha-guilty-crown.jpg",
+      "videoUrl": "http://192.168.21.242:5244/d/download/Unplay/inori-yuzuriha-guilty-crown.mp4"
     },
     {
       "coverUrl": "http://192.168.21.242:5244/p/download/Unplay/lanfanmv.jpg",
@@ -38,8 +50,8 @@
       "videoUrl": "http://192.168.21.242:5244/d/download/Unplay/punishing.mp4"
     },
     {
-      "coverUrl": "http://192.168.21.242:5244/p/download/Unplay/Red-Eyes.jpg",
-      "videoUrl": "http://192.168.21.242:5244/d/download/Unplay/Red-Eyes.mp4"
+      "coverUrl": "http://192.168.21.242:5244/d/download/Unplay/Red%20Eyes.jpg",
+      "videoUrl": "http://192.168.21.242:5244/d/download/Unplay/Red%20Eyes.mp4"
     },
     {
       "coverUrl": "http://192.168.21.242:5244/p/download/Unplay/sdxj.jpg",
@@ -54,7 +66,7 @@
       "videoUrl": "http://192.168.21.242:5244/d/download/Unplay/wushidao.mp4"
     },
     {
-      "coverUrl": "http://192.168.21.242:5244/p/download/Unplay/zero-path-to-nowhere.jpg",
+      "coverUrl": "http://192.168.21.242:5244/d/download/Unplay/zero-path-to-nowhere.jpg",
       "videoUrl": "http://192.168.21.242:5244/d/download/Unplay/zero-path-to-nowhere.mp4"
     }
   ]
