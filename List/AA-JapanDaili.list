@@ -163,6 +163,7 @@ DOMAIN-SUFFIX,awstrust.com
 DOMAIN-SUFFIX,boxofficemojo.com
 DOMAIN-SUFFIX,cdkworkshop.com
 DOMAIN-SUFFIX,cloudfront.net
+DOMAIN-SUFFIX,completion.amazon.com
 DOMAIN-SUFFIX,containersonaws.com
 DOMAIN-SUFFIX,createspace.com
 DOMAIN-SUFFIX,elasticbeanstalk.com
@@ -193,6 +194,7 @@ DOMAIN-SUFFIX,kindleoasis.us
 DOMAIN-SUFFIX,kindleoasisnews.com
 DOMAIN-SUFFIX,kindleproject.com
 DOMAIN-SUFFIX,llnwd.net
+DOMAIN-SUFFIX,m.media-amazon.com
 DOMAIN-SUFFIX,media-amazon.com
 DOMAIN-SUFFIX,media-imdb.com
 DOMAIN-SUFFIX,prime-video.com
