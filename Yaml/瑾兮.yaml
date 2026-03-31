@@ -1,0 +1,311 @@
+#⚓️ 本策略由ℳ谨兮维护未经允许不得外传
+#😲 奇葩现象:节点要选冷门自选更新才不会报错(第一次更新/代理没通时),添加国内加速库亦是如此
+
+#以下为历史更新记录，当前仅作参考，实际生效配置请以最新下发内容为准。
+#🤔 之前都忘记了以后优化会记录
+#🛠️ 25.10.27 优化策略 完全重新写适配
+#🛠️ 25.10.28 更换图标
+#🛠️ 25.12.11 优化策略库
+# 地址：https://gist.githubusercontent.com/MJinxi/04dae1b1e2f30362dc1e85ef7f43839d/raw/Rule.yaml
+#⚠️ 25.04.28/30 故障：由github修改规则抽风导致大家无法使用,因此没结经过同意不得分享ta人，规则不要频繁点更新，不是天天有新站维护本地正常就行!!!
+############################################# - ⚓️ ℳ锚点区开始 - #############################################
+
+# 锚点 - 远程订阅组
+PProviders: &PProviders {type: http, interval: 86400, health-check: {enable: true, url: 'https://www.gstatic.com/generate_204', interval: 300}, filter: '^(?!.*(群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author))'}
+# 锚点 - 筛选组 
+FilterHK: &FilterHK '(?i)港|香港|🇭🇰|HK|Hong|HKG'
+FilterTW: &FilterTW '(?i)台|台湾|🇼🇸|🇹🇼|TW|tai|TPE|TSA|KHH'
+FilterSG: &FilterSG '(?i)坡|新加坡|🇸🇬|SG|Sing|SIN|XSP'
+FilterJP: &FilterJP '(?i)日|日本|🇯🇵|JP|Japan|NRT|HND|KIX|CTS|FUK'
+FilterKR: &FilterKR '(?i)韩|韩国|🇰🇷|韓|韓國|首尔|南朝鲜|KR|KOR|Korea|South'
+FilterUS: &FilterUS '(?i)美|美国|🇺🇸|US|USA|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD'
+FilterEU: &FilterEU '(?i)(🇧🇪|🇨🇿|🇩🇰|🇫🇮|🇫🇷|🇩🇪|🇮🇪|🇮🇹|🇱🇹|🇱🇺|🇳🇱|🇵🇱|🇸🇪|🇬🇧|CDG|FRA|AMS|MAD|BCN|FCO|MUC|BRU)'
+FilterOther: &FilterOther '^(?!.*(直连|港|台|新|日|韩|香港|台湾|新加坡|日本|韩国|美国|🇭🇰|🇼🇸|🇹🇼|🇸🇬|🇯🇵|🇰🇷|🇺🇸|🇬🇧|🇦🇹|🇧🇪|🇨🇿|🇩🇰|🇫🇮|🇫🇷|🇩🇪|🇮🇪|🇮🇹|🇱🇹|🇱🇺|🇳🇱|🇵🇱|🇸🇪|HK|TW|SG|JP|KR|US|GB|CDG|FRA|AMS|MAD|BCN|FCO|MUC|BRU|HKG|TPE|TSA|KHH|SIN|XSP|NRT|HND|KIX|CTS|FUK|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD|LHR|LGW))'
+FilterAll: &FilterAll '^(?!.*(直连|群|邀请|返利|循环|官网|客服|网站|网址|获取|订阅|流量|到期|机场|下次|版本|官址|备用|过期|已用|联系|邮箱|工单|贩卖|通知|倒卖|防止|国内|地址|频道|无法|说明|使用|提示|特别|访问|支持|教程|关注|更新|作者|加入|USE|USED|TOTAL|EXPIRE|EMAIL|Panel|Channel|Author))'
+# 锚点 - 策略组
+UrlTest: &UrlTest {type: url-test, interval: 60, tolerance: 20, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: true, include-all: true, proxies: [REJECT]}
+FallBack: &FallBack {type: fallback, interval: 60, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, timeout: 2000, max-failed-times: 3, hidden: false}
+LoadBalanceCH: &LoadBalanceCH {type: load-balance, interval: 60, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, strategy: consistent-hashing, timeout: 2000, max-failed-times: 3, hidden: true, include-all: true}
+LoadBalanceCR: &LoadBalanceCR {type: load-balance, interval: 60, lazy: true, url: 'https://www.gstatic.com/generate_204', disable-udp: false, strategy: round-robin, timeout: 2000, max-failed-times: 3, hidden: true, include-all: true}
+
+# 锚点 - 选择组 
+SelectFB: &SelectFB {type: select, proxies: [故障转移, 香港策略, 台湾策略, 新加坡策略, 日本策略, 韩国策略, 美国策略, 欧盟策略, 冷门自选, 全球手动, 链式代理, 直连]}
+SelectHK: &SelectHK {type: select, proxies: [香港策略, 台湾策略, 新加坡策略, 日本策略, 韩国策略, 美国策略, 欧盟策略, 冷门自选, 全球手动, 链式代理, 直连]}
+SelectSG: &SelectSG {type: select, proxies: [新加坡策略, 故障转移, 香港策略, 台湾策略, 日本策略, 韩国策略, 美国策略, 欧盟策略, 冷门自选, 全球手动, 链式代理, 直连]}
+SelectUS: &SelectUS {type: select, proxies: [美国策略, 故障转移, 香港策略, 台湾策略, 新加坡策略, 日本策略, 韩国策略, 欧盟策略, 冷门自选, 全球手动, 链式代理, 直连]}
+SelectProxy: &SelectProxy {type: select, proxies: [默认代理, 故障转移, 香港策略, 台湾策略, 新加坡策略, 日本策略, 韩国策略, 美国策略, 欧盟策略, 冷门自选, 全球手动, 链式代理, 直连]}
+# 锚点 - 规则集 
+DomainMrs: &DomainMrs {type: http, interval: 86400, behavior: domain, format: mrs}
+DomainText: &DomainText {type: http, interval: 86400, behavior: domain, format: text}
+domainYaml: &domainYaml {type: http, interval: 86400, behavior: domain, format: yaml}
+IPcidrMrs: &IPcidrMrs {type: http, interval: 86400, behavior: ipcidr, format: mrs}
+IPcidrText: &IPcidrText {type: http, interval: 86400, behavior: ipcidr, format: text}
+ClassicalText: &ClassicalText {type: http, interval: 86400, behavior: classical, format: text}
+ClassicalYaml: &ClassicalYaml {type: http, interval: 86400, behavior: classical, format: yaml}
+############################################## - ⚓️ 锚点区结束 - ############################################## 
+# 远程订阅组
+# 注意：请提供您的机场订阅链接，每个链接一行，并为每个机场命名，末尾的[A]为每个节点添加机场名称前缀，可自定义
+proxy-providers:
+  机场A: {<<: *PProviders, url: '机场订阅地址', override: {additional-prefix: '[A] '}}
+
+
+# 全局配置
+# 缓存
+profile:
+  store-selected: true
+  store-fake-ip: true
+
+# 自定 UI界面
+external-controller: 0.0.0.0:9090
+external-ui-url: https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip
+external-ui: ui
+external-ui-name: zashboard
+secret: 123456
+
+# 自定 GEO 下载地址
+geox-url:
+  geosite: https://github.moeyy.xyz/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geosite.dat
+  mmdb: https://github.moeyy.xyz/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/country-lite.mmdb
+  geoip: https://github.moeyy.xyz/https://github.com/MetaCubeX/meta-rules-dat/releases/download/latest/geoip-lite.dat
+  asn: https://github.moeyy.xyz/https://github.com/xishang0128/geoip/releases/download/latest/GeoLite2-ASN.mmdb
+
+# 域名嗅探
+sniffer:
+  enable: true
+  sniff:
+    HTTP:
+      ports: [80, 8080-8880]
+      override-destination: true
+    TLS:
+      ports: [443, 8443]
+    QUIC:
+      ports: [443, 8443]
+  skip-domain: # 忽略嗅探
+    - 'rule-set:cn_domain,private_domain'
+    - 'Mijia Cloud'
+    - '+.push.apple.com'
+    - '+.wechat.com'
+    - '+.qpic.cn'
+    - '+.qq.com'
+    - '+.wechatapp.com'
+    #  语音通信
+    - '+.vivox.com'
+    # 向日葵服务
+    - '+.oray.com'
+    - '+.sunlogin.net'
+
+# 本地自建节点组
+proxies:
+  - {name: 直连, type: direct, udp: true}
+
+# 总策略组 ℳ谨兮优化
+proxy-groups:
+ # 国内
+  - {name: 默认代理, <<: *SelectFB, icon: https://www.helloimg.com/i/2025/10/28/68ffb03a371ab.png}
+  - {name: 国内网站, type: select, proxies: [直连, 默认代理,香港策略, 台湾策略, 新加坡策略, 日本策略, 韩国策略, 美国策略, 欧盟策略, 全球手动, 冷门自选], icon: https://www.helloimg.com/i/2025/10/28/68ffd43e678fb.png}
+  - {name: PT站点, type: select, proxies: [直连, 默认代理,香港策略, 台湾策略, 新加坡策略, 日本策略, 韩国策略, 美国策略, 欧盟策略, 全球手动], icon: https://www.helloimg.com/i/2025/10/28/68ffcbc8764f8.png}
+  - {name: Emby, <<: *SelectProxy, icon: https://www.helloimg.com/i/2025/10/28/68ffce34a8b45.png}
+  - {name: 抖快书定位, type: select, proxies: [直连, 香港策略, 台湾策略, 新加坡策略, 日本策略, 韩国策略, 美国策略, 欧盟策略], icon: https://www.helloimg.com/i/2025/10/28/68ffb1caabcfe.png}
+ # 国外
+  - {name: 国外网站, <<: *SelectProxy, icon: https://www.helloimg.com/i/2025/10/28/68ffb85dcca55.png}
+  - {name: Telegram, <<: *SelectProxy, icon: https://www.helloimg.com/i/2025/10/28/68ffb2f62b607.png}
+  - {name: Twitter, <<: *SelectProxy, icon: https://www.helloimg.com/i/2025/10/28/68ffb2f482f45.png}
+  - {name: Github, <<: *SelectProxy, icon: https://www.helloimg.com/i/2025/10/28/68ffb1c257765.png}
+  - {name: 微软服务, <<: *SelectProxy, icon: https://www.helloimg.com/i/2025/10/28/68ffb69fab26f.png}
+  - {name: 谷歌服务, <<: *SelectProxy, icon: https://www.helloimg.com/i/2025/10/28/68ffb1c6d81c2.png}
+  - {name: 苹果服务, <<: *SelectProxy, icon: https://www.helloimg.com/i/2025/10/28/68ffb1c22efa4.png}
+  - {name: 脸书服务, <<: *SelectProxy, icon: https://www.helloimg.com/i/2025/10/28/68ffb1c22e877.png}
+ # 不常用APP
+  - {name: ChatGPT, <<: *SelectSG, icon: https://www.helloimg.com/i/2025/10/28/68ffb45840249.png}  
+  - {name: AI平台, <<: *SelectSG, icon: https://www.helloimg.com/i/2025/04/29/680ff0b68fd90.png}
+  - {name: YouTube, <<: *SelectProxy, icon: https://www.helloimg.com/i/2025/10/28/68ffb2f4193f6.png}
+  - {name: NetFlix, <<: *SelectProxy, icon: https://www.helloimg.com/i/2025/10/28/68ffb1c798d6e.png}
+  - {name: TikTok, <<: *SelectProxy, icon: https://www.helloimg.com/i/2025/10/28/68ffb2f480e72.png}
+  - {name: Disney, <<: *SelectProxy, icon: https://www.helloimg.com/i/2025/10/28/68ffb1c22a932.png}
+  - {name: Spotify, <<: *SelectProxy, icon: https://www.helloimg.com/i/2025/10/28/68ffb1c79c231.png}
+  - {name: HBO, <<: *SelectProxy, icon: https://www.helloimg.com/i/2025/10/28/68ffbac809b0c.png}
+  - {name: 国际新闻, <<: *SelectProxy, icon: https://www.helloimg.com/i/2025/10/28/68ffb1c1c009f.png}
+  - {name: 社交平台, <<: *SelectProxy, icon: https://www.helloimg.com/i/2025/10/28/68ffbc1b9911f.png}
+  - {name: 货币平台, <<: *SelectProxy, icon: https://www.helloimg.com/i/2025/10/28/68ffbd63b90f6.png}
+  - {name: 游戏平台, <<: *SelectProxy, icon: https://www.helloimg.com/i/2025/10/28/68ffb14a5601d.png}
+  - {name: 网速测试, <<: *SelectProxy, icon: https://www.helloimg.com/i/2025/10/28/68ffc0e9d4026.png}
+ # 地区策略
+  - {name: 香港策略, type: select, proxies: [香港自动, 香港均衡-散列, 香港均衡-轮询], include-all: true, filter: *FilterHK, icon: https://www.helloimg.com/i/2025/04/29/680ff0cd26dcd.png}
+  - {name: 台湾策略, type: select, proxies: [台湾自动, 台湾均衡-散列, 台湾均衡-轮询], include-all: true, filter: *FilterTW, icon: https://www.helloimg.com/i/2025/04/29/680ff0e5cd10a.png}
+  - {name: 新加坡策略, type: select, proxies: [新加坡自动, 新加坡均衡-散列, 新加坡均衡-轮询], include-all: true, filter: *FilterSG, icon: https://www.helloimg.com/i/2025/04/29/680ff0db50157.png}
+  - {name: 日本策略, type: select, proxies: [日本自动, 日本均衡-散列, 日本均衡-轮询], include-all: true, filter: *FilterJP, icon: https://www.helloimg.com/i/2025/04/29/680ff0d03d3bc.png}
+  - {name: 韩国策略, type: select, proxies: [韩国自动, 韩国均衡-散列, 韩国均衡-轮询], include-all: true, filter: *FilterKR, icon: https://www.helloimg.com/i/2025/04/29/680ff0d06194d.png}
+  - {name: 美国策略, type: select, proxies: [美国自动, 美国均衡-散列, 美国均衡-轮询], include-all: true, filter: *FilterUS, icon: https://www.helloimg.com/i/2025/04/29/680ff0e957756.png}
+  - {name: 欧盟策略, type: select, proxies: [欧盟自动, 欧盟均衡-散列, 欧盟均衡-轮询], include-all: true, filter: *FilterEU, icon: https://www.helloimg.com/i/2025/04/29/680ff0c396695.png}
+ # 其他策略
+  - {name: 链式代理, type: relay, proxies: [中转机, 落地机], icon: https://www.helloimg.com/i/2025/10/28/68ffc0ea2f9c7.png}
+  - {name: 中转机, type: select, proxies: [香港策略, 台湾策略, 日本策略, 新加坡策略, 韩国策略, 美国策略, 欧盟策略, 冷门自选, 全球手动], icon: https://www.helloimg.com/i/2025/10/28/68ffc3461b4d6.png}
+  - {name: 落地机, type: select, include-all: true, filter: *FilterAll, icon: https://www.helloimg.com/i/2025/10/28/68ffb86826f82.png}
+  - {name: 故障转移, <<: *FallBack, proxies: [香港策略, 台湾策略, 新加坡策略, 日本策略, 韩国策略, 美国策略, 欧盟策略, 全球手动, 冷门自选, 直连], icon: https://www.helloimg.com/i/2025/10/28/68ffc52be2332.png}
+  - {name: 漏网之鱼, type: select, proxies: [默认代理, 直连], icon: https://www.helloimg.com/i/2025/10/28/68ffbd63e0d7e.png}
+  - {name: 全球手动, type: select, include-all: true, filter: *FilterAll, icon: https://www.helloimg.com/i/2025/10/28/68ffc5e82d461.png}
+  - {name: 冷门自选, type: select, include-all: true, filter: *FilterOther, icon: https://www.helloimg.com/i/2025/10/28/68ffc6ee9b20b.png}
+ # 自动测速
+  - {name: 香港自动, <<: *UrlTest, filter: *FilterHK, icon: https://www.helloimg.com/i/2025/10/28/68ffc7d742fdf.png}
+  - {name: 台湾自动, <<: *UrlTest, filter: *FilterTW, icon: https://www.helloimg.com/i/2025/10/28/68ffc7dbdd538.png}
+  - {name: 新加坡自动, <<: *UrlTest, filter: *FilterSG, icon: https://www.helloimg.com/i/2025/10/28/68ffc7d76a93d.png}
+  - {name: 日本自动, <<: *UrlTest, filter: *FilterJP, icon: https://www.helloimg.com/i/2025/10/28/68ffc7d721661.png}
+  - {name: 韩国自动, <<: *UrlTest, filter: *FilterKR, icon: https://www.helloimg.com/i/2025/10/28/68ffc7d75bdfc.png}
+  - {name: 美国自动, <<: *UrlTest, filter: *FilterUS, icon: https://www.helloimg.com/i/2025/10/28/68ffc7dc1bdb1.png}
+  - {name: 欧盟自动, <<: *UrlTest, filter: *FilterEU, icon: https://www.helloimg.com/i/2025/10/28/68ffc7d720235.png}
+ # 负载均衡-散列
+  - {name: 香港均衡-散列, <<: *LoadBalanceCH, filter: *FilterHK, icon: https://www.helloimg.com/i/2025/04/29/680ff0d91d20d.png}
+  - {name: 台湾均衡-散列, <<: *LoadBalanceCH, filter: *FilterTW, icon: https://www.helloimg.com/i/2025/04/29/680ff0d91d20d.png}
+  - {name: 新加坡均衡-散列, <<: *LoadBalanceCH, filter: *FilterSG, icon: https://www.helloimg.com/i/2025/04/29/680ff0d91d20d.png}
+  - {name: 日本均衡-散列, <<: *LoadBalanceCH, filter: *FilterJP, icon: https://www.helloimg.com/i/2025/04/29/680ff0d91d20d.png}
+  - {name: 韩国均衡-散列, <<: *LoadBalanceCH, filter: *FilterKR, icon: https://www.helloimg.com/i/2025/04/29/680ff0d91d20d.png}
+  - {name: 美国均衡-散列, <<: *LoadBalanceCH, filter: *FilterUS, icon: https://www.helloimg.com/i/2025/04/29/680ff0d91d20d.png}
+  - {name: 欧盟均衡-散列, <<: *LoadBalanceCH, filter: *FilterEU, icon: https://www.helloimg.com/i/2025/04/29/680ff0d91d20d.png}
+ # 负载均衡-轮询
+  - {name: 香港均衡-轮询, <<: *LoadBalanceCR, filter: *FilterHK, icon: https://www.helloimg.com/i/2025/04/29/680ff0d8af264.png}
+  - {name: 台湾均衡-轮询, <<: *LoadBalanceCR, filter: *FilterTW, icon: https://www.helloimg.com/i/2025/04/29/680ff0d8af264.png}
+  - {name: 新加坡均衡-轮询, <<: *LoadBalanceCR, filter: *FilterSG, icon: https://www.helloimg.com/i/2025/04/29/680ff0d8af264.png}
+  - {name: 日本均衡-轮询, <<: *LoadBalanceCR, filter: *FilterJP, icon: https://www.helloimg.com/i/2025/04/29/680ff0d8af264.png}
+  - {name: 韩国均衡-轮询, <<: *LoadBalanceCR, filter: *FilterKR, icon: https://www.helloimg.com/i/2025/04/29/680ff0d8af264.png}
+  - {name: 美国均衡-轮询, <<: *LoadBalanceCR, filter: *FilterUS, icon: https://www.helloimg.com/i/2025/04/29/680ff0d8af264.png}
+  - {name: 欧盟均衡-轮询, <<: *LoadBalanceCR, filter: *FilterEU, icon: https://www.helloimg.com/i/2025/04/29/680ff0d8af264.png}
+ 
+# ℳ谨兮规则合集
+rule-providers: 
+ # 国内
+  mydomain:                   {<<: *ClassicalText, url: https://gh-proxy.com/https://raw.githubusercontent.com/MJinxi/Rule/main/rules/MyDomain.list}
+  private-direct:             {<<: *ClassicalText, url: https://gh-proxy.com/https://raw.githubusercontent.com/MJinxi/Rule/main/rules/direct-domain.list}
+  tracker-direct:             {<<: *ClassicalText, url: https://gh-proxy.com/https://raw.githubusercontent.com/MJinxi/Rule/main/rules/Tracker-Domain.list}
+  Pt-Domain:                  {<<: *ClassicalText, url: https://gh-proxy.com/https://raw.githubusercontent.com/MJinxi/Rule/main/rules/Pt-Domain.list}
+  emby:                       {<<: *ClassicalText, url: https://gh-proxy.com/https://raw.githubusercontent.com/MJinxi/Rule/main/rules/emby.list}
+  location_ip:                {<<: *ClassicalYaml, url: https://gh-proxy.com/https://raw.githubusercontent.com/MJinxi/Rule/main/rules/location_ip.yaml}
+  XPTV:                       {<<: *ClassicalYaml, url: https://gh-proxy.com/https://raw.githubusercontent.com/MJinxi/Rule/main/rules/xptv.yaml}
+  fix-direct:                 {<<: *ClassicalYaml, url: https://gh-proxy.com/https://raw.githubusercontent.com/MJinxi/Rule/main/rules/fix-direct.yaml}
+ # 国外
+  private-proxy:              {<<: *ClassicalText, url: https://gh-proxy.com/https://raw.githubusercontent.com/MJinxi/Rule/main/rules/proxy-domain.list}
+  telegram:                   {<<: *DomainMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/telegram.mrs}
+  twitter:                    {<<: *DomainMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/twitter.mrs}
+  github:                     {<<: *DomainMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/github.mrs}
+  onedrive:                   {<<: *DomainMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/onedrive.mrs}
+  google:                     {<<: *DomainMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/google.mrs}
+  apple-cn:                   {<<: *DomainMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/apple-cn.mrs}
+  apple:                      {<<: *DomainMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/apple.mrs}
+  instagram:                  {<<: *DomainMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/instagram.mrs}
+  facebook:                   {<<: *DomainMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/facebook.mrs}
+  meta:                       {<<: *DomainMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/meta.mrs}
+  tiktok:                     {<<: *DomainMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/tiktok.mrs}
+  youtube:                    {<<: *DomainMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/youtube.mrs}
+  netflix:                    {<<: *DomainMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/netflix.mrs}
+# 不常用APP
+  speedtest:                  {<<: *ClassicalYaml, url: https://gh-proxy.com/https://raw.githubusercontent.com/MJinxi/Rule/main/rules/speedtest.yaml}
+  openai:                     {<<: *DomainMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/openai.mrs}
+  category-ai-chat-!cn:       {<<: *DomainMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/category-ai-!cn.mrs}
+  spotify:                    {<<: *DomainMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/spotify.mrs}
+  disney:                     {<<: *DomainMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/disney.mrs}
+  hbo:                        {<<: *DomainMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/hbo.mrs}
+  microsoft@cn:               {<<: *DomainMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/microsoft@cn.mrs}
+  microsoft:                  {<<: *DomainMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/microsoft.mrs}
+  paypal@cn:                  {<<: *DomainMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/paypal@cn.mrs}
+  paypal:                     {<<: *DomainMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/paypal.mrs}
+  cloudflare-cn:              {<<: *DomainMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/cloudflare-cn.mrs}
+  category-public-tracker:    {<<: *DomainMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/category-public-tracker.mrs}
+  category-games:             {<<: *DomainMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/category-games.mrs}
+  category-media-cn:          {<<: *DomainMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/category-media-cn.mrs}
+  category-media:             {<<: *DomainMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/category-media.mrs}
+  category-cryptocurrency:    {<<: *DomainMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/category-cryptocurrency.mrs}
+  category-social-media-!cn:  {<<: *DomainMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/category-social-media-!cn.mrs}
+  geolocation-!cn:            {<<: *DomainMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/geolocation-!cn.mrs}
+  private_domain:             {<<: *DomainMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/private.mrs}
+  cn_domain:                  {<<: *DomainMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/cn.mrs}
+# IP规则集
+  facebook_ip:                {<<: *IPcidrMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/facebook_ip.mrs}
+  google_ip:                  {<<: *IPcidrMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/google_ip.mrs}
+  netflix_ip:                 {<<: *IPcidrMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/netflix_ip.mrs}
+  twitter_ip:                 {<<: *IPcidrMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/twitter_ip.mrs}
+  telegram_ip:                {<<: *IPcidrMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/telegram_ip.mrs}
+  private_ip:                 {<<: *IPcidrMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/private_ip.mrs}
+  cn_ip:                      {<<: *IPcidrMrs, url: https://gh-proxy.org/https:/raw.githubusercontent.com/MJinxi/Rule/main/rules/1/cn_ip.mrs}
+  
+# 路由: 规则走向从上到下
+rules:
+  # 本地定制规则
+  # 游戏下载
+  - DOMAIN,gst.prod.dl.playstation.net,直连
+  - DOMAIN-SUFFIX,steamcontent.com,直连
+  # BitTorrent
+  - DOMAIN-SUFFIX,bittorrent.com,直连
+  - DOMAIN-SUFFIX,bttrack.com,直连
+  - DOMAIN-SUFFIX,tracker,直连
+  # BitTorrent 常见端口范围
+  - SRC-PORT,34560-34570,直连
+  - SRC-PORT,8080,直连
+  # Cloudflare
+  - DOMAIN-SUFFIX,cloudflare.com,直连
+  # 拦截规则
+  - DOMAIN-SUFFIX,posthog.com,REJECT-DROP
+  # 米家请求风暴
+  - IP-CIDR,114.247.154.1/24,REJECT-DROP,no-resolve 
+  - IP-CIDR,106.120.178.6/24,REJECT-DROP,no-resolve
+  # ARC 用户行为跟踪
+  - DOMAIN-KEYWORD,launchdarkly,REJECT-DROP
+  - DOMAIN-KEYWORD,segment,REJECT-DROP
+  # Follow 用户行为跟踪
+  - DOMAIN-SUFFIX,posthog.com,REJECT-DROP
+  # Adobe PJ
+  - OR,((DOMAIN,lcs-cops.adobe.io), (DOMAIN,photo.adobe.io)),DIRECT
+  - DOMAIN-SUFFIX,adobe.io,REJECT
+  # >屏蔽QUIC
+  - AND,((DST-PORT,443),(NETWORK,UDP)),REJECT-DROP
+  # 防御
+  - RULE-SET,category-public-tracker,REJECT-DROP # 拒绝公共行为跟踪
+  # 域名路由
+  - RULE-SET,mydomain,直连
+  - RULE-SET,Pt-Domain,PT站点
+  - RULE-SET,tracker-direct,直连
+  - RULE-SET,private-direct,国内网站
+  - RULE-SET,private-proxy,国外网站
+  - RULE-SET,fix-direct,直连
+  - RULE-SET,XPTV,直连
+  - RULE-SET,location_ip,抖快书定位
+  - RULE-SET,private_ip,国内网站,no-resolve
+  - RULE-SET,speedtest,网速测试
+  - RULE-SET,openai,ChatGPT
+  - RULE-SET,category-ai-chat-!cn,AI平台
+  - RULE-SET,telegram,Telegram
+  - RULE-SET,twitter,Twitter
+  - RULE-SET,emby,Emby
+  - RULE-SET,youtube,YouTube
+  - RULE-SET,spotify,Spotify
+  - RULE-SET,netflix,NetFlix
+  - RULE-SET,disney,Disney
+  - RULE-SET,hbo,HBO
+  - RULE-SET,tiktok,TikTok
+  - RULE-SET,github,Github
+  - RULE-SET,onedrive,微软服务
+  - RULE-SET,microsoft@cn,国内网站
+  - RULE-SET,microsoft,微软服务
+  - RULE-SET,instagram,脸书服务
+  - RULE-SET,facebook,脸书服务
+  - RULE-SET,meta,脸书服务
+  - RULE-SET,google,谷歌服务
+  - RULE-SET,apple-cn,国内网站
+  - RULE-SET,apple,苹果服务
+  - RULE-SET,paypal@cn,国内网站
+  - RULE-SET,paypal,货币平台
+  - RULE-SET,category-cryptocurrency,货币平台
+  - RULE-SET,cloudflare-cn,国内网站
+  - RULE-SET,category-games,游戏平台
+  - RULE-SET,category-media-cn,国内网站
+  - RULE-SET,category-media,国际新闻
+  - RULE-SET,category-social-media-!cn,社交平台
+  - RULE-SET,cn_domain,国内网站
+  - RULE-SET,geolocation-!cn,国外网站
+  - DOMAIN-REGEX,^[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+$,漏网之鱼
+  # IP路由
+  - RULE-SET,facebook_ip,脸书服务,no-resolve
+  - RULE-SET,google_ip,谷歌服务,no-resolve
+  - RULE-SET,netflix_ip,NetFlix,no-resolve
+  - RULE-SET,twitter_ip,Twitter,no-resolve
+  - RULE-SET,telegram_ip,Telegram,no-resolve
+  - RULE-SET,cn_ip,国内网站,no-resolve
+  - MATCH,漏网之鱼
