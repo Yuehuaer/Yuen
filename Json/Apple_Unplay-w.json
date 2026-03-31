@@ -68,6 +68,22 @@
     {
       "coverUrl": "http://192.168.21.242:5244/d/download/Unplay/zero-path-to-nowhere.jpg",
       "videoUrl": "http://192.168.21.242:5244/d/download/Unplay/zero-path-to-nowhere.mp4"
+    },
+    {
+      "coverUrl": "http://192.168.21.242:5244/d/download/Unplay/Cyberpunk.jpg",
+      "videoUrl": "http://192.168.21.242:5244/d/download/Unplay/Cyberpunk.mp4"
+    },
+    {
+      "coverUrl": "http://192.168.21.242:5244/d/download/Unplay/Edgerunners.jpg",
+      "videoUrl": "http://192.168.21.242:5244/d/download/Unplay/Edgerunners.mp4"
+    },
+    {
+      "coverUrl": "http://192.168.21.242:5244/d/download/Unplay/Elysia_Honkai_Star_Rail.jpg",
+      "videoUrl": "http://192.168.21.242:5244/d/download/Unplay/Elysia_Honkai_Star_Rail.mp4"
+    },
+    {
+      "coverUrl": "http://192.168.21.242:5244/d/download/Unplay/Mystic_Dual_Eyes.jpg",
+      "videoUrl": "http://192.168.21.242:5244/d/download/Unplay/Mystic_Dual_Eyes.mp4"
     }
   ]
 }
