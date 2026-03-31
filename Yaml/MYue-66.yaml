@@ -13,7 +13,7 @@
 #--------------------------------------------------------------------------------------------
 # 版本更新：
 # 2026-03-12 更新日志：1. 添加了「自动选择」锚点，用于自动选择节点。
-#
+# 2026-03-30 更新日志：1. 优化了规则集的命名和分类，使其更清晰易懂。
 #
 # mihomo 配置--------------------------------------------------------------------------------
 
@@ -108,22 +108,27 @@ dns:
     - 223.5.5.5
     - 119.29.29.29
 # 出站策略
-pr: &pr {type: select, proxies: [🚀 随心所欲, ♻️ 香港自动, 🔯 香港故转, 🛳 香港节点, ♻️ 日本自动, 🔯 日本故转, 🗾 日本节点, ♻️ 狮城自动, 🔯 狮城故转, 🦁 狮城节点, ♻️ 美国自动, 🔯 台湾故转, 🗽 美国节点, ♻️ 自动选择,  直连]}
-aq: &aq {type: select, proxies: [♻️ 台湾自动, ♻️ 日本自动, ♻️ 狮城自动, ♻️ 美国自动, ✋ 指尖逸选, 直连, 🚀 随心所欲, ♻️ 香港自动,]}
-ae: &ae {type: select, proxies: [直连, 🚀 随心所欲]}
-at: &at {type: select, include-all: true, filter: '^(?!.*(直连|港|台|新|日|韩|香港|台湾|新加坡|日本|韩国|美国|🇭🇰|🇼🇸|🇹🇼|🇸🇬|🇯🇵|🇰🇷|🇺🇸|🇬🇧|🇦🇹|🇧🇪|🇨🇿|🇩🇰|🇫🇮|🇫🇷|🇩🇪|🇮🇪|🇮🇹|🇱🇹|🇱🇺|🇳🇱|🇵🇱|🇸🇪|HK|TW|SG|JP|KR|US|GB|CDG|FRA|AMS|MAD|BCN|FCO|MUC|BRU|HKG|TPE|TSA|KHH|SIN|XSP|NRT|HND|KIX|CTS|FUK|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD|LHR|LGW))'}
-av: &av {type: select, proxies: [♻️ 日本自动, 🔯 日本故转, 🗾 日本节点, 直连, ✋ 指尖逸选]}
-ay: &ay {type: select, proxies: [❄️ 雪落无声, 直连, ✋ 指尖逸选]}
-pt: &pt {type: select, proxies: [🚀 随心所欲, 🔯 香港故转, 🔯 日本故转, ♻️ 香港自动, ♻️ 日本自动, ♻️ 美国自动, ♻️ 自动选择, ✋ 指尖逸选, 🛳 香港节点, 🗾 日本节点, 🗽 美国节点, 直连]}
-mm: &mm {type: select, proxies: [♻️ 香港自动, 🔯 香港故转, 🛳 香港节点, ♻️ 自动选择, 🔯 日本故转, 🗾 日本节点, ♻️ 日本自动, 🔯 狮城故转, 🦁 狮城节点, ♻️ 狮城自动, 🔯 台湾故转, 🧋 台湾节点, ♻️ 台湾自动, 🔯 美国故转, 🗽 美国节点, ♻️ 美国自动, ✋ 指尖逸选, 直连]}
+pr: &pr {type: select, proxies: [💫 随心所欲, 🌟 香港自动, 🔯 香港故转, 🛳 香港节点, 🌸 日本自动, 🔯 日本故转, 🗾 日本节点, ☕ 狮城自动, 🔯 狮城故转, 🦁 狮城节点, 🌭 美国自动, 🔯 台湾故转, 🗽 美国节点, ⚡ 自动选择,  直连]}
+aq: &aq {type: select, proxies: [🍍 台湾自动, 🌸 日本自动, ☕ 狮城自动, 🌭 美国自动, ⚜️ 指尖逸选, 直连, 💫 随心所欲, 🌟 香港自动,]}
+ae: &ae {type: select, proxies: [直连, 💫 随心所欲]}
+at: &at {type: select, include-all: true, filter: '^(?!.*(直连|港|台|新|日|香港|台湾|新加坡|日本|美国|🇭🇰|🇼🇸|🇹🇼|🇸🇬|🇯🇵|🇺🇸|🇬🇧|HK|TW|SG|JP|US|GB|HKG|TPE|TSA|KHH|SIN|XSP|NRT|HND|KIX|CTS|FUK|JFK|LAX|ORD|ATL|DFW|SFO|MIA|SEA|IAD)).*$'}
+av: &av {type: select, proxies: [🌸 日本自动, 🔯 日本故转, 🗾 日本节点, 直连, ⚜️ 指尖逸选]}
+ay: &ay {type: select, proxies: [❄️ 雪落无声, 直连, ⚜️ 指尖逸选]}
+pt: &pt {type: select, proxies: [💫 随心所欲, 🔯 香港故转, 🔯 日本故转, 🌟 香港自动, 🌸 日本自动, 🌭 美国自动, ⚡ 自动选择, ⚜️ 指尖逸选, 🛳 香港节点, 🗾 日本节点, 🗽 美国节点, 直连]}
+mm: &mm {type: select, proxies: [⚡ 自动选择, 🌟 香港自动, 🌸 日本自动, ☕ 狮城自动, 🍍 台湾自动, 🌭 美国自动, ⚜️ 指尖逸选, 🔯 香港故转, 🔯 日本故转, 🔯 狮城故转, 🔯 台湾故转, 🔯 美国故转, 🛳 香港节点, 🗾 日本节点, 🦁 狮城节点, 🧋 台湾节点, 🗽 美国节点, 直连]}
 ad: &ad {type: select, include-all: true}
 au: &au {type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "^((?!(直连)).)*$"} # 自动选择
 
 
 proxy-groups:
-  - {name: 🚀 随心所欲, !!merge <<: *mm}
-  - {name: ✋ 指尖逸选, !!merge <<: *ad}
-  - {name: ♻️ 自动选择, !!merge <<: *au}
+  - {name: 💫 随心所欲, !!merge <<: *mm}
+  - {name: ⚜️ 指尖逸选, !!merge <<: *ad}
+  - {name: ⚡ 自动选择, !!merge <<: *au}
+  - {name: 🌟 香港自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(港|HK|(?i)Hong|HKG|香港|🇭🇰))^((?!(台|日|韩|新|深|美|hongxin)).)*$"}
+  - {name: 🌸 日本自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(日|JP\\b|(?i)Japan|NRT|HND|KIX|CTS|FUK|🇯🇵))^((?!(港|台|韩|新|深|美)).)*$"}
+  - {name: ☕ 狮城自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(狮城|新加坡|(?i)Singapore|SG\\b|SGP|SIN|XSP|🇸🇬))^((?!(港|台|日|韩|美|美利坚|USA|Japan|JP|韩国|香港|台湾)).)*$"}
+  - {name: 🍍 台湾自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(台|TW\\b|Taiwan|TPE|KHH|TSA|🇹🇼))^((?!(港|日|韩|新|美)).)*$"}
+  - {name: 🌭 美国自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(美|US\\b|(?i)States|USA|United\\s*States|American|JFK|LAX|SFO|🇺🇸))^((?!(港|台|日|韩|新)).)*$"} 
   - {name: 📥 兰台共储, !!merge <<: *pt}
   - {name: 🎬 影库狂潮, !!merge <<: *ay}
   - {name: 🔞 秘密花园, !!merge <<: *av}
@@ -133,11 +138,6 @@ proxy-groups:
   - {name: 🍎 果园私语, !!merge <<: *ae}
   - {name: 🎯 绝对通行, !!merge <<: *ae}
   - {name: 🐟 漏网之鱼, !!merge <<: *pr}
-  - {name: ♻️ 香港自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(港|HK|(?i)Hong|HKG|香港|🇭🇰))^((?!(台|日|韩|新|深|美|hongxin)).)*$"}
-  - {name: ♻️ 日本自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(日|JP\\b|(?i)Japan|NRT|HND|KIX|CTS|FUK|🇯🇵))^((?!(港|台|韩|新|深|美)).)*$"}
-  - {name: ♻️ 狮城自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(狮城|新加坡|(?i)Singapore|SG\\b|SGP|SIN|XSP|🇸🇬))^((?!(港|台|日|韩|美|美利坚|USA|Japan|JP|韩国|香港|台湾)).)*$"}
-  - {name: ♻️ 台湾自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(台|TW\\b|Taiwan|TPE|KHH|TSA|🇹🇼))^((?!(港|日|韩|新|美)).)*$"}
-  - {name: ♻️ 美国自动, type: url-test, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(美|US\\b|(?i)States|USA|United\\s*States|American|JFK|LAX|SFO|🇺🇸))^((?!(港|台|日|韩|新)).)*$"} 
   - {name: 🔯 香港故转, type: fallback, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(港|HK|(?i)Hong))^((?!(台|日|韩|新|深|美)).)*$"}
   - {name: 🔯 日本故转, type: fallback, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(日|JP|(?i)Japan))^((?!(港|台|韩|新|美)).)*$"}
   - {name: 🔯 狮城故转, type: fallback, include-all: true, tolerance: 20, interval: 300, filter: "(?=.*(狮城|新加坡|(?i)Singapore|SG\\b|SGP))^((?!(港|台|日|韩|美|美利坚|USA|Japan|JP|韩国|香港|台湾)).)*$"}
@@ -195,8 +195,8 @@ rules:
 
 # 代理规则-手动填写-----------------------------------------------------------------------------------
 
-  - DOMAIN,ourbits.club,🚀 随心所欲
-  - DOMAIN-SUFFIX,ourbits.club,🚀 随心所欲
+  - DOMAIN,ourbits.club,💫 随心所欲
+  - DOMAIN-SUFFIX,ourbits.club,💫 随心所欲
   - DOMAIN,lf3-static.bytednsdoc.com,🎯 绝对通行
   - DOMAIN,v5-dy-o-abtest.zjcdn.com,🎯 绝对通行
   - DOMAIN-SUFFIX,amemv.com,🎯 绝对通行
@@ -212,11 +212,11 @@ rules:
   - DOMAIN-SUFFIX,toutiao.com,🎯 绝对通行
   
   - RULE-SET,AA-REJECT,REJECT
-  - RULE-SET,AA-Daili,🚀 随心所欲
+  - RULE-SET,AA-Daili,💫 随心所欲
   - RULE-SET,AA-Emby,🎬 影库狂潮
-  - RULE-SET,AA-HKDaili,♻️ 香港自动
+  - RULE-SET,AA-HKDaili,🌟 香港自动
   - RULE-SET,AA-JapanDaili,🔞 秘密花园
-  - RULE-SET,AA-TwDaili,♻️ 台湾自动
+  - RULE-SET,AA-TwDaili,🍍 台湾自动
   - RULE-SET,AA-XPTV,🎯 绝对通行
   - RULE-SET,AA-Zhilian,🎯 绝对通行
   - RULE-SET,AA-PT,📥 兰台共储
@@ -224,7 +224,7 @@ rules:
   - RULE-SET,Openai,🤯 人工智能
   - RULE-SET,private_domain,🎯 绝对通行
   - RULE-SET,apple_domain,🍎 果园私语
-  - RULE-SET,proxylite,🚀 随心所欲
+  - RULE-SET,proxylite,💫 随心所欲
   - RULE-SET,ai,🤯 人工智能
   - RULE-SET,github_domain,🌏 全球语桥
   - RULE-SET,youtube_domain,🌏 全球语桥
@@ -234,8 +234,8 @@ rules:
   - RULE-SET,speedtest_domain,🌏 全球语桥
   - RULE-SET,telegram_domain,🌏 全球语桥
   - RULE-SET,paypal_domain,🌏 全球语桥
-  - RULE-SET,gfw_domain,🚀 随心所欲
-  - RULE-SET,geolocation-!cn,🚀 随心所欲
+  - RULE-SET,gfw_domain,💫 随心所欲
+  - RULE-SET,geolocation-!cn,💫 随心所欲
   - RULE-SET,cn_domain,🎯 绝对通行
   - RULE-SET,google_ip,🌏 全球语桥,no-resolve
   - RULE-SET,telegram_ip,🌏 全球语桥,no-resolve
