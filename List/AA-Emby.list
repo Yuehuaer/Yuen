@@ -1,9 +1,16 @@
-# Emby 分流
-# Git加速链接：https://gh.catmak.name/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Emby.list ---------------------------------------#
-# Git加速链接：https://git.886.be/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Emby.list  ------------------------------------------#
-# Git加速链接：https://gh-proxy.com/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Emby.list  ----------------------------------------#
-#-------------------------------------------------------------------------------------------------------------------------------------------------------------# 
-# 25.05.04 更新文档
+# ===================================================================================================
+#  🎬 Emby 分流 (Emby Proxy Rules)
+# ===================================================================================================
+#  源地址   : https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Emby.list
+#
+#  [ Git 加速订阅链接 ]
+#  [>] 加速镜像 01: https://gh-proxy.com/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Emby.list
+#  [>] 加速镜像 02: https://gh.catmak.name/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Emby.list
+# ===================================================================================================
+#
+#  更新日期 : 2026-04-02
+# ===================================================================================================
+
 
 DOMAIN,195.201.86.86
 DOMAIN,cc.coemn.com

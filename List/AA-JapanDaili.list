@@ -1,15 +1,18 @@
-# 日本代理分流
-# Git加速链接：https://gh.catmak.name/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-JapanDaili.list ----------------------------------------#
-# Git加速链接：https://git.886.be/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-JapanDaili.list  -------------------------------------------#
-# Git加速链接：https://gh-proxy.com/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-JapanDaili.list  -----------------------------------------#
-#--------------------------------------------------------------------------------------------------------------------------------------------------------------------# 
-# 源地址：
-# 25.06.13 更新文档
+# ===================================================================================================
+#  🇯🇵 日本代理分流 (Japan Proxy Rules)
+# ===================================================================================================
+#  源地址   : https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-JapanDaili.list
+#
+#  [ Git 加速订阅链接 ]
+#  [>] 加速镜像 01: https://gh-proxy.com/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-JapanDaili.list
+#  [>] 加速镜像 02: https://gh.catmak.name/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-JapanDaili.list
+# ===================================================================================================
+#
+#  更新日期 : 2026-04-02
+# ===================================================================================================
 
-# Claude Ai软件
-DOMAIN,cdn.usefathom.com
-DOMAIN-SUFFIX,anthropic.com
-DOMAIN-SUFFIX,claude.ai
+
+
 
 #爱壹帆
 DOMAIN-SUFFIX,m10.iyf.tv
@@ -36,6 +39,21 @@ DOMAIN-KEYWORD,mgstage.com
 DOMAIN-SUFFIX,wheel-soft.com
 IP-CIDR,125.6.189.7/32,no-resolve
 IP-CIDR,203.104.209.7/32,no-resolve
+DOMAIN-SUFFIX,.jp
+DOMAIN-SUFFIX,1pondo.tv
+DOMAIN-SUFFIX,avbase.net
+DOMAIN-SUFFIX,caribbeancom.com
+DOMAIN-SUFFIX,aventertainments.com
+DOMAIN-SUFFIX,caribbeancompr.com
+DOMAIN-SUFFIX,fc2.com
+DOMAIN-SUFFIX,heydouga.com
+DOMAIN-SUFFIX,jav321.com
+DOMAIN-SUFFIX,javfree.me
+DOMAIN-SUFFIX,javbus.com
+DOMAIN-SUFFIX,tokyo-hot.com
+DOMAIN-SUFFIX,theporndb.net
+DOMAIN-SUFFIX,javten.com
+DOMAIN-SUFFIX,javlibrary.com
 
 # Amazon-18
 DOMAIN-SUFFIX,a2z.com

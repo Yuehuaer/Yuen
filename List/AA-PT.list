@@ -1,16 +1,17 @@
-# PT站点代理分流
-# Git加速链接：https://gh.catmak.name/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-PT.list--------------------------------------------#
-# Git加速链接：https://git.886.be/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-PT.list------------------------------------------------#
-# Git加速链接：https://gh-proxy.com/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-PT.list  --------------------------------------------#
-#---------------------------------------------------------------------------------------------------------------------------------------------------------------# 
+# ===================================================================================================
+#  🧲 PT 站点代理分流 (PT Proxy Rules)
+# ===================================================================================================
+#  源地址   : https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-PT.list
+#
+#  [ Git 加速订阅链接 ]
+#  [>] 加速镜像 01: https://gh-proxy.com/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-PT.list
+#  [>] 加速镜像 02: https://gh.catmak.name/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-PT.list
+# ===================================================================================================
+#
+#  更新日期 : 2026-04-02
+# ===================================================================================================
 
 
-
-# NAME: PrivateTracker
-# AUTHOR: blackmatrix7
-# Modify:iovejieba
-# REPO: https://github.com/blackmatrix7/ios_rule_script
-# UPDATED: 2025-04-15 20:35:11
 DOMAIN,agsvpt.trackers.work
 DOMAIN,www.agsvpt.com
 DOMAIN,6ahddutb1ucc3cp.ru
@@ -246,13 +247,8 @@ DOMAIN,10.rarbg.com
 DOMAIN,12.rarbg.me
 DOMAIN,sukebei.tracker.wf
 DOMAIN,tracker.archlinux.org.theoks.net
-DOMAIN,tracker.openbittorrent.com
 DOMAIN,tracker.tasvideos.org
 DOMAIN,tracker.leech.ie
-DOMAIN,tracker.opentrackr.org
-DOMAIN,tracker.coppersurfer.tk
-DOMAIN,tracker.internetwarriors.net
-DOMAIN,open.stealth.si
 DOMAIN,anidex.moe
 DOMAIN,freerainbowtables.com
 DOMAIN,www.freerainbowtables.com
@@ -262,7 +258,6 @@ DOMAIN,www.thetradersden.org
 DOMAIN,udp-tracker.shittyurl.org
 DOMAIN,tracker.shittyurl.org
 DOMAIN,bt.firebit.org
-DOMAIN,exodus.desync.com
 DOMAIN,tracker.torrent.eu.org
 DOMAIN,tracker.t-rb.org
 DOMAIN,tracker.therarbg.com
@@ -270,7 +265,6 @@ DOMAIN,tracker.tamersunion.org
 DOMAIN,tracker.thinelephant.org
 DOMAIN,tracker.theoks.net
 DOMAIN,tracker.tiny-vps.com
-DOMAIN,tracker.torrent.eu.org
 DOMAIN,tracker.torrust-demo.com
 DOMAIN,tracker.tryhackx.org
 DOMAIN,tracker.trackerfix.com
@@ -284,8 +278,6 @@ DOMAIN,tracker.zond.org
 DOMAIN,tracker1.itzmx.com
 DOMAIN,tracker1.ctix.cn
 DOMAIN,tracker1.myporn.club
-DOMAIN,tracker2.dler.org
-DOMAIN,tracker2.itzmx.com
 DOMAIN,tracker3.itzmx.com
 DOMAIN,tracker4.itzmx.com
 DOMAIN,trackers.mlsub.net
@@ -312,7 +304,6 @@ DOMAIN,www.all4nothin.net
 DOMAIN,www.peckservers.com
 DOMAIN,www.torrent.eu.org
 DOMAIN,tracker.token.ro
-DOMAIN,tracker.torrent.eu.org
 DOMAIN,www.wareztorrent.com
 DOMAIN,z.mercax.com
 DOMAIN-SUFFIX,m-team.io
@@ -422,7 +413,6 @@ DOMAIN-SUFFIX,leaguehd.com
 DOMAIN-SUFFIX,lemonhd.org
 DOMAIN-SUFFIX,lemonhd.club
 DOMAIN-SUFFIX,lztr.me
-DOMAIN-SUFFIX,m-team.cc
 DOMAIN-SUFFIX,madsrevolution.net
 DOMAIN-SUFFIX,moecat.best
 DOMAIN-SUFFIX,morethan.tv
@@ -460,7 +450,6 @@ DOMAIN-SUFFIX,sjtu.edu.cn
 DOMAIN-SUFFIX,skyey2.com
 DOMAIN-SUFFIX,soulvoice.club
 DOMAIN-SUFFIX,carpt.net
-DOMAIN-SUFFIX,btschool.club
 DOMAIN-SUFFIX,springsunday.net
 DOMAIN-SUFFIX,tju.pt
 DOMAIN-SUFFIX,rousipt.com
@@ -508,3 +497,61 @@ DOMAIN-KEYWORD,ourbits
 IP-CIDR,207.241.226.111/32,no-resolve
 IP-CIDR,207.241.231.226/32,no-resolve
 IP-CIDR,52.58.128.163/32,no-resolve
+DOMAIN,004430.xyz
+DOMAIN,aboutbeautifulgallopinghorsesinthegreenpasture.online
+DOMAIN,admin.52ywp.com
+DOMAIN,bughome.de
+DOMAIN,cny.fan
+DOMAIN,http1.torrust-tracker-demo.com
+DOMAIN,lucke.fenesisu.moe
+DOMAIN,node01.madtia.cc
+DOMAIN,node01.trackerstatus.live
+DOMAIN,ns575949.ip-51-222-82.net
+DOMAIN,open.trackerlist.xyz
+DOMAIN,opentracker.8880085.xyz
+DOMAIN,rekcart.duckdns.org
+DOMAIN,s1130639.ha009.t.mydomain.zone
+DOMAIN,s1130642.ha014.t.mydomain.zone
+DOMAIN,shahidrazi.online
+DOMAIN,speedtest.iperson.xyz
+DOMAIN,t.213891.xyz
+DOMAIN,torrent.hificode.in
+DOMAIN,torrentclub.online
+DOMAIN,tr.abiir.top
+DOMAIN,tr.highstar.shop
+DOMAIN,tracker-de-2.cutie.dating
+DOMAIN,tracker-zhuqiy.xn--1r3au8b.space
+DOMAIN,tracker.004430.xyz
+DOMAIN,tracker.1h.is
+DOMAIN,tracker.7471.top
+DOMAIN,tracker.bluefrog.pw
+DOMAIN,tracker.cutie.dating
+DOMAIN,tracker.darkness.services
+DOMAIN,tracker.dhitechnical.com
+DOMAIN,tracker.ducks.party
+DOMAIN,tracker.exe.in.th
+DOMAIN,tracker.flatuslifir.is
+DOMAIN,tracker.ghostchu-services.top
+DOMAIN,tracker.huadongblower.xyz
+DOMAIN,tracker.iperson.xyz
+DOMAIN,tracker.ixuexi.click
+DOMAIN,tracker.manager.v6.navy
+DOMAIN,tracker.nekomi.cn
+DOMAIN,tracker.opentorrent.top
+DOMAIN,tracker.playground.ru
+DOMAIN,tracker.plx.im
+DOMAIN,tracker.qingwapt.org
+DOMAIN,tracker.t-1.org
+DOMAIN,tracker.tritan.gg
+DOMAIN,tracker.tvunderground.org.ru
+DOMAIN,tracker.xn--djrq4gl4hvoi.top
+DOMAIN,tracker.yggleak.top
+DOMAIN,tracker.zhuqiy.dgj055.icu
+DOMAIN,tracker3.ctix.cn
+DOMAIN,uabits.today
+DOMAIN,udp1.torrust-tracker-demo.com
+DOMAIN,utracker.ghostchu-services.top
+DOMAIN,www.nartlof.com
+DOMAIN-SUFFIX,hhanclub.top
+DOMAIN-SUFFIX,icetorrent.org
+DOMAIN-SUFFIX,torrentleech.org

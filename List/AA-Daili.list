@@ -1,11 +1,19 @@
-# 强制代理列表，来自个人收集
-# Git加速链接：https://gh.catmak.name/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Daili.list --------------------------------------#
-# Git加速链接：https://git.886.be/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Daili.list  -----------------------------------------#
-# Git加速链接：https://gh-proxy.com/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Daili.list  ---------------------------------------#
-#-------------------------------------------------------------------------------------------------------------------------------------------------------------# 
+# ===================================================================================================
+#  🌐 强制代理列表 - 个人收集 (Global Proxy Rules)
+# ===================================================================================================
+#  源地址   : https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Daili.list
+#
+#  [ Git 加速订阅链接 ]
+#  [>] 加速镜像 01: https://gh-proxy.com/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Daili.list
+#  [>] 加速镜像 02: https://gh.catmak.name/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Daili.list
+# ===================================================================================================
+#
+#  更新日期 : 2026-04-02
+# ===================================================================================================
 
 
-# 常用域名
+# ================================== 常用域名 ========================================================
+
 DOMAIN,qb.yuehua.site
 DOMAIN,tr.yuehua.site
 DOMAIN,mp.yuehua.site
@@ -27,14 +35,14 @@ DOMAIN,mh.yuehua.site
 DOMAIN,img-tgbed.pages.dev
 DOMAIN-SUFFIX,img-tgbed.pages.dev
 
-
+# ================================== 常用网站 ========================================================
 
 DOMAIN-SUFFIX,invite.stotik.com
 DOMAIN-SUFFIX,linux.do
+
 # 青鸟bot验证
 DOMAIN-SUFFIX,tgbot.lyrebirdemby.com
 
-DOMAIN-SUFFIX,avbase.net
 # cf bark通知
 DOMAIN-SUFFIX,bark.yuehuakq.workers.dev
 
@@ -50,17 +58,17 @@ DOMAIN-SUFFIX,qichiyu.com
 # Pi
 DOMAIN-SUFFIX,minepi.com
 
-#-------------------------------------------------------------------------------------------------------------------------------------------------------------#
-# PT站点
-# 飞天拉面
-DOMAIN-SUFFIX,fsm.name
-DOMAIN,fsm.name
+# ================================== PT网站 ========================================================
+
+
 # 观众
 DOMAIN-SUFFIX,audiences.me
 # rousi
+
 DOMAIN-SUFFIX,rousi.zip
 DOMAIN,rousi.zip
 # 我堡
+
 DOMAIN-SUFFIX,ourbits.club
 DOMAIN,ourbits.club
 

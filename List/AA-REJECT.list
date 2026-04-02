@@ -1,8 +1,16 @@
-# 拦截列表，来自个人收集
-# Git加速链接：https://gh.catmak.name/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/AA-REJECT.list --------------------------------------------#
-# Git加速链接：https://git.886.be/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-REJECT.list  ------------------------------------------#
-# Git加速链接：https://gh-proxy.com/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-REJECT.list  ----------------------------------------#
-#---------------------------------------------------------------------------------------------------------------------------------------------------------------# 
+# ===================================================================================================
+#  🚫 个人收集拦截列表 (Reject/Adblock Rules)
+# ===================================================================================================
+#  源地址   : https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-REJECT.list
+#
+#  [ Git 加速订阅链接 ]
+#  [>] 加速镜像 01: https://gh-proxy.com/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-REJECT.list
+#  [>] 加速镜像 02: https://gh.catmak.name/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-REJECT.list
+# ===================================================================================================
+#
+#  更新日期 : 2026-04-02
+# ===================================================================================================
+
 
 # 游戏广告
 DOMAIN-SUFFIX,chatmate.tv

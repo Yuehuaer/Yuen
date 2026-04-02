@@ -1,22 +1,17 @@
-# 直连规则
-# Git加速链接：https://gh.catmak.name/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Zhilian.list ----------------------------------------#
-# Git加速链接：https://git.886.be/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Zhilian.list  -------------------------------------------#
-# Git加速链接：https://gh-proxy.com/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Zhilian.list  -----------------------------------------#
-#-----------------------------------------------------------------------------------------------------------------------------------------------------------------# 
-# 25.06.12 更新文档#-----------------------------------------------------------------------------------------------------------------------------------------------#
-
-# 规则类型	                    示例	                  匹配 baidu.com	匹配 www.baidu.com	匹配 tieba.baidu.com	误匹配风险
-# DOMAIN-SUFFIX,baidu.com	    所有 *.baidu.com	      ✅	            ✅	                ✅	                   低
-# DOMAIN,baidu.com	          仅 baidu.com	          ✅	           	❌		              ❌		            	   无
-# DOMAIN-KEYWORD,baidu	      含 baidu 的域名	        ✅	           	✅	               	✅	                   高
-# DOMAIN-PREFIX,baidu	        开头为 baidu 的域名	    ✅	           	❌	               	❌	                   中
-# DOMAIN,www.baidu.com	      仅 www.baidu.com	      ❌	           	✅	               	❌                     无
-
+# ===================================================================================================
+#  🎯 直连规则 (Direct Rules)
+# ===================================================================================================
+#  源地址   : https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Zhilian.list
+#
+#  [ Git 加速订阅链接 ]
+#  [>] 加速镜像 01: https://gh-proxy.com/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Zhilian.list
+#  [>] 加速镜像 02: https://gh.catmak.name/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Zhilian.list
+# ===================================================================================================
+#
+#  更新日期 : 2026-04-02
+# ===================================================================================================
 
 
-
-
-#-----------------------------------------------------------------------------------------------------------------------------------------------------------------#
 # 游戏网站
 DOMAIN-SUFFIX,koyso.com
 DOMAIN,koyso.to
@@ -33,7 +28,7 @@ DOMAIN,38.255.16.237
 
 # 自有域名
 DOMAIN,yue.yuehua.site
-DOMAIN,yue2.yuehua.site
+DOMAIN,229830.xyz
 
 # 樱花动漫网
 DOMAIN-SUFFIX,skr.skr2.cc
