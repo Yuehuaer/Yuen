@@ -1,0 +1,13 @@
+{
+    "name": "cc11图标",
+    "description": "cc11的图标订阅",
+    "icons": [
+        {
+            "name": "1.1.1.1",
+            "url": "https://www.helloimg.com/i/2025/07/17/68785d4f86932.png"
+        },
+        {   "name": "cc",
+            "url": "https://fastly.jsdelivr.net/gh/Yuehuaer/Yuen@main/icon/APP/24.png"
+        }
+    ]
+}
