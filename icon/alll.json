@@ -1,0 +1,28 @@
+{
+    "name": "慕夏11图标",
+    "description": "慕夏的11图标订阅",
+    "icons": [
+
+        {
+            "name": "1.1.1.1",
+            "url": "https://gitee.com/yuehuaer/icon/raw/master/icon/Apple.png"
+        },
+        {
+            "name": "1.1.1.2",
+            "url": "https://gitee.com/yuehuaer/icon/raw/master/icon/CFMOTO.png"
+        },
+        {
+            "name": "1.1.1.3",
+            "url": "https://gitee.com/yuehuaer/icon/raw/master/icon/aliyun.png"
+        },
+        {
+            "name": "1.1.1.4",
+            "url": "https://gitee.com/yuehuaer/icon/raw/master/icon/bilibili.png"
+        },
+        {
+            "name": "1.1.1.5",
+            "url": "https://gitee.com/yuehuaer/icon/raw/master/icon/dd.png"
+        }
+
+    ]
+}
