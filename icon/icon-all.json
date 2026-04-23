@@ -3,12 +3,12 @@
     "description": "慕夏的图标订阅",
     "icons": [
         {
-            "name": "Apple",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/Apple.png"
-        },
-        {
             "name": "CFMOTO",
             "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/CFMOTO.png"
+        },
+        {
+            "name": "Apple",
+            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/Apple.png"
         },
         {
             "name": "Docker",
