@@ -34,29 +34,56 @@ DOMAIN,amm.yuehua.site
 DOMAIN,mh.yuehua.site
 DOMAIN,img-tgbed.pages.dev
 DOMAIN-SUFFIX,img-tgbed.pages.dev
-DOMAIN,229830.xyz
-DOMAIN,by.229830.xyz
-DOMAIN,qb.229830.xyz
-DOMAIN,tr.229830.xyz
-DOMAIN,mp.229830.xyz
-DOMAIN,ts.229830.xyz
-DOMAIN,e.229830.xyz
-DOMAIN,lucky.229830.xyz
-DOMAIN,f.229830.xyz
-DOMAIN,av.229830.xyz
-DOMAIN,is.229830.xyz
-DOMAIN,a.229830.xyz
-DOMAIN,g.229830.xyz
-DOMAIN,gx.229830.xyz
-DOMAIN,al.229830.xyz
-DOMAIN,msgo.229830.xyz
-DOMAIN,op.229830.xyz
-DOMAIN,ya.229830.xyz
-DOMAIN,amm.229830.xyz
-DOMAIN,mh.229830.xyz
+# DOMAIN,229830.xyz
+# DOMAIN,by.229830.xyz
+# DOMAIN,qb.229830.xyz
+# DOMAIN,tr.229830.xyz
+# DOMAIN,mp.229830.xyz
+# DOMAIN,ts.229830.xyz
+# DOMAIN,e.229830.xyz
+# DOMAIN,lucky.229830.xyz
+# DOMAIN,f.229830.xyz
+# DOMAIN,av.229830.xyz
+# DOMAIN,is.229830.xyz
+# DOMAIN,a.229830.xyz
+# DOMAIN,g.229830.xyz
+# DOMAIN,gx.229830.xyz
+# DOMAIN,al.229830.xyz
+# DOMAIN,msgo.229830.xyz
+# DOMAIN,op.229830.xyz
+# DOMAIN,ya.229830.xyz
+# DOMAIN,amm.229830.xyz
+# DOMAIN,mh.229830.xyz
 DOMAIN,img-tgbed.pages.dev
 DOMAIN-SUFFIX,img-tgbed.pages.dev
 
+# 脚本 
+
+DOMAIN-SUFFIX, helloimg.com
+DOMAIN-SUFFIX, docker.com
+DOMAIN-SUFFIX, skr2.cc
+DOMAIN-SUFFIX, wzrqxio.com
+DOMAIN-SUFFIX, hitokoto.cn
+DOMAIN-SUFFIX, 16k.club
+DOMAIN-SUFFIX, 1st.moe
+DOMAIN-SUFFIX, fulitu.cc
+DOMAIN-SUFFIX, wsrv.nl
+DOMAIN-SUFFIX, hentaiclub.net
+DOMAIN-SUFFIX, jk.rs
+DOMAIN-SUFFIX, lolicon.app
+DOMAIN-SUFFIX, lsp.pw
+DOMAIN-SUFFIX, misskon.com
+DOMAIN-SUFFIX, wp.com
+DOMAIN-SUFFIX, nekos.best
+DOMAIN-SUFFIX, qhsou.com
+DOMAIN-SUFFIX, javday.app
+DOMAIN-SUFFIX, lolimi.cn
+DOMAIN-SUFFIX, onexiaolaji.cn
+DOMAIN-SUFFIX, xxapi.cn
+DOMAIN-SUFFIX, youfreex.com
+DOMAIN-SUFFIX, tuzac.com
+DOMAIN-SUFFIX, kkc3.com
+DOMAIN-SUFFIX, 876512.xyz
 
 
 
