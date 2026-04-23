@@ -1,0 +1,26 @@
+{
+    "name": "慕夏图标",
+    "description": "方寸之间，遇见美好。",
+    "icons": [
+        {
+            "name": "icon_01",
+            "url": "https://img.229830.xyz/file/AgACAgEAAyEGAATdFJTpAAICpmnpzh_fP_2xDynYbcNFM5Op9bbsAAILDGsb5QZQR2JQGbT4FV32AQADAgADbQADOwQ.png"
+        },
+        {
+            "name": "icon_02",
+            "url": "https://img.229830.xyz/file/AgACAgEAAyEGAATdFJTpAAICpGnpzh2pBnZGhd4965DFUp7rZ4cFAAIKDGsb5QZQR0D_9PT6K-6pAQADAgADbQADOwQ.png"
+        },
+        {
+            "name": "icon_03",
+            "url": "https://img.229830.xyz/file/AgACAgEAAyEGAATdFJTpAAIComnpzhs8hVd0Ixk1x3827fqRz5yiAAIJDGsb5QZQR2v6F1Wazu8iAQADAgADbQADOwQ.png"
+        },
+        {
+            "name": "icon_04",
+            "url": "https://img.229830.xyz/file/AgACAgEAAyEGAATdFJTpAAICoGnpzhi2SM2_rKPefXczTa8HvybWAAIIDGsb5QZQRx5lQeW63PreAQADAgADbQADOwQ.png"
+        },
+        {
+            "name": "icon_05",
+            "url": "https://img.229830.xyz/file/AgACAgEAAyEGAATdFJTpAAICnmnpzhZ4UyiX8XQPETMiYhjLC98LAAIHDGsb5QZQR8AWuWdO8aY-AQADAgADbQADOwQ.png"
+        }
+    ]
+}
