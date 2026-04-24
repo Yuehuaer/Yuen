@@ -8,7 +8,7 @@
 #  [>] 加速镜像 02: https://gh.catmak.name/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Daili.list
 # ===================================================================================================
 #
-#  更新日期 : 2026-04-02
+#  更新日期 : 2026-04-24
 # ===================================================================================================
 
 
@@ -35,6 +35,9 @@ DOMAIN,mh.yuehua.site
 DOMAIN,img-tgbed.pages.dev
 DOMAIN-SUFFIX,img-tgbed.pages.dev
 DOMAIN,img.229830.xyz
+DOMAIN,bark.229830.xyz
+
+
 # DOMAIN,229830.xyz
 # DOMAIN,by.229830.xyz
 # DOMAIN,qb.229830.xyz
