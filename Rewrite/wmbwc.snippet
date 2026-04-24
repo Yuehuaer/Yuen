@@ -3,14 +3,16 @@
 #!author=Yuehuaer
 #!icon=https://img.229830.xyz/file/AgACAgEAAyEGAATdFJTpAAIC2mnpz8uUMQYstnlYaunujDbW2zqiAAIlDGsb5QZQR6gFP_NM6wYAAQEAAwIAA20AAzsE.png
 #!raw-url=https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/Rewrite/wmbwc.snippet
-#!date=undefined
 #############################################
 
 
-# 去开屏
-host-suffix, ad.gameley.com, reject
-host-suffix, zlsdk.1rtb.net, reject
+# 歪麦霸王餐 - 拦截神策与微信埋点
+^https?:\/\/clklog\.waimaimingtang\.com url reject
+^https?:\/\/test-clklog\.waimaimingtang\.com url reject
+^https?:\/\/work\.weixin\.qq\.com\/wework_admin\/report url reject
 
-https:\/\/this-is-an-example\.com\/example\/ url reject-dict
+# 歪麦霸王餐 - 核心接口解密与广告抹除
+^https?:\/\/.*waimaimingtang\.com\/api\/v2\/index\/newServiceConfig url script-response-body https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/Adblock/waimai_ad_block.js
 
-hostname = this-is-an-example.com
+
+hostname = *.waimaimingtang.com, work.weixin.qq.com
