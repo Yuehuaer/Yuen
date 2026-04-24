@@ -38,17 +38,26 @@ function encrypt(plaintext) {
 // 主逻辑
 if ($response.body) {
     try {
-        let obj = JSON.parse($response.body); // 挪到 try 里面
+        let obj = JSON.parse($response.body);
         if (obj.data) {
             // 1. 解密数据
             let decryptedData = decrypt(obj.data);
             let dataObj = JSON.parse(decryptedData);
 
-            const adKeys = ['adv', 'ads', 'banner', 'popup', 'splash', 'float_window', 'notice'];
+            // 2. 暴力抹除所有已知的广告节点
+            const adKeys = [
+                'adv', 'ads', 'banner', 'popup', 'splash', 'float_window', 'notice',
+                // --- 下面是 Tare 刚扒出来的核心广告字段 ---
+                'homeBannerAdsList', 'indexTopBannerList', 
+                'banner3List', 'banner4List', 'banner5List', 'banner6List',
+                'valueAddFirstBannerList1', 'valueAddFirstBannerList2', 'valueAddFirstBannerList3',
+                'valueMiddleBannerList', 'rightDownBannerList', 'topActivityBannerList', 'presonalCenterBannerAdsList'
+            ];
+            
             adKeys.forEach(key => {
                 if (dataObj.hasOwnProperty(key)) {
                     if (Array.isArray(dataObj[key])) {
-                        dataObj[key] = []; 
+                        dataObj[key] = []; // 只要是数组，全给清空
                     } else if (typeof dataObj[key] === 'boolean') {
                         dataObj[key] = false; 
                     } else {
@@ -57,13 +66,9 @@ if ($response.body) {
                 }
             });
 
-            if (dataObj.config) {
-                dataObj.config.show_popup = false;
-                dataObj.config.ad_enabled = "0";
-            }
+            console.log("歪麦广告拦截成功，抹除节点，重新加密...");
 
-            console.log("歪麦广告拦截成功，重新加密...");
-
+            // 3. 重新加密并回填
             let modifiedDataStr = JSON.stringify(dataObj);
             obj.data = encrypt(modifiedDataStr);
             
@@ -72,7 +77,6 @@ if ($response.body) {
             $done({});
         }
     } catch (e) {
-        // 这样不管是 JSON 解析失败还是解密失败，都能捕获到，不会导致网络请求卡死
         console.log("解析或解密失败: " + e);
         $done({});
     }

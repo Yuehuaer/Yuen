@@ -6,13 +6,16 @@
 #############################################
 
 
-# 歪麦霸王餐 - 拦截神策与微信埋点
+# 1. 拦截神策与微信埋点
 ^https?:\/\/clklog\.waimaimingtang\.com url reject
 ^https?:\/\/test-clklog\.waimaimingtang\.com url reject
 ^https?:\/\/work\.weixin\.qq\.com\/wework_admin\/report url reject
 
-# 歪麦霸王餐 - 核心接口解密与广告抹除
-^https?:\/\/.*waimaimingtang\.com\/api\/v2\/index\/newServiceConfig url script-response-body https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/Adblock/waimai_ad_block.js
+# 2. 核心接口解密与广告抹除 (旧加密接口，使用JS脚本)
+^https?:\/\/.*waimaimingtang\.com\/api\/v2\/index$ url script-response-body https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/Adblock/waimai_ad_block.js
+^https?:\/\/.*waimaimingtang\.com\/api\/v2\/index\/grzxy\/index$ url script-response-body https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/Adblock/waimai_ad_block.js
 
+# 3. 首页新加密广告接口 (动态加密太复杂，先尝试直接暴力 Reject)
+^https?:\/\/.*waimaimingtang\.com\/bwc\/waimaimt-web-bwc\/baseIndex\/getBannerList url reject
 
 hostname = *.waimaimingtang.com, work.weixin.qq.com
