@@ -2,7 +2,6 @@
     "name": "慕夏图标",
     "description": "慕夏的图标订阅",
     "icons": [
-
         {
             "name": "1.1.1.1",
             "url": "https://www.helloimg.com/i/2025/07/17/68785d4f86932.png"
@@ -124,160 +123,148 @@
             "url": "https://www.helloimg.com/i/2025/07/14/6874a61d627bf.png"
         },
         {
-            "name": "Apple",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/Apple.png"
-        },
-        {
-            "name": "CFMOTO",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/CFMOTO.png"
-        },
-        {
-            "name": "Docker",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/Docker.png"
-        },
-        {
-            "name": "Dockerb",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/Dockerb.png"
-        },
-        {
-            "name": "KFC",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/KFC.png"
-        },
-        {
-            "name": "LYMPlayer",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/LYMPlayer.png"
-        },
-        {
-            "name": "PingMe",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/PingMe.png"
-        },
-        {
-            "name": "Stay",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/Stay.png"
-        },
-        {
-            "name": "Steam",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/Steam.png"
-        },
-        {
-            "name": "TestFlight",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/TestFlight.png"
-        },
-        {
-            "name": "WeTalk",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/WeTalk.png"
-        },
-        {
-            "name": "aliyun",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/aliyun.png"
-        },
-        {
-            "name": "bilibili",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/bilibili.png"
-        },
-        {
-            "name": "dd",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/dd.png"
-        },
-        {
-            "name": "ddjy",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/ddjy.png"
-        },
-        {
-            "name": "dingshi",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/dingshi.png"
-        },
-        {
-            "name": "dm",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/dm.png"
-        },
-        {
-            "name": "fanju",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/fanju.png"
-        },
-        {
-            "name": "fanzu",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/fanzu.png"
-        },
-        {
-            "name": "gd",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/gd.png"
-        },
-        {
-            "name": "gotab",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/gotab.png"
-        },
-        {
-            "name": "heoliao",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/heoliao.png"
-        },
-        {
-            "name": "iios",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/iios.png"
-        },
-        {
-            "name": "jtc",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/jtc.png"
-        },
-        {
-            "name": "lanjie",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/lanjie.png"
-        },
-        {
-            "name": "mdl",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/mdl.png"
-        },
-        {
-            "name": "mxbc",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/mxbc.png"
-        },
-        {
-            "name": "my",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/my.png"
-        },
-        {
-            "name": "pp",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/pp.png"
-        },
-        {
-            "name": "tonghs",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/tonghs.png"
-        },
-        {
-            "name": "toutiao",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/toutiao.png"
-        },
-        {
-            "name": "waimai",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/waimai.png"
-        },
-        {
-            "name": "weibo",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/weibo.png"
-        },
-        {
-            "name": "xiaocan",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/xiaocan.png"
+            "name": "zuimei",
+            "url": "https://img.229830.xyz/file/zuimei.png"
         },
         {
             "name": "yinghua",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/yinghua.png"
+            "url": "https://img.229830.xyz/file/yinghua.png"
         },
         {
-            "name": "zuimei",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/APP/zuimei.png"
+            "name": "xiaocan",
+            "url": "https://img.229830.xyz/file/xiaocan.png"
         },
         {
-            "name": "cywl",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/GM/cywl.png"
+            "name": "wetalk",
+            "url": "https://img.229830.xyz/file/wetalk.png"
         },
         {
-            "name": "xymm",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/GM/xymm.png"
+            "name": "weibo",
+            "url": "https://img.229830.xyz/file/weibo.png"
         },
         {
-            "name": "xyxe",
-            "url": "https://raw.githubusercontent.com/Yuehuaer/Yuen/main/icon/GM/xyxe.png"
+            "name": "waimai",
+            "url": "https://img.229830.xyz/file/waimai.png"
+        },
+        {
+            "name": "toutiao",
+            "url": "https://img.229830.xyz/file/toutiao.png"
+        },
+        {
+            "name": "tonghs",
+            "url": "https://img.229830.xyz/file/tonghs.png"
+        },
+        {
+            "name": "testflight",
+            "url": "https://img.229830.xyz/file/testflight.png"
+        },
+        {
+            "name": "steam",
+            "url": "https://img.229830.xyz/file/steam.png"
+        },
+        {
+            "name": "stay",
+            "url": "https://img.229830.xyz/file/stay.png"
+        },
+        {
+            "name": "pp",
+            "url": "https://img.229830.xyz/file/pp.png"
+        },
+        {
+            "name": "pingme",
+            "url": "https://img.229830.xyz/file/pingme.png"
+        },
+        {
+            "name": "my",
+            "url": "https://img.229830.xyz/file/my.png"
+        },
+        {
+            "name": "mxbc",
+            "url": "https://img.229830.xyz/file/mxbc.png"
+        },
+        {
+            "name": "mdl",
+            "url": "https://img.229830.xyz/file/mdl.png"
+        },
+        {
+            "name": "lymplayer",
+            "url": "https://img.229830.xyz/file/lymplayer.png"
+        },
+        {
+            "name": "lanjie",
+            "url": "https://img.229830.xyz/file/lanjie.png"
+        },
+        {
+            "name": "kfc",
+            "url": "https://img.229830.xyz/file/kfc.png"
+        },
+        {
+            "name": "jtc",
+            "url": "https://img.229830.xyz/file/jtc.png"
+        },
+        {
+            "name": "iios",
+            "url": "https://img.229830.xyz/file/iios.png"
+        },
+        {
+            "name": "heoliao",
+            "url": "https://img.229830.xyz/file/heoliao.png"
+        },
+        {
+            "name": "gotab",
+            "url": "https://img.229830.xyz/file/gotab.png"
+        },
+        {
+            "name": "gd",
+            "url": "https://img.229830.xyz/file/gd.png"
+        },
+        {
+            "name": "fanzu",
+            "url": "https://img.229830.xyz/file/fanzu.png"
+        },
+        {
+            "name": "fanju",
+            "url": "https://img.229830.xyz/file/fanju.png"
+        },
+        {
+            "name": "dockerb",
+            "url": "https://img.229830.xyz/file/dockerb.png"
+        },
+        {
+            "name": "docker",
+            "url": "https://img.229830.xyz/file/docker.png"
+        },
+        {
+            "name": "dm",
+            "url": "https://img.229830.xyz/file/dm.png"
+        },
+        {
+            "name": "dingshi",
+            "url": "https://img.229830.xyz/file/dingshi.png"
+        },
+        {
+            "name": "ddjy",
+            "url": "https://img.229830.xyz/file/ddjy.png"
+        },
+        {
+            "name": "dd",
+            "url": "https://img.229830.xyz/file/dd.png"
+        },
+        {
+            "name": "cfmoto",
+            "url": "https://img.229830.xyz/file/cfmoto.png"
+        },
+        {
+            "name": "bilibili",
+            "url": "https://img.229830.xyz/file/bilibili.png"
+        },
+        {
+            "name": "apple",
+            "url": "https://img.229830.xyz/file/apple.png"
+        },
+        {
+            "name": "aliyun",
+            "url": "https://img.229830.xyz/file/aliyun.png"
         }
     ]
 }
