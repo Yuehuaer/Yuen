@@ -8,7 +8,7 @@
 #  [>] 加速镜像 02: https://gh.catmak.name/https://raw.githubusercontent.com/Yuehuaer/Yuen/refs/heads/main/List/AA-Daili.list
 # ===================================================================================================
 #
-#  更新日期 : 2026-04-24
+#  更新日期 : 2026-04-30
 # ===================================================================================================
 
 
@@ -58,8 +58,6 @@ DOMAIN,bark.229830.xyz
 # DOMAIN,ya.229830.xyz
 # DOMAIN,amm.229830.xyz
 # DOMAIN,mh.229830.xyz
-DOMAIN,img-tgbed.pages.dev
-DOMAIN-SUFFIX,img-tgbed.pages.dev
 
 # 脚本 
 
@@ -88,7 +86,8 @@ DOMAIN-SUFFIX,youfreex.com
 DOMAIN-SUFFIX,tuzac.com
 DOMAIN-SUFFIX,kkc3.com
 DOMAIN-SUFFIX,876512.xyz
-
+DOMAIN-SUFFIX,waifu.im
+DOMAIN-SUFFIX,3650000.xyz
 
 
 
@@ -104,7 +103,7 @@ DOMAIN-SUFFIX,876512.xyz
 
 # ================================== 常用网站 ========================================================
 
-DOMAIN-SUFFIX,invite.stotik.com
+# linux.do
 DOMAIN-SUFFIX,linux.do
 
 # 青鸟bot验证
@@ -112,9 +111,6 @@ DOMAIN-SUFFIX,tgbot.lyrebirdemby.com
 
 # cf bark通知
 DOMAIN-SUFFIX,bark.yuehuakq.workers.dev
-
-# JK图片
-DOMAIN-SUFFIX,jk.rs
 
 # buondua
 DOMAIN-SUFFIX,buondua.com
@@ -130,12 +126,11 @@ DOMAIN-SUFFIX,minepi.com
 
 # 观众
 DOMAIN-SUFFIX,audiences.me
+
 # rousi
+DOMAIN-SUFFIX,rousi.pro
 
-DOMAIN-SUFFIX,rousi.zip
-DOMAIN,rousi.zip
 # 我堡
-
 DOMAIN-SUFFIX,ourbits.club
 DOMAIN,ourbits.club
 
