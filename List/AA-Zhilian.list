@@ -16,6 +16,7 @@
 DOMAIN-SUFFIX,koyso.com
 DOMAIN,koyso.to
 DOMAIN-KEYWORD,koyso
+DOMAIN-SUFFIX,playzip.com
 
 # 影视emby
 DOMAIN,emos.lol
@@ -25,7 +26,13 @@ DOMAIN,link00.okemby.org
 DOMAIN,emby.dnscf.dpdns.org
 DOMAIN,owntv.ckbc.ac.cn
 DOMAIN,38.255.16.237
+# HGemby
 DOMAIN,hgemby.qzz.io
+DOMAIN,dpdns.org
+DOMAIN,111660.xyz
+DOMAIN-SUFFIX,qzz.io
+DOMAIN,111848.xyz
+DOMAIN-SUFFIX,帝acg.xyz
 
 # 自有域名
 DOMAIN,yue.yuehua.site
