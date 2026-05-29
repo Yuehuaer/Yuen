@@ -109,6 +109,7 @@ DOMAIN-SUFFIX,linux.do
 
 # 青鸟bot验证
 DOMAIN-SUFFIX,tgbot.lyrebirdemby.com
+DOMAIN,console.lyrebirdemby.com
 
 # cf bark通知
 DOMAIN-SUFFIX,bark.yuehuakq.workers.dev
