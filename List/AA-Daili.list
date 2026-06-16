@@ -141,6 +141,8 @@ DOMAIN-SUFFIX,rousi.pro
 DOMAIN-SUFFIX,ourbits.club
 DOMAIN,ourbits.club
 
-
+# 馒头
+DOMAIN,api.m-team.cc
+DOMAIN,kp.m-team.cc
 
 #-------------------------------------------------------------------------------------------------------------------------------------------------------------#
