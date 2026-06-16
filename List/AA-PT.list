@@ -306,8 +306,6 @@ DOMAIN,www.torrent.eu.org
 DOMAIN,tracker.token.ro
 DOMAIN,www.wareztorrent.com
 DOMAIN,z.mercax.com
-DOMAIN-SUFFIX,m-team.io
-DOMAIN-SUFFIX,m-team.cc
 DOMAIN-SUFFIX,czhch.com
 DOMAIN-SUFFIX,plab.site
 DOMAIN-SUFFIX,trackers.work
@@ -489,7 +487,6 @@ DOMAIN-SUFFIX,raingfh.top
 DOMAIN-SUFFIX,pting.club
 DOMAIN-KEYWORD,announce
 DOMAIN-KEYWORD,chdbits
-DOMAIN-KEYWORD,m-team
 DOMAIN-KEYWORD,torrent
 DOMAIN-KEYWORD,tracker
 DOMAIN-KEYWORD,agsvpt
