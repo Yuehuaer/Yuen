@@ -29,6 +29,23 @@ DOMAIN,emby.dnscf.dpdns.org
 DOMAIN,owntv.ckbc.ac.cn
 DOMAIN,38.255.16.237
 DOMAIN,ownultra.ckbc.ac.cn
+DOMAIN,dym7.cdn.feimu.tv
+DOMAIN,feimu.tv
+DOMAIN,messagepush.luckfast.com
+DOMAIN,msmp.abchina.com.cn
+DOMAIN,117.185.242.18
+DOMAIN,nekos.best
+DOMAIN,my.microsoftpersonalcontent.com
+DOMAIN,hcz-member.pingan.com.cn
+DOMAIN-SUFFIX,data.zlketang.com
+DOMAIN,data.zlketang.com
+DOMAIN,app.zlketang.com
+DOMAIN,119.29.29.98
+DOMAIN,m.bmhyk.vip
+DOMAIN,154.12.35.2
+DOMAIN,file.picix.us
+DOMAIN,nekos.best
+
 
 # HGemby
 DOMAIN,hgemby.qzz.io
@@ -40,6 +57,7 @@ DOMAIN-SUFFIX,帝acg.xyz
 
 # 自有域名
 DOMAIN,yue.yuehua.site
+
 
 # 脚本
 DOMAIN-SUFFIX, gotab.cn
