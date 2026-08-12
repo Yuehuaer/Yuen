@@ -34,17 +34,15 @@ DOMAIN,feimu.tv
 DOMAIN,messagepush.luckfast.com
 DOMAIN,msmp.abchina.com.cn
 DOMAIN,117.185.242.18
-DOMAIN,nekos.best
 DOMAIN,my.microsoftpersonalcontent.com
 DOMAIN,hcz-member.pingan.com.cn
 DOMAIN-SUFFIX,data.zlketang.com
-DOMAIN,data.zlketang.com
 DOMAIN,app.zlketang.com
 DOMAIN,119.29.29.98
 DOMAIN,m.bmhyk.vip
 DOMAIN,154.12.35.2
 DOMAIN,file.picix.us
-DOMAIN,nekos.best
+
 
 
 # HGemby
@@ -69,7 +67,7 @@ DOMAIN-SUFFIX, szft.gov.cn
 DOMAIN-SUFFIX,skr.skr2.cc
 DOMAIN-SUFFIX,skr.cc
 DOMAIN,www.skr2.cc
-DOMAIN-SUFFIX,www.skr2.cc
+DOMAIN-SUFFIX,skr2.cc
 
 #Bark通知
 DOMAIN,api.day.app
