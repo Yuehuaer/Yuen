@@ -22,8 +22,9 @@ DOMAIN-SUFFIX,playzip.com
 
 # 影视emby
 # 乐蛙Emby
-DOMAIN,emby.taotu.ink 
+DOMAIN,emby.taotu.ink
 # LogVar弹幕API
+DOMAIN,dm.ljiaovm.com
 DOMAIN,emos.lol
 DOMAIN,dm.ljiaovm.com 
 DOMAIN,209.146.116.89
