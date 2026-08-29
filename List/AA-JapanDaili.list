@@ -18,6 +18,9 @@ DOMAIN,api.pingmeapp.net
 DOMAIN-SUFFIX,m10.iyf.tv
 
 # DMM-18
+DOMAIN-SUFFIX,pics.dmm.co.jp
+DOMAIN-SUFFIX,image.mgstage.com
+DOMAIN-SUFFIX,c0.jdbstatic.com
 DOMAIN-SUFFIX,akabeesoft2.com
 DOMAIN-SUFFIX,akabeesoft3.com
 DOMAIN-SUFFIX,akatsukiworks.com

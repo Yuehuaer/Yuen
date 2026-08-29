@@ -21,9 +21,11 @@ DOMAIN-KEYWORD,koyso
 DOMAIN-SUFFIX,playzip.com
 
 # 影视emby
-DOMAIN,emby.taotu.ink # 乐蛙Emby
-DOMAIN,dm.ljiaovm.com # LogVar弹幕API
+# 乐蛙Emby
+DOMAIN,emby.taotu.ink 
+# LogVar弹幕API
 DOMAIN,emos.lol
+DOMAIN,dm.ljiaovm.com 
 DOMAIN,209.146.116.89
 DOMAIN,shicheng.wang
 DOMAIN,link00.okemby.org
